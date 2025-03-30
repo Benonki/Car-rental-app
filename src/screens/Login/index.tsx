@@ -2,6 +2,7 @@ import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
 import './index.css';
+import Logo from '../../assets/Logo.png';
 
 type FieldType = {
     username?: string;
@@ -20,10 +21,13 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 const App: React.FC = () => (
     <div className="login-container">
         <div className="login-card">
+            <div className="logo-container">
+                <img src={Logo} alt="Logo" className="logo"/>
+            </div>
             <Form
                 name="basic"
                 layout="vertical"
-                initialValues={{ remember: true }}
+                initialValues={{remember: true}}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
@@ -31,17 +35,17 @@ const App: React.FC = () => (
                 <Form.Item<FieldType>
                     label="Username"
                     name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{required: true, message: 'Please input your username!'}]}
                 >
-                    <Input />
+                    <Input/>
                 </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Password"
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{required: true, message: 'Please input your password!'}]}
                 >
-                    <Input.Password />
+                    <Input.Password/>
                 </Form.Item>
 
                 <Form.Item<FieldType> name="remember" valuePropName="checked">

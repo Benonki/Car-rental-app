@@ -4,6 +4,7 @@ import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 import { Outlet, useNavigate } from "react-router";
 import './layout.css';
+import Logo from './assets/Logo.png';
 
 const { Header, Content, Sider } = Layout;
 
@@ -50,7 +51,9 @@ const LayoutApp: React.FC = () => {
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Header className="layout-header">
-                <div className="demo-logo" />
+                <div className="header-logo">
+                    <img src={Logo} alt="Logo" className="miniLogo" />
+                </div>
                 <div className="header-menu-container">
                     <Menu
                         theme="dark"

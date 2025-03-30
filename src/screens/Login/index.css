@@ -17,9 +17,21 @@ body {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    min-width: 300px;
+    min-width: 350px;
 }
 
 .login-button {
     width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    padding-left: 20px;
+    padding-bottom: 10px;
+    width: 300px;
+    height: auto;
 }
