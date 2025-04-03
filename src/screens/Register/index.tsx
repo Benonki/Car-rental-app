@@ -1,6 +1,7 @@
 import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Flex, Form, Input } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import './index.css';
 import Logo from '../../assets/Logo.png';
 
@@ -20,11 +21,20 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 
 const App: React.FC = () => (
     <Flex justify="center" align="center" className="h-screen">
-        <div className="login-card">
+        <Button
+            type="text"
+            icon={<ArrowLeftOutlined />}
+            className="back-button"
+            onClick={() => window.history.back()}
+        >
+            Powrót
+        </Button>
+
+        <div className="register-card">
             <div className="logo-container">
                 <img src={Logo} alt="Logo" className="logo"/>
             </div>
-            <h2 className="login-title">Login</h2>
+            <h2 className="register-title">Register</h2>
             <Form
                 name="basic"
                 layout="vertical"
@@ -49,18 +59,18 @@ const App: React.FC = () => (
                     <Input.Password/>
                 </Form.Item>
 
-                <Form.Item<FieldType> name="remember" valuePropName="checked">
-                    <Checkbox>Pamiętaj mnie</Checkbox>
+                <Form.Item<FieldType> valuePropName="checked">
+                    <Checkbox>Akceptuje warunki użytkowania</Checkbox>
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-button">
-                        Zaloguj się
+                    <Button type="primary" htmlType="submit" className="register-button">
+                        Zarejestruj się
                     </Button>
                 </Form.Item>
             </Form>
-            <p className="register-text">
-                Pierwszy raz? <a href="/register" className="register-link">Zarejestruj się</a>
+            <p className="login-text">
+                Masz już konto? <a href="/login" className="login-link">Zaloguj się</a>
             </p>
         </div>
     </Flex>
