@@ -1,54 +1,25 @@
-# React + TypeScript + Vite
+# Car Rental App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A car rental app built with TypeScript and React, allowing users to easily browse, book, and manage car rentals.
+The backend is developed using Spring Boot, with data persisted in a MongoDB database.
 
-Currently, two official plugins are available:
+## 📝 Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- <a href="https://nodejs.org/en" target="_blank">Node.js</a> installed on your computer.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## ⚙️ Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Benonki/Car-rental-app.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm i
+   ```
+   
+## 🚀 Running the App
+1. Open console and start an application:
+   ```bash
+   npm run dev
+   ```
+2. You can open http://localhost:5173/ on your PC.
