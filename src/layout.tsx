@@ -1,10 +1,11 @@
 import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { LaptopOutlined, NotificationOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
-import { Outlet, useNavigate } from "react-router";
+import { Layout, Menu, theme, Button } from 'antd';
+import { Outlet } from "react-router";
 import './layout.css';
 import Logo from './assets/Logo.png';
+import { logout } from './api/auth.ts'
 
 const { Header, Content, Sider } = Layout;
 
@@ -36,7 +37,6 @@ const LayoutApp: React.FC = () => {
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
-    const navigate = useNavigate();
 
     const handleMenuClick: MenuProps['onClick'] = (e) => {
         if (e.key === '1' || e.key === '2') {
@@ -44,13 +44,15 @@ const LayoutApp: React.FC = () => {
         }
     };
 
-    const handleLoginClick = () => {
-        navigate('/login');
+    const handleLogoutClick = () => {
+        logout().then(() => {
+            window.location.href = '/login'
+        })
     };
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Header className="layout-header">
+            <Header className="layout-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
                 <div className="header-logo">
                     <img src={Logo} alt="Logo" className="miniLogo" />
                 </div>
@@ -64,19 +66,15 @@ const LayoutApp: React.FC = () => {
                         onClick={handleMenuClick}
                     />
                     <Button
-                        type="text"
-                        onClick={handleLoginClick}
-                        style={{
-                            color: '#fff',
-                            marginLeft: 'auto',
-                            fontWeight: 'bold',
-                        }}
+                        type="primary"
+                        icon={<LogoutOutlined />}
+                        onClick={handleLogoutClick}
                     >
-                        Login
+                        Wyloguj się
                     </Button>
                 </div>
             </Header>
-            <Layout style={{ flex: 1 }}>
+            <Layout style={{ marginTop: 64, marginLeft: 200, flex: 1 }}>
                 <Sider width={200} className="layout-sider" style={{ background: colorBgContainer }}>
                     <Menu
                         mode="inline"
@@ -85,11 +83,7 @@ const LayoutApp: React.FC = () => {
                         items={items2}
                     />
                 </Sider>
-                <Layout style={{ padding: '0 24px 24px', flex: 1 }}>
-                    <Breadcrumb
-                        items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
-                        className="layout-breadcrumb"
-                    />
+                <Layout style={{ padding: '10px 24px 24px', flex: 1 }}>
                     <Content
                         className="layout-content"
                         style={{
@@ -98,7 +92,6 @@ const LayoutApp: React.FC = () => {
                             flex: 1,
                         }}
                     >
-                        Content
                         <Outlet />
                     </Content>
                 </Layout>

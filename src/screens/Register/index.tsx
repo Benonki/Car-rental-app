@@ -19,7 +19,7 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
-const App: React.FC = () => (
+const Register: React.FC = () => (
     <Flex justify="center" align="center" className="h-screen">
         <Button
             type="text"
@@ -76,4 +76,4 @@ const App: React.FC = () => (
     </Flex>
 );
 
-export default App;
+export default Register;
