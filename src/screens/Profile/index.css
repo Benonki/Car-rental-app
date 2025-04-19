@@ -1,0 +1,226 @@
+/* Profile.css */
+
+.profile-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 16px;
+}
+
+/* Karta profilu */
+.profile-card {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.profile-badges {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.user-name {
+    text-align: center;
+    margin: 16px 0 !important;
+}
+
+.loyalty-section {
+    background-color: #f5f5f5;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.loyalty-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.loyalty-points {
+    font-weight: bold;
+    color: #1890ff;
+}
+
+.contact-info {
+    margin-bottom: 24px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.info-icon {
+    color: #1890ff;
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.edit-profile-btn {
+    margin-top: 8px;
+}
+
+/* Karta z zakładkami */
+.tabs-card {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Odstęp między ikoną a tekstem w zakładkach */
+.tab-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.tab-with-icon span {
+    margin-left: 8px;
+}
+
+/* Tabela historii wypożyczeń responsywna */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Dane osobowe */
+.profile-details {
+    padding: 8px 0;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.mt-large {
+    margin-top: 32px !important;
+}
+
+/* Historia wypożyczeń */
+.rental-history-table {
+    margin-top: 16px;
+}
+
+/* Style dla przycisków w tabeli */
+.rental-history-table .ant-btn-link {
+    padding: 0 8px;
+}
+
+/* Ulubione samochody */
+.car-thumbnail {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.price-text {
+    font-weight: bold;
+    color: #1890ff;
+}
+
+.price-day {
+    font-size: 12px;
+    color: #888;
+    font-weight: normal;
+    margin-left: 4px;
+}
+
+/* Animacje i efekty */
+.profile-card:hover,
+.tabs-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 0 8px;
+    }
+
+    .profile-card {
+        margin-bottom: 16px;
+    }
+
+    .info-item {
+        margin-bottom: 8px;
+    }
+
+    /* Poprawki dla przycisków w tabeli na urządzeniach mobilnych */
+    .rental-history-table .ant-space {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rental-history-table .ant-btn-link {
+        padding: 4px 0;
+    }
+}
+
+/* Kolorowe style dla statusów */
+.ant-tag-success {
+    color: #52c41a;
+    background: #f6ffed;
+    border-color: #b7eb8f;
+}
+
+.ant-tag-processing {
+    color: #1890ff;
+    background: #e6f7ff;
+    border-color: #91d5ff;
+}
+
+.ant-tag-error {
+    color: #f5222d;
+    background: #fff1f0;
+    border-color: #ffa39e;
+}
+
+/* Efekty przejścia dla przycisków i kart */
+button,
+.ant-card,
+.ant-table-row {
+    transition: all 0.3s;
+}
+
+/* Stylizacja zakładek */
+.ant-tabs-tab:hover {
+    color: #40a9ff;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #1890ff;
+    font-weight: 500;
+}
+
+.ant-tabs-ink-bar {
+    background: #1890ff;
+}
+
+/* Stylizacja formularzy */
+.ant-input:focus,
+.ant-input-focused,
+.ant-select-focused .ant-select-selector {
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Stylowanie avatara */
+.ant-avatar {
+    border: 3px solid #1890ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

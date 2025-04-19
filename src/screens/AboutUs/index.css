@@ -1,0 +1,208 @@
+.about-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sekcja hero */
+.hero-section {
+    margin-bottom: 48px;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.hero-description {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-stats {
+    margin-top: 32px;
+}
+
+.about-statistic .ant-statistic-title {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.about-statistic .ant-statistic-content {
+    font-size: 24px;
+    color: #fff;
+}
+
+.hero-carousel-wrapper {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.hero-carousel {
+    height: 400px;
+    border-radius: 8px;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Sekcje ogólne */
+.section-title {
+    text-align: center;
+    margin-bottom: 32px !important;
+    position: relative;
+    padding-bottom: 16px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #1890ff;
+}
+
+.section-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.section-divider {
+    margin: 64px 0;
+}
+
+/* Sekcja misji */
+.mission-card {
+    height: 100%;
+    text-align: center;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: #1890ff;
+}
+
+.card-icon-container {
+    margin-bottom: 16px;
+}
+
+.card-icon {
+    font-size: 36px;
+    color: #1890ff;
+    background: rgba(24, 144, 255, 0.1);
+    padding: 16px;
+    border-radius: 50%;
+}
+
+/* Sekcja zespołu */
+.team-card {
+    text-align: center;
+    height: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.team-avatar {
+    margin-bottom: 16px;
+    border: 4px solid #f0f0f0;
+}
+
+.team-position {
+    display: block;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.team-bio {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+/* Sekcja historii */
+.history-timeline-container {
+    padding-left: 2px;
+}
+
+.timeline-content h5 {
+    margin-bottom: 8px;
+    color: #1890ff;
+}
+
+.timeline-content p {
+    margin-bottom: 0;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+/* Sekcja kontaktu */
+.contact-card {
+    height: 100%;
+    border-radius: 8px;
+}
+
+.contact-info {
+    margin-top: 24px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.contact-icon {
+    font-size: 18px;
+    color: #1890ff;
+    margin-right: 12px;
+}
+
+.opening-hours {
+    margin-top: 24px;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.hours-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .hero-carousel {
+        height: 250px;
+    }
+
+    .carousel-image {
+        height: 250px;
+    }
+
+    .section-divider {
+        margin: 40px 0;
+    }
+
+    .history-image {
+        height: 300px;
+    }
+}

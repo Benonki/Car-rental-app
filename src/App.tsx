@@ -7,6 +7,7 @@ import Profile from './screens/Profile';
 import Renting from './screens/Renting';
 import Cars from './screens/Cars';
 import Register from "./screens/Register";
+import AboutUs from "./screens/AboutUs";
 import './App.css'
 
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -31,6 +32,7 @@ const App: React.FC = () => {
                     <Route path="/renting" element={<Renting />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/cars" element={<Cars />} />
+                    <Route path="/about" element={<AboutUs />} />
 
                 </Route>
             </Routes>
