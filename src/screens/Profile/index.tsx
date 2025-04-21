@@ -30,7 +30,7 @@ const Profile: FC = () => {
         telefon: "+48 123 456 789",
         adres: "ul. Przykładowa 15, 00-001 Warszawa",
         dataRejestracji: "01.06.2023",
-        avatar: "/api/placeholder/150/150",
+        avatar: "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
         poziomKonta: "Premium",
         punktyLojalnosciowe: 850
     };

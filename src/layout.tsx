@@ -84,6 +84,21 @@ const LayoutApp: React.FC = () => {
             case '1-4':
                 window.location.href = '/profile?tab=4';
                 break;
+            case '2-1':
+                window.location.href = '/cars?type=Sedan';
+                break;
+            case '2-2':
+                window.location.href = '/cars?type=Kombi';
+                break;
+            case '2-3':
+                window.location.href = '/cars?type=SUV';
+                break;
+            case '2-4':
+                window.location.href = '/cars?type=Coupe';
+                break;
+            case '2-5':
+                window.location.href = '/cars?type=Kabriolet';
+                break;
         }
     };
 
