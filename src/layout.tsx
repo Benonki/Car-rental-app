@@ -111,7 +111,7 @@ const LayoutApp: React.FC = () => {
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Header className="layout-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-                <div className="header-logo">
+                <div className="header-logo" onClick={() => window.location.href = '/'}>
                     <img src={Logo} alt="Logo" className="miniLogo" />
                 </div>
                 <div className="header-menu-container">
