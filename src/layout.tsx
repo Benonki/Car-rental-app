@@ -13,6 +13,7 @@ const leftItems: MenuProps['items'] = [
     { key: '1', label: 'Strona Główna' },
     { key: '2', label: 'Nasze Auta' },
     { key: '3', label: 'O Nas' },
+    { key: '4', label: 'FAQ' },
 ];
 
 const items2: MenuProps['items'] = [
@@ -66,6 +67,9 @@ const LayoutApp: React.FC = () => {
                 break;
             case '3':
                 window.location.href = '/about';
+                break;
+            case '4':
+                window.location.href = '/FAQ';
                 break;
         }
     };
