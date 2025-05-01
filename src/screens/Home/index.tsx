@@ -153,7 +153,7 @@ const Home: FC = () => {
                     ))}
                 </Row>
                 <div className="view-more">
-                    <Button type="link" size="large">Zobacz wszystkie samochody</Button>
+                    <Button type="link" size="large" onClick={() => window.location.href = '/cars'}>Zobacz wszystkie samochody</Button>
                 </div>
             </section>
 
