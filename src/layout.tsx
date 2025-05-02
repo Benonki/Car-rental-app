@@ -6,8 +6,9 @@ import { Outlet, useLocation } from "react-router-dom";
 import './layout.css';
 import Logo from './assets/Logo.png';
 import { logout } from './api/auth.ts'
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content, Sider, Footer } = Layout;
 
 const leftItems: MenuProps['items'] = [
     { key: '1', label: 'Strona Główna' },
@@ -157,6 +158,58 @@ const LayoutApp: React.FC = () => {
                     >
                         <Outlet />
                     </Content>
+                    <Footer className="app-footer">
+                    <div className="footer-copyright">
+                        <p>&copy; {new Date().getFullYear()} AutoWypożyczalnia. Wszelkie prawa zastrzeżone.</p>
+                    </div>
+                    <div className="footer-content">
+                        <div className="content-left">
+                        <h4>Kontakt</h4>
+                            <ul>
+                                <li>
+                                <span className="footer-icon">📍</span>
+                                ul. Przykładowa 15, 00-001 Warszawa
+                                </li>
+                                <li>
+                                <span className="footer-icon">📞</span>
+                                +48 123 456 789
+                                </li>
+                                <li>
+                                <span className="footer-icon">✉️</span>
+                                    kontakt@przykladowa-wypozyczalnia.pl
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="content-center">
+                        <h4>Informacje</h4>
+                            <ul>
+                                <li>Regulamin</li>
+                                <li>Polityka prywatności</li>
+                                <li>FAQ</li>
+                                <li>Kontakt</li>
+                            </ul>
+                        </div>
+                        <div className="content-right">
+                        <h4>Godziny otwarcia</h4>
+                        <ul>
+                            <li>Pon – Pt: 08:00 – 18:00</li>
+                            <li>Sobota: 09:00 – 14:00</li>
+                            <li>Niedziela: nieczynne</li>
+                        </ul>
+                        </div>
+                        <div className="footer-social">
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                            <FaFacebookF />
+                            </a>
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                            <FaInstagram />
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                            <FaLinkedinIn />
+                            </a>
+                        </div>
+                    </div>
+                    </Footer>
                 </Layout>
             </Layout>
         </Layout>

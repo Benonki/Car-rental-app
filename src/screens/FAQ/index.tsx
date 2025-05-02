@@ -4,7 +4,7 @@ import './index.css';
 const FAQ: FC = () => {
   return (
     <div>
-      <h1>Często zadawane pytania</h1>
+      <h1>FAQ - Często zadawane pytania</h1>
       <ol>
         <li>
             Jak mogę zarezerwować samochód?
