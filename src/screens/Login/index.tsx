@@ -7,13 +7,17 @@ import './index.css';
 import Logo from '../../assets/Logo.png';
 import type { LoginData } from '../../types.ts'
 import { GoogleOutlined } from '@ant-design/icons'
+import { useUser } from '../../contexts/UserContext';
 
 const Login: React.FC = () => {
     const navigate = useNavigate()
+    const { setUsername } = useUser();
 
     const onFinish: FormProps<LoginData>['onFinish'] = (values) => {
         login(values)
             .then(() => {
+                console.log(values.username);
+                setUsername(values.username);
                 navigate('/')
             })
             .catch(() => {

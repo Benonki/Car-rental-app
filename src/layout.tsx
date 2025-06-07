@@ -1,12 +1,13 @@
 import React from 'react';
 import { CarOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import {Divider, MenuProps} from 'antd';
 import { Layout, Menu, theme, Button } from 'antd';
 import { Outlet, useLocation } from "react-router-dom";
 import './layout.css';
 import Logo from './assets/Logo.png';
 import { logout } from './api/auth.ts'
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { useUser } from "./contexts/UserContext.tsx";
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -52,6 +53,8 @@ const getSelectedKey = (pathname: string) => {
 };
 
 const LayoutApp: React.FC = () => {
+    const { username, logout: contextLogout } = useUser();
+
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
@@ -109,6 +112,7 @@ const LayoutApp: React.FC = () => {
 
     const handleLogoutClick = () => {
         logout().then(() => {
+            contextLogout();
             window.location.href = '/login';
         });
     };
@@ -142,10 +146,20 @@ const LayoutApp: React.FC = () => {
                     <Menu
                         mode="inline"
                         defaultSelectedKeys={['1']}
-                        style={{ height: '100%', borderRight: 0 }}
+                        style={{ height: 'calc(100% - 60px)', borderRight: 0 }}
                         items={items2}
                         onClick={handleSiderMenuClick}
                     />
+
+                    <div className="user-info-section">
+                        <Divider className="custom-divider" />
+                        <div className="username-display">
+                            <div className="username-content">
+                                <UserOutlined className="user-icon" />
+                                <span className="username-text">{username || "Gość"}</span>
+                            </div>
+                        </div>
+                    </div>
                 </Sider>
                 <Layout style={{ padding: '10px 24px 24px', flex: 1 }}>
                     <Content
