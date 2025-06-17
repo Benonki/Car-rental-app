@@ -1,0 +1,628 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for src/screens/Cars/index.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/screens/Cars</a> index.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>0/163</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/163</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC } from "react";
+<span class="cstat-no" title="statement not covered" >import { useLocation, useNavigate } from "react-router-dom";</span>
+<span class="cstat-no" title="statement not covered" >import { Button, Card, Typography, Row, Col, Divider, Tag, Rate, Tabs } from "antd";</span>
+import type { Car } from '../../types.ts';
+<span class="cstat-no" title="statement not covered" >import './index.css';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >const { Title, Paragraph } = Typography;</span>
+<span class="cstat-no" title="statement not covered" >const { TabPane } = Tabs;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >const Cars: FC = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const location = useLocation();</span>
+<span class="cstat-no" title="statement not covered" >    const navigate = useNavigate();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const queryParams = new URLSearchParams(location.search);</span>
+<span class="cstat-no" title="statement not covered" >    const activeCategory = queryParams.get("type")?.toLowerCase() || "all";</span>
+<span class="cstat-no" title="statement not covered" >    const auta: Car[] = [</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 1,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "BMW X5",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "SUV",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 350,</span>
+<span class="cstat-no" title="statement not covered" >            image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 5,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Luksusowy SUV z potężnym silnikiem i nowoczesnym wyposażeniem."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 2,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "Mercedes C-Class",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "Sedan",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 280,</span>
+<span class="cstat-no" title="statement not covered" >            image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIREhISExIWFRIXGBcVFxYVGRcXFhIVGBcXFhYWFxkYHiogGBolGxgYIjEhJSkrLi4uFx8zOjMtNygtLisBCgoKDg0NFw8QFisdFR0rLSsrKy0rLS0tKy0tLS0tKys1LS0tLS03LTcrKysrLS0rLSstLS0tLS0tKystKywtLf/AABEIAKgBKwMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABQIDBAYHCAH/xABMEAACAQMCAwUFBAUHCQgDAAABAgMABBESIQUxQQYTIlFxB2GBkaEyQlKxFGJygsEjM0OSstHhU2Nzg5OiwsPwFSQ0RFRVs9QWFyX/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGxEBAQEAAwEBAAAAAAAAAAAAABEBAiExExL/2gAMAwEAAhEDEQA/AO40pSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpVMsgUFmIVRzJOAPUmgqpUGe2FhkhbqORhsVhPfMD5Yi1GrQ7Xwn7EF2/pa3CD5yIooNhpWsv2tcHbh16w89Nuv9ucH6VQe10v8A7ZefO0/+xQbTStV//MmH2uG3w94SB/7ExP0qxL7RLZM97FcwgdZoJY1Hq5XT9aDcaVq1t27tZBqjYOPNWUj6GrjdsYugHxYD8gasGy0rUn7ZHpFER75iP+XVo9t3H/llP7Nwn/EopBuVK0k9v2U+Lh9wR5xvbP8ATvQa+f8A7PskGZ47q2HUzQOQP3otQ+tQbvSofg3amxvNre6ilbnpVxrx+wfEPlUxQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUrGvrjQu32jyzyHmT7hQY91xMLIY13KjLnGyk/ZXOftY3xg7YzjIzp3a3tXZQuBMqzzrusYRZGjPmdXhi5+478jWrdrO3OdUFk5C5Ou5B8Tknxd0fXnJ/V6GtBZgM/M+8nqT1NWDdL/wBp9420SRQr0B1SMPjkL/u1DT9tOIvzumH7Kxr+S+vyrXx9a+Buvn+XT6VYiVk7Q3p53lx8JCv5VaPHLv8A9Zc/7Z/76j9VUu1BKw9pr4MALub4uW/tf9b1K2vbjiEfK4V/dJGuPmmlvrWqWXMn3fmdvoKvE0G6R9o7K6YC+tVhkO36TBlSD5sQNajP4ta+e1RnazgNxZlZFlMtu+NEo8zuA+DgEjkRsemOQhnkzGPdgfStg7GdoUjzZXIDWcvhGo7Qs2+CekZO+R9lsHbch4Y1tJpvxfID+FXhdzDnIR8x/CpftDwV7KYxklo2y0bn7wGxDdNY2z89tWK115NTH3nb+FVL2kBxKdf6Rv8Ar1FZcHHZ1/pGHy/urAe15DVuB8M86tW6g6vxAZA8/P40Wp7uVuQXkhWTT9pwgDp1BLoAy+456VtfZ7tXcWwCrL+kR/5O4YlgPJJgCw67OH6DK1Ldixb/AKMklvGqahh8ZLaxzDMdyM7j3GsriXZ63nydPdyfjjwCT5sOTfHf30jH07jYeAdqre7OhSY58ZMMuFkx1K4JWRf1kJFTlcX4vwWWEDvV1xqdSypkGNujAjxRN+sD8aleB9vJrQBbvVcWw/8AMKMzwj/PIoxKo/GoB8wedZ3G82up0rG4ffxXEaywyLJGwyroQVPxH5Vk1FKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQW55lQFmYKo6kgD5mtJ7f8ADbu9jEUEsccZz3ocuGkXpGCqnCnfPnsOWavcZsZLq6dJTpt4yukAnMo0KSCOSjUTvzPLbANS0i7jJwD58s+VGuWZk7rkL+zy96Nbtjosh/4lGKwZ+wfEB/Qqw/Vkj/iwrthhJ3GDjl/hWBe3qQMiyagGGQQkjA/FEIHxI5irWXF5+yV+oP8A3WT93Df2Saj5+E3Kfat5lA/FE4A+JFd9tZu8BZVbGSPEMZx1HmPf7jV4ZHSlHm3UM4yM+XX5VRcHAr0nNEj7OgYeTDUPkaibnsvYSHxWsW+SSEVT06qB5/SlHB7PkfUD5DNXzC3l+VdeufZvYNnQHiP6jt+UmsfSom69ln+Sum/1iq2fijJ+VWo53BMiZEgBUj95fIj/ABqzJOhGABgjBB/Opri/s84grnTbF1/FHLFpb3gSMG+YqDvez95ANUlrMqjmcCQD1MeQB60pG9dleIpxC3bh10x75BmGU7sVAwrA9WUHSR95T1Oo1CW3ZWVWdXkijdGKEO6joCGXJBKspBDe/wA8itNteIGKRZo5B3qMHGdskdCPIjIx5Gu1NYjiUEM6t3UhQNG+nOVYZ7uQZ8SZPTBByRzIM8Nc2vBJEwDqV6dCHHRlYbN13FYhmCvqU7Zz5eore4+wt5NkPJbKuo5/lJDuNs6TF5bjfkR51n2nsplByLqAH/RSSfL+UX8qtwiD7F9oUtHkSRiInAZcDOG6YA8xkfuitpj7ZoxOhBgdGkVXb0HIH4ms239m2Od3jz0QIv8AaZqyU9m8X3r25PuAtlH/AMJP1pcZ3hm7V7h3HIJo1dZFAYZ0uQrL0IZSdqiuJcEidXltWUMoLMiEMjYBOAAfAxxtjY+Q51NJ2AtQN3nf3mTB/wBwLV+HsVYry70f66cE+uXwafpM4TzXKbaee3Zp+HSmN2IaSDIEU5H3gp8Kvj3YP59P9n/b+HiKmNiI7tPtxN4WONiVB54PMDl1xyqTt+yFku4iLftO5/jiq27IcPL94bOAyZB1mNC+RyOojORgb+6puuiepVtVxyPz3pqPln0qC5SqBKPT1qsGgUpSgUpSgUpSgUpSgUpSgUpQig1mWXVI7dCT8ht/Cs6CWonhg1RRn72NL/6RfBIP64atE9rXa+a0EdnbNommQu8gODFFkqNB+6x0vlugG25yA6ulwurTnxeXUeo51XFIACvly96/d/u/dNeX7PsxICr94UuDhh/KKswJ3DBdWoHnsSG2O2a6p7Ou2Mkxa0umzcxgsrkYM8QOG1D/ACiHGepAPXVVg6d3wpqU9KwNVfQ9QZpjQ9KsSWYbWAcEqAD5Hxb/AF+lWxJXxJTk/CggU4PerkBbf9VxJLt+7IGKeinFT36Iw65Pyq6J6qFxQYrRuKwry1WQYliSQfrqG/MVM9+K+FgaDV17N2O+bWPfmGUOPk+QKzLGxiSNFjAVAPCoGFUc8DHIb1Msi86wJrZxGvdBGYKBiRmQctt1RvyoLLWhByp369Qfhtv7/wA8Cvqsw5gj0OfzwfpV+K2kx4tIb9Ukj6gUkjYc6D7FeHlq+B5/I1lJeHqAfpUS4NUhyOW3pt9OX0qCdW6XqCPrVwSA/eHx2/OoJbwjyPrt9R/dV9L1evh9eXz5fDnQSjR9dx7xQSuOufX++sVXxyJFXBMeuDQZK3Q6gj6irol+VYWoGvq7cqDN7wHnQAdDisMSjzz6b/lVQk9x+g/PegzAxHvqsNWGszeQ+f8AhVNhxASglcjBwQyMjKfIhsGqM8GvtWM++riPnI6igrpSlApSlApSlApSlBrNnGFM2llZDNKV0/dJb+UU/rCXvPnXGu1L6+M3srAMLdE0BvskqiaQc7Ad44b4GuscX4Dc288l1ZYkSQ6p7Rjp1tjeSFjssh6g7Hr0xyjjxWW94gRqTvUikMckTd6uBGjxmI/abUPMA52PWrgi7vh4lfvGDFSMyD75j7uSSPr9pkPdg/jjbyq3fcReGSO6Qg3FtKA+M4dsZZf2T/Kxj9VB1Jqc7LoIlaPupIwobQJZEMwLZkRRbqAYwWVmVZGYg50k63La/NZhYLohzKpMZSXLMHwWDKCSSrLq3VvF4s8iKo79w27SWNJEOUZVZT5oyhkPrpIrMCZ5Vzf2UcZD2Ko7YMLNDljgaQQ6eI7ZxJpxz8FbysudwdvMVkZ5jq1pOo+i/m9WVumHX571Ul74jkdF5bdX/voL2aa6+i4Q+Y9f8K+6QeRB9KCnXTXRoqtlaCqZ/C37J/I1dV8ViTHwt6H8qrD0GdFJWH2j49bWUJluJAiDbfcsx5Kqjdm9w9Tgb1cjevN3bXjj8VvJJC+LWIlI8nYID9oA/ffGo/AdBQbtf+2+INiGwLJ+KSQKx/dVWx/WNZ/BvatY3JCTI9o52BY95FnoCwAK+pUDzIrnkfAkijEkzrboTpUMhklY+9cqE/eYH3CrMtjZOSq3WkjG8sWEOoZHjRzpHwNWDuN1IwGxAyMq32lORscAjI5HY1zXjvHOIwS4mfwHOkR6o4pB+1GyuPQtn+NXYzi0tm8dlcnNvL/4eTVqRWJwO7frGW2xzUkbAE1uV9aq6tHIoZeoIyD5H/GghODcXlnBZLKTEagk29/dRBUwpB0F2U/bXbfrtscZfC+2WvdJeIqPJo7a6iX1OhZNv2s1CP2UdGb9FuGiDAjQWYLvjI1LvjYbY6CsnhXZPiUX81KijnhJCVzjGdLqBnG2fLar0Nsse2rNkLc2Ux/DKtxYtj3s/eoTy5YFZ03bBISr3dvJGjsEieNoriAnns0bZ1HBOWUbDYbEnUpeznGTHHGrwhUJZdos5bXklm1av5xtiOo8hV+Ts/Oe7F5LGypukEIIiU/iJbdm95yee+5qdDpfDuL284BR8j0I+hFXOJcXs7YZnuYovLvHVSfQE5Ncl7cdrzw+EQ2+BcOB4hjECHIDY/EcHHlgnyzx2+dmMzMSzF1YsxLMSdXNjuefM1IPS177VuDxHAnaRs6cRxyEE+QYgKefnUOvtlhmbRa2F1O2CwwFGwyM4QsRvtuOo864LoOsj/PgfHJ/urb+y/DC9tGNljkWV2LEKJZCZYYostsxGhiF6a2O2RVg2649uUgLAWCjBI8Uxz4SAdu7GOf0NbP7OPaV/wBo3LW8sIhk0FkKuXD6T4lOVGCNyOfI8uvFO1MYa4YjOoqofI3MjRQKSc7kktkk8yTU/wCyu2Y8RtpItRKGR5MAaUjIbBLat8iRRjHzpB6XpVEMgYBhyNV1ApSlApSlAr5mhFUstAaUDrXPvavFG0cU4bToLQyuNisEwC6iR91ZREx9wNb1LDmobivAFmVlOCCCCDyIOxBoOAJbm2iuYn8DKWDY+6FESxkHmQA7NnrqPnVri9+TbKXz3kr6yc4MipqQO6jZjqLqHI1Huzknatz412T4rbDuoreO8tlGI9axSPCmQRH4mVmUYGAQw25CufcZ4FxN3ZpbO51HmTE2+AAPsjAAAAAGAAABsKtEz7LO1cVlJLFPJ3cUulg+GIVxkb43AII/q10l+2nCyT/Lhj+JIpST6OqZ+INcEk4Hdj7VtKPVGH8KsPZTDnGw9QRUHoW37WcPc4W8Ke6QSAH1aZD/AGhUraTCbxQzQzbH7Deh3KF/y615kE0q/eb47/nVf/aD7alVseY3+HlQen2Z1+1Gw94w3yAOr/dq2bxQQC2knkG8BPoGwTXn/h/bi7h+xcTqPLvC6j0STKj5Vsdj7WbtcBmhkHXvYipI9YWVfmDVHZ1uWHU/9etXVvD1AP0rl9j7TLZv5yzK+ZtpVOfUfyZ+pqdte2vD35XbxE8luIm0j1YLj5yVBuM9wCjdPCff0NXSw6GoW1uROp7mWCcEEZikB6eS6vqayjMw+1G6/u68/wCzLEfHFBY7Y3phsLx1OGEMmD5EqVB+ZFcW7OW4hjM2nJiC6FO4a5cagx8+7UZ9WQ9K6p26uFfh94gYau5Y4yNXh8R259K5gbR5bQLHE0jNLOxChiA3dog1EfZGANyQPnVwUd7HMDLK2hJv5KZnwTDPGHNtcuo/GgIOBvplH3hWRYMsJPeKE/RJC0wxuco0KRp0ZnLLpO4xluQNX7LEUKxTNB3DBVkU95KWjUKCha3R0DAgEMHVgwU46GSFrC0MYZlaBW1KZQiG4VVdLSKfkExqCZGMAFTgEFaI4vHKojlUHvVWSQITi1jIPcdwv3H0nVyyyKurPeEje+HSvJBG0n86MxSY5GSMlWYfqtjUD1DCuXLbXH6QP0lAZZS7EHRibceNWTKsvPkT7ga6R2cuh3j2xAEhhS42JIOljatjI6CKL1yaC9KMGp7g9yDgGoe+AUEsQqgEljsFUDJJPQAVzXj3amaYsImaG2G2rJV5fecbgHomR789IPQH6RGBuwHqQKh+Kxq5Gk5943xXnE3O+QyjzxpyfUkZqoXj/wCUJ92ofwWkG3ds+xl7Jc3EiR94srqysrJkIoICsGYNkDA2BHhqGk7GXzM3/dZMNICc6NkXPv8Af9Kl+yljxS7AW2L92D9rXojB67tjJ9ATUvxj2fcajhmllvECKpOgSMS22AuoqoBJ259aDTD2audQOhF8cj+KWDZyBpBAc8mFTPCV7mOOKUwN3edBaVxhWOp1ZVjOsayxGGU77nlix2XltYVMl1AZsxxrGCUWNTpBdmLsN9gB6t7qk17ZW8JzHBaxb56yN+rjuRgAHffOc9KotWPB7csZ53uLgasyuqLEuS5c5PjXOSNgycl5VVxztesMZt+HItvAq6n0YaSTACqZpCG23AC7k7eLG1WH9owVY0094EKMqrGsSnQwdVz91cjkqjapriDJx24WGQJa3BibSyeJJjobRG+oEqyuBhxuU1rt4ag6x7M7eROF2feMzSPH3rFyS2ZWMuDnyDAY91bPVmyVBHGI8GMKoTGCCoA04x0xir1QKUpQKUpQKUpQK+Fa+0oKDGKoaCr1KDDkslPNQajbzs7byfaiU/AVPUoOf8R9mtnJnCaT7q1XiXsdU57t/mK7QV91UmOg84cR9k10mdI1elazfdibqLnE3yNesjBVqSyB5qDQeOZ+EyrzQj4VZHeJyLD4mvXN52bt5PtRKfhWv3/s2s5PuafSg80LeOCDsSORIAI9CMGtp4L7TOIW2B3hlQfcnJkX4M3jX0DAV0jiPsejOdD49a1jiHsiuFzoIag+8W9q8N3bTQSWrxtJGyZVxIoLKQDggEDPrUBwSRJYJlZWkACzCPXpVtu6mOACSQO62GDvz22s3/s/u4+cZ+FYVjaXNq4bQwKnIJGQNiGBH3lZSQR1BI61cEtDxZtIRBFAU3Urqdli1BQUeZmZPDl9S6SBGv4hUvxC+lUzlcFf0qK1PfFnDrAjoS2TnJcIdQOQyhsgqCIK8tI7wMbbCyNnXCSBKeumJjjvkyNgPFyBAwCZbi9jesZ1ihZ2N9dMFKB1CMpVsgjGD3p/OqPtjAkZljUkIHUNb3JLprY5VopAPtHOASisCCO82zU72Zk//rFMYMVs1sQSW8YdZpN2yTh2ddyT4d61zv1sn7+eRZ75RiGMYdLRgBplmYbPImW0rzycnnkainGZYpBJHI6uCTrDHUWb7RJ+9nJznnk1B1P2j8QOVtl2BAkf9YZIRfTKkn0Wub8RjldgiQyOo38Ksck9Rgb7bfOrl12yuJlXvtEpHJmUK6jyzHpyPXNZvDvaRewKqI40KAArIhAA2ABABx6k0EdBwK9cgCyuN+pR1UerMAB8TW99lPZ1kh7rDHpGMmNf2j98+7l61CL7XL4fdhPrGT/zBWDxb2j3lyndu2lCMFYgsYYeRIy+PcGGaDonaHt9HZA29lpaUeFpMAxw4+6gGzsOWB4R1yRiuVcfuL69k1ObiYebF2XPM4z4VHuGBWBHxiVf5sKg5eEbj48z8Sa+PxK4fnIfgAp+agUF2Ls3Ow5KMcyXUkfBCT9Km+Dez6a5wqOGOcYTTzJ/zzx/IZNa+scjnxFm/aJb862ns5c3UDaoSyNyyOfwONqg3XhPsQbOZWReWCztJy66IxHpP+sblW42vsrtkKuJ5lcEHKaFAIOQQGVjnPLJNQvZ/jvEiRl2bP4hqz8xXTeFSytGDKulvlkeeOlBes7ZYo0jQYRFVFHkqgAD5Cr1KUClKUClKUClKUClKUClKUClKUClKUClKUCvhUV9pQUGMVS0Aq7Sgw5LJTzFRd/2YglBDL8q2ClByPtB7GY5yWiuDGx5how6n1wR861q69jPEVBWO5t3Q81JlQHyyoUivQNfMUHmi49j/FRsBAR+rIf4qKwX9k3ExziX4ODXqXSK+d2PKg8pv7Nb9ecVWT2CuxzjPyr1j3S+Qr53C/hHyoPKSdg7o/0TfKs239nN039Ga9QiFfwj5CqgoHSg862XspuG5oa2Kw9kL7asD1IrtNKDnfD/AGWwpjUw+AzWyWPY+1i+5qPv5fStgpQWoLZE2RQvoMVdpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSg//9k=",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.6,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Elegancki sedan premium z wysokiej jakości materiałami wykończeniowymi."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 3,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "Audi A4",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "Sedan",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 260,</span>
+<span class="cstat-no" title="statement not covered" >            image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.7,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: false,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Sportowy sedan z zaawansowanymi technologiami i doskonałymi osiągami."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 4,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "Volkswagen Passat",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "Kombi",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 220,</span>
+<span class="cstat-no" title="statement not covered" >            image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.5,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Przestronne kombi idealne dla rodzin i długich podróży."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 5,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "Audi Q7",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "SUV",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 380,</span>
+<span class="cstat-no" title="statement not covered" >            image: "data:image/jpeg;base64,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",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.9,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Duży SUV z trzema rzędami siedzeń i bogatym wyposażeniem."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 6,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "Porsche 911",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "Coupe",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 600,</span>
+<span class="cstat-no" title="statement not covered" >            image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.9,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Legendarny sportowy coupe z doskonałymi osiągami i charakterystycznym designem."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 7,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "BMW 4 Series Cabrio",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "Kabriolet",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 450,</span>
+<span class="cstat-no" title="statement not covered" >            image: "https://images.unsplash.com/photo-1547038577-da80abbc4f19?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.7,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Elegancki kabriolet z automatycznym dachem i sportowym charakterem."</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >            id: 8,</span>
+<span class="cstat-no" title="statement not covered" >            nazwa: "Volvo V90",</span>
+<span class="cstat-no" title="statement not covered" >            kategoria: "Kombi",</span>
+<span class="cstat-no" title="statement not covered" >            cena: 290,</span>
+<span class="cstat-no" title="statement not covered" >            image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFhUXFRcXGBgYFRgXFxgXFRcXFxgXFRcYHSggGBolHRUWITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0NFQ8QFSsdFR0rLSsrKysrLSstKy0rLTctKystKy0tLSs3LS03Ny0tLS03LS0rLSs3KzctLSsrKysrLf/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAQIDBAYABwj/xABHEAACAQIEAwUFBAgEBQIHAAABAhEAAwQSITEFQVEGImFxgRMykaGxQlLB0QcUI1NykuHwM2KCohVDstLxk+IWJDRjc4PC/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//EABoRAQEBAAMBAAAAAAAAAAAAAAARARIhQQL/2gAMAwEAAhEDEQA/ALmWmsKwo7a3eiH/AE/1qe32yckZlgdVWT8CfxqI1rrXWF19Pp/5oLge0lptHcCdv2bqfJtCo8w1GsJdV4ZSCpBII25UFpF7/rSYpdV9efnTs0Nt0oZx3jlu0QsEuJJEiAD1NFEEWpIrIt21C6m2I8yPwqy3a9AoeAQSBkzDMDEhh95SOY6eIkjRstRMtZ1e21s72iPGf6VOO1lg7Ms+JYfMpA9aAxlpQtDLfaCydyAOodXA88pkDxiittwRKkEdQZGutA5RTbgFPprtQDsSkmrHstKbdFT3LqICXdUUAkltAANyfDYeZA50ENlfqfqavcOX9qnn+BrMt2swS/8APY+Vl/8A+gKv8A7TYa9ibVu07ZmJgNaIkhWJ706aDpyqjeUEdd/WieJxlu377gHpz+A1oRcxiZTB5GJ0E/WoIEEUKv25uE+P4Vf9qmWS6+hJPwGvyqot9Mw1O+8aedBPhVhtelW2cDYD4Coj7P8Aer86Y2T98tUSKEJllBND+M2UIGVQPKrIRP3yehH5ikNgPtcT1I/AmgH4FntibbshMAlWKkidtDRpcQSsticQG5xfePhNda4SwA7y8jqLi/8AUgqrisKYPfSZ0BLAfHLQXBihlKNfe4pMxdAu6jaM80LwfaHEL3UKKgPurbVR46AVEMPc+9a9C5/CrGE4WT9tZ6BGPzkUBbFcVzkE3AIHK7dtjrqE0PrT8VxpbgFshWYycywVWPNAZjTQ86z+N4e6sQQDHQjXSdiRHqRScAvI90gBwwQkhrbLoWAkFhqN6A/gXCFrje6iljAkwNTA5ml4bxXCM5d7jqZkBs5UzMwkFfl5VV41eW1hbzsQohVkzHfcL9kE8+lZUYlFUF20gGVBdIOgYsv2Z0zREgiaDfXOIYd2I9uir/8AgDZvMG1pUScRwuY5DaUDm1iCddcuW1toN6w13itpGguNpJBLR4aCCfIkfGnJxvCn/ngedu7+CGg2d4iWNtjkOoMnnrziBJ2in3uL2AxAumPDDqR8Tb186Cr2mwnssouiQkbdIE/P+9aqWkzCVhh1GvppzorzZo5CPOpraCB0+h6U4YQ9fpTmsuRBbT0/AURDaeGjlP8AZrR8D4k1s5xJExcQc4+0vR4/mAjkIdwbD3gghrbA8gbRcDoVyFh607imGfQw6mZn2QQRHNhbGagP4ztFZXMUcFsqFehzjukdRM/A1kccjOSZmTJJPrqdt4qv/wAPQgsWJaZ3gd6ST3Y5k6ePjUTnL/fp+FBS4pZJhScviQx0690HQfjXWrh9gEzA+za4BAGxKtqdzMsRP3TtrT70EHNB1kabVBhSFaffXSV01hSu/kxoGC5SwKINYsRIDqYkBtQ3SDpuR0irZ4SihHZh7NoBK6ss790kZiJ2BnyqoEpcIiOVb3grrctq9rLbuRGkBSR9i4OYPJtxO8GVzqYHDCG9o0ciQVn1UNHlvVhuJZVKi4HkDvZ7srHIZiBr4g1Bp7fHreYW7k27hMFSDAaSIzR1H5wdKvu1Yu7be4y3GBuFcsFXV9VECcs5joJmZjWiVnjb5groZOn3WnpB0J+FFF8TdyqzASQpMdYG1dxbgtnEWwly5dXvZpUqMzcpUjUDWByk+dV8Vixbte2YELynukn7oB+14Vl8XgnxN43rjMqAj2a7MFGxj7BO/XXlFQR8Z7KWUJW3ine5+79iCdds7BwEHiY8Jp3BcIuEIuatiBOUyQtuRlMQe8SCddInwolh7QjLbAAnU+PUnmaI8NwqhxpJ6nXkdulVndipbxGJbvJaGus5CST1zOZJqliu0V9GKkww3AOWPA5a1HGceLNov9rZfFj+W9ecs0E6nx1qLm0WPai7/mP/AOxqYnHCdrc/6/8A20GJB29at4bEZVj8qRaL2+PMuwcfwsPzqVO0Z+9fHr+TVm7NzvSfE1YuYhSP7+NIVoh2l63W/wBaFvqpq/geOA95CrECSSmRVnrAEwB1isPYDOwRfebT05k+ET8KLcRui0os2/sxmPMtvP0PmRtlpAaxXap1ef8AFYaw/wDhAjabY0Pkee4NA8RxrEASHVdRoqDmY3IPUUNtMJ1+sfhTmMyBsRpVSrdvjmKO14/BPyopwriWJb2js827S5rjMFUCToqnL3rjahU5noJIzuFNssuZnVYBbKAzbHNlkgSSBvtm5xVrH8S9oFtovs7KElLYM9473Hb7dw/e6aAAaUUcxHam5IAS3C6DLz197PoSDAImjfZfi9q7dhgLdzIddwyyJB5Eg96YnRtYmsBg1WSrGNmBiYEw4jwkMPJqMHFAhbVkm0mYE3D77MNnuZZhRJi2JGpnMaD0HjmGV7JtuyDO6gZyMrEd4CYJ1iZAJ0kVjm7JujSpW0sAEC6XeSSHh4WAQOh0bWimMxa4vChgsiwe+qznBUMjMIB/i6lXrNXeBG/cJsYwKFCgo1wgggRAyz93pVwPxXY68TK3LZB5CdPCnYLsS+pu3Ms6DKob4yRl26GmcR7PY1SrfrSIpIHdu3NwN4joKI3biplRsYwbKqnvBSxiJiZ1NEAsb2SxJzAAPmOkGDlDAyZEDb0+dbXh+Cm2DfuW7dzYqgLiBoDIjUxtFBLXGHfEHDg/ssjZjpmZ0KktPSSRHnS8R4natME9oD3Qe6c0TOhI2PhQZi+XUwykHxFQNfpnEOK37aoisBbKAgZF3HdbUgmSyk78xVH/AIziIj2jekD6Coq/7c9DUtjGXU9w3F/hJH0qPC3rot943LjloKtdfuJC5SFVgRmJYSdBlHWqXEMewZltu2WYnOWJ/wBRO3lE0BWzjLgJkNDe8SsnzneZ10OsUSvOtwlLaEAm3lBYEaLlZ3I2doWQukzzArI2Hvse6z+eYwPEmYFG7fGblvMttiAxbvDRtTuDv8ZoH8a4e1l8jfaXMJEHKSwgjr3T/ZoKAbYZgZJIUeEyT8hVrHcTuXGm65bSATvvUKEEqJn9oh+ccvOqIhjGzr7YMwXKCCSDkH2R002rRXVsssDH3SkyEZ2KjcAkEHWCeQ3OtAONrLq0asII5yInTzPxmpcBwPFPqlh/MjKPi0VBeu4bIC3trbrI7uYgkDqNJPlVbEYiwCBnujugkBFYAkAgBi6yIPMD13o3guw2Ju++6IOcS59YgfOjlrsBhwP2rXHaIkQg0ECZ0MeY29atIw2GZXJhmgCSWAA6DmdT0opw69dDhLbXGZTqhabYg6ZiCRAPSfCtTe7KYUW8igqSR7jy3mzHMCJjSqtnsvk/wr7LI5pB+Kn8KlDcRmzC5fc3Lg2n3UHS2uyD5mqeLxJ6j4/KpcRwPFDZrdz1IP8AuAHzqi+AxA3w5P8ADB+hNRIXC44pMMB4EEz8NquYTtHlYFlkCdtDsetB76Mvv2LqfxIw+sVW9vaPP61SCfG+Mm+wMZVUGBM6k7/T4UHdiTA9acxQ6BtfMVKLQGxBoGKvKo3Y1aRNRv8ACm3bQmgrA1xapgniPWrXAuG+3vQdEXvOZ5DkD47fE8qAjwix+r4dsS4l2HcHgTC/zGPQTQnDYZ7jQAWYySepJksempq/2z4nN5LAgBYLcgGYQo8AF/6vCjX6OceE9qMqsWymSASPeEaj1061FngMezt6J7nlmM/SPnVj9TTCgNcT21wwQuosIT+8YQbjf5RA8W2r0XE8TEa2rbDxVR8wKyWLxyuWQKpzyuUGTr/fypV3GVtp7QEKozl+SgCZxLADkAZtLG3u9KVLdq1/iEXH/doe4D0uXBv/AApP8Qo/gOxrR+0uLrqQAWgxHdnQHxiaMYPgWGsbKGbq2p+VWpGbGHvC4ly4IM5TaRBpaIMr3dE8BqSd41NEsPw17jLmVUsIe7badRzLAaljAkkzy20Gmw+KQKyiypBG8KmRuTZ/wO9UzfVnKK42BAEu0QJJAUR3swH4UqrHDcliSgBLEFwBlBIEA6ACI5ACsX2h7HWLY9rYW7dR2PcRlzWiZIRgd10MN4VuOG2FukgIxyjYnViQfQe7A8zrMQv697TEqiqq20Rh3RuxMM0xqJSAegoPF7/CboJ/YXQPFZPyFWbmIxULpdJQALmtAkAbAMVnSvcDZHSkNgdB8KI8n7OYEETew9x/9TIZzMWzaS0934eNVsR2QxLuzBVCliVBYyFnQbdK9iFhelPFodKDw9HdRAOh5aEfA6cq2nYXB4Z7Fx7trDG4LxUFytuE9mhEZR96fifKvNCynVnJP8M/U0xsvU/yj86D2oYXhqRmThqide8jGJMxI3iPnTxxPhVsaPgl/hRT9BXiEjx+VdI6H41aNN2oxtm5i7zWri+yLLlIVssZFmAF0708qFKFcgKxJOwAJJPkBNEeB9mHvAPc/ZodtyzeQOw8TW84Vw6zhxFpFB5sdWPmfwqVYyPDOxN67q49mhG7QGmdCFEmI6xWg4V2Ew1tgWdrjDWSwtqCNZ0M/Ojucnck/T4U4R0rNWJrWEsp7otiOgJOpk6xJ1pXZT9pvRAPmWqMHwFPB8B8KCMKOUx51KBb/dt/P/Snr5CpFUdBQRr7P91/vali3+6/3mpwg6U8Wx0oRSuW1J0WPUmut2U+0G/0kD6ir3shSewnYE+QmoKyi2NvajyZfypr2sO3+Imcf5rdsn+bQ/OrgwP3iF+Z+VNNpBsCx8fyoAmN4Dg3Y+yw2VSBpuR4ysR/etDLvY3DfdZfK4x/OtcLTtoPgBMf0px4YeZj/cfnp8jVGEfsVZ3F64vqpH/TNRN2RSdMVcPks/jW8ucNXdpb+I/htUF1FXTQeA/AClSMaOx1qCWu3zp/kX8DRnDYO3YTLbXKPiSepPOiTWWaIUxvMbx9BSYjAOEDkd0nKDKnXeNDNFec8R7O3XuXLrsozOzc2MMTE7RppvVAcOum4ETMZ0BGkfxEbetekthgRqJpLVpU2FWohs8BwqWLIOd70N7Us7kEz3SNYGnIdKtcO4dYtHOLNtB1Mg+kd4+lc94LuQPmf6fD1qnf4kAdBr1J1+O9BYbHKb7JmLKxJW2q95Uk+8xMT41PccDVmUaDQnppsvlQG9j2Okx4D8evrURLHYfH8qii9/iibZc0bEmB6KP6UNfiBY+8eWxjbpHSoRhG5sB5CqXFptJIYkkgAeJqoJP2xNq6twHVRl0jvaksTOkEk1oOyhS4PaJMMDuZIjTL6fjXkOLslhIJMGNu78Z3r0v9ETzh3Uzo5jyhf79KqNmbfjXBan9nTSDQR5aUU6KSKDyEdgrvUVKn6P7nM16yMOOlOGHHSg8ttfo9PNvlU9rslasuCYYryO07jTmefTUV6YLArzf/AOJLZu3AzJIdgQ4NvZiNH7yn1y0UXs3bY99bhPKCF084arC4m0R3bRPibs/QCqiYpCJMp4t7v86yvzqf9VDAEQ3QjUehrKlsXQD3lLDoGy/ODVkX7H7u6PK6p+tuqRw7DYn11+utNlhyn++n9agJq9g/avL/AKUf8Vp6LZ/fN62o+jGhPtuunn+e1OD0BS5AOjhx1AYfHMBUtkyQBE+JA+Z0oWlypku0UaOGcDMVOXqIYepWQKRWofZPU1eweNCMGI2mNtDBAbXmDB9KC4LQX39/u8/XkPLemXMXyUegqicUnIMT4tp6wPxqfD3NeQ8qIs4bAXLrAEhATvvpzMURs4G2NyW+Cj+VdPjNMweKCGW1DArA945hrl8YqXKYkGFzRqBm2kTuo+e3KqHXHVRsAPh8Ko4rER4eeny3+Qqwyjl8Z1+J1iq74YcqgFYi+TtP/SPlr86pMfTy0+lM432gw9klS+ZxuqCY8zsPKZoRb7UKTItt4aj8qs0o2yhfeGY/dnQfxH8NPPlUGIxR0LEaaAbADoANvQVVOPVlkE77HceNUrxJ50Ft8X0qG5eqqoilNBG8kztSCyKkrqIRUA2FPApopSwG5op4FZXtJeL3FtruIVf47m3yitM14AEmQAJmsYVe9fbIwVgr3JJgKTA1PgCKuIna2BaKBIKK4I5g22dmYnrFsj/VFekfo24d7HBKxEG6S/8ApJOT5GfWvOcS2b2iC6gdlbMsMGZ3M5UlQO8SCSDzA239vVMoC9AB8BFVHE02uMV3rQNY0yngETr9NPLnS0EmWlWpZpNKgbXz3x6yUxN9T++uD43G1+GtfQvrXmP6ROzua4120vejMyj7Q07y9SIiPH40YLCY25aM23ZNdgdDrAkbNz3FaDB8XxSobzYcXEEFntt7K4J2LG2fd81j8cyiEmACTpAAmdZ+hU1puEwuIXK4AuxauIdmS4AuXYqw1EA9BRRjhnbG25C+0YEn3btrNPgr2dfVlo9b4gjEhk1HvG2y3Qp6ECHB8MteYcUxZS9et2lFpBccEJoxCtEF9430BjWhtvukEEqZGo0I7xEgjblUhXtFm3buGLdxS33dn9UMMPhSng7E6KR5afGK8vwfajEqArMt5dO7eUXNwftmHERybSvTuzPaRrli26hkDh5QuXCMjKO4X1ghpgkgcvGbi1MnAb/JZ89Pn/SlbhV5feSB1BzD/bJHmQBUPFO0bKTbtm7dvZc3s0yCByLtl7o+J8KzeKxPFrh0L2x0D2xz01YztH9NghW0scGusJVlI6qcw+Ipt/hLL77geZA+tYb/AIHinYtcxF2SIY+0QkgTAMXtRr86cOxjkQXVhmLAHOCCwUMTlRs0hFGh5U4laTEY3D2zDYqyD09qk/AGap3O1GHWQt0uQJhVcjzLRlA9aHDsyyhRcxNsKBGVrauB/CLsZPSKs4fgGFKsEJb72S6oQ/xDPcPwIqxKuYHtisE27F64ds7ZUBO4VdSQNdo85Jk6HjN7F2cMl/8AYK7sipZYO73GfZFYMoBiSSQQACTtQWwbNpReeFtISZiSYiBlO2/KZNcmPuXrv6xeLSAVs22yzaRozTlAHtGgE9BA6yK09vFEDvgDTUqZA67iY9KxnaftfnDJZaLexfm/8PRfr9aHa7tAf/p0O+tw+G4T13PhA5msPxHGzAHoPxNMw3TsXjue31PkKpNxDwJ8zUOTWWOvxNOaypGkg+hqoLcN4w22Yx0Jn4Gtng8RnQN8fP8AvX1ry4EqfEVvezN7NbPofiD+VTVF66upwWoplOy9a4uB41RxnEET3jr0Gp+HKiLZu9NKrYjGJb9469Bqx/vxoNi+KMdjkHxc/l8qH/rEHRfU6k+tWFWeNcdJGUAD/LuT4t4eFC+DorM7XDoAGjmxzCFXxJIH/ih19MrHzn/zVnhuK9m4aAYjTy1HziqjXcJsi9irAYElbgYbH9laLSs9M1u3p/8AdaN69VXET0rB9juGsB7ZlIJRUQfdtr85J1PkK19tqaokHHjXZx1qqs08KetQWcxpM3hUKilnxqi7NJXEim5qgfpQnjnDLt0B7ORmTTKWymd9GIIO40Mc6JM9UuF3Llz2vsnC5b4Ikd1lKZWB011BIjmo1gmriPMuM21BKYzD3MG7T+0VZtvII7xAhvTn0qha4dfs5blgW76o0qy96D4rM6EyBrEc69ibiZAKYqxAJYe7nRgqhpI1GozmAWgW2nlIrG9gsHdi5hmbDOQGDWWhSDqCbZ0jyirB4ZcstmbMDJMnrqSdRuNFY67U1TqOWoPzJ+n1r1TinZ3H2h+0s2cbaE94KFuAR93l6Zqx7HAX9At605k91hcWTEmXg8htUVmlG232PDYE16R2KX/5Sx4m6R6OorML2aJ2YlTOoQAwfAvG2m9a7hVr2dpEiAi5VG51OZmMaAknYTEb1NMTcQ4IzObtq6bVwgAnMCrBdpE6elVHx+Ltzbu2Gu6e/Ydl9ZiAfSitu+OtWEvj7w+NZrUZ08QvlpGExnvq8G8CJUREez907kbVSxVnEuoUYO4AJgsc76knVp136Vt1uikZqckjzW72bxJZWW0VYEEEsoOnP5CjfCcBirSFCMOMxJLNmZpJYn3I+8eceG9aS8f71qIirSBYwplTduG6ye7IARD1VBz8TJp2NxgtIzk7DrueQ+NXHWsl2vxPeW0OQzN5nQD4T8aZ2AWIxBOZmMkySepNDyx3+0flUuJbYep/CpsDYIR7+UkJtppmOgJ8BpPiR1rbK0eFmzZW/eVsrsVCggOTE6lgco8wZ6DQm9jeFWxh7N0My3Lhud0kMsK5UGYBHumT8qifHi7gAHJJt4hZ5nvK8E+fe/8ATAq5799Ec5bOHtTcPIEnMw8TJAI6hqgzOKWVkiGUwf6+RHzrXdkF/ZE/w/Q0A4/fFy69xVyi4M4XoAWGvj3JPiTRjhmLWzZg6t0HgANems1NVo/aAeNUcZxRF0Jk/dGp9elZ/FcVd51yjov4mqyIx20+vxpCiGL4s7aTkHQat8eXyqksnYR47n41YsYGiGHwfQVUDrOC61fscNnlRXDYDrRWxhB0oAVngCn3hNFuH8DsoZFtZ6wKK2rFW7duop2HAq6sdahRKlAqh4p1Ii08pUHKad8KaDXTQXCaTMKaz1C9wdaCRzQHG4S9bAaxecZFChZmFUaCDowHl+dFHu1VvXjQC8N+kFrZyYyzI2L2xOh+9bO48QfStVwniGGxKK2GuowUAALplhWADJoVjNsRWP4phrdwd5RWPxXZ9kfPh7jK42KsVceRG/p8K1Uj3K1nkAwRO/OJbf8A2/Pwr5lweHYXgg3ViPhINb/hP6RMbhiExVv26D7XuXB5mIPqAfGsBf4gRfe7aJTNcdlmJAZiQCNqaPSOHcPvZB+zJ8tfkNamKMvvKR5gj61m+EfpExCR7S3buAdJtt8u78q9K4V2iXEWVuWgYbcHdSNCD4/0rnuN4zDERJIHjNCMTx+wpgOW/gUsPjtWx4/wz9btNacanVWj3WGx8fEdCa8yxnZTG2yQcNdP8KllPiCvKrnaaJntPb5JcP8ApA+pph7VjlaufFR+NA24HiueFxP/AKNz8qbZ4NigwJwl8jmDbf8AKrMS60eD7WIXCsrJOkkgj1jbzrUgyJrzZ+AYokxhrsT9w7etbXs6botBL6Mjrp3tyBsfhE+VTcM0QYV5vxDEe0uu/JmMeQ0X5AVvuMYjJauNzCmPMiB8683uGFPw+OlX5NU3aZPU/Ktpaxv6pYSzesq1tlzSD38zAZhcU6MO9l0gx461kcFYD3UTkzhf5jFaztBwO4G9ri8TaSIBCAsdJICggZm1934wNa0ihYwdm2Z9oDYa4LitBPuK3s7bqPtFmIIMaITTFwV/FAJasutnNmLsCS7Ge+7Rr7xMLtmO+9XUJsWva2lDLadCUeC5V7aZieUAsm0wSpqpewdzEEXbWIa8nNHuftUOvdKkww8V36VBDxzArZvJbD54tDMYKjMS8gA6xqKgVGbeuwdgteYR7ojyPMfHN8KN2MJ4UFDD4TwojYw3SiGHwM0Uw+A8KihuHwHWieGwYFX7WGq0mHoILNgeFXLdmnJZqdEoI1t1KEqQCly0CItSZaRRTwtB00uYUhFdloHTXCKZFIfOgc1ROQK52P8AWoSOtQNe5VW9cqwwqpeFUUcSs0FxqMK0D26qXrHWgzj447OodejDUeR3FU7uAwt3mbTf5hmX4jajON4bOooJiMORyqor3Oyb722zDqhzfLei3YnE3cJiPZ3Gi1cIB0AKvsrEEGBsD6dKFKWUyrEHwMURwfaC6hUuBcCkEZh0oPVTfvLsAf5f6VE3E7w/5Z+C/wDfXn9/t7iBslsj+Fp9e9Vdu3+J+4n8p/7qkWtJxH9I1u27IwullJUgWwII5d40Mu/pLtcrd4+tofgax/HuLPimD3EQMBGZVgkcg2uoFCfZ+P0/KrErcXf0iqdsO/rcUfRKoY3tjcuIQtpbRkQwYswg6xOnht1rL5B1Px/KntemJOwgUmLU+IxLuZd2bzJP/iquJOw6n6f2KRr/AIVFMmTRE3Dmi9bPR1PwYHf0oxZwz3mfEYlm9naknbXmERdl5erDqJAgd7XatFxXHtes2URItgg3iPtXCTEgbKdSOpfqKoXD4og2GYf42KvZ13GS6tlCnllePQVU4Y13BtcuAwAXtlTsxGgkdMxBB/yt40T47ZCXbCwFFrK7RJAZiCwk6mMsdTQ/GN+uYkqilbeaT6ALJ6EgbcpPjUF3sxw8+zzndzPoNvxPrWnw2E8KmwWCgDSAB8qK2bFRVexho5Vdt2hUyW/CpVt0DbdoVKtunKKcKBoWnrSxSxQdNItPW3UmWgjpQafHhShRQMzeFKHpSlKaBuhpcg60kUlBC5qJ1mrISmstBTKVBcFXbiVVuCKCs9VnWrzComWgoPbqtfwobcUUdaiK0Rm8Vwg/Z/rQq/gyNxW0Nuq93DhtxRWKazURs1rb/CRyqhd4eRyoM8bB6UxsNRxsL4U39TPSqgA2Gpn6uelaE4E9K79QPSgzhwlQvhmFaj/h/hT04YTyoMiyn1p9nEldQSCNiCQR6itcvZ/NyolgeyNoGXWfOgxuFs4jFNC5m6sSSB1lia9A4BwBbCgbtzNGMLglQQqgDoBV23ZoqG3bFWVtU7JUirUEeSpFSnqKcR0oGBa6nRSqlBw1p4SlAp60CBaUinVxoGha6K6KcBQMApYp5FMNAjCoj5080lAhFIa6uoIXqF1rq6ghNqmRXV1QNKVG1ma6uoGGzTDarq6qEazULYaaSuoI3wIqE4OurqBy4TwpwwfhXV1A5cFVm3w8UtdQW7ODFW7eFpa6gsCyKetuurqB+WmmurqBBSg0ldQSpb61IVrq6gTJTwtLXUHGkrq6gQ0hNdXUCZqaSa6uoFimxS11B//Z",</span>
+<span class="cstat-no" title="statement not covered" >            ocena: 4.6,</span>
+<span class="cstat-no" title="statement not covered" >            dostepny: true,</span>
+<span class="cstat-no" title="statement not covered" >            opis: "Luksusowe kombi z naciskiem na bezpieczeństwo i komfort podróży."</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >    ];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const filteredCars = activeCategory === "all"</span>
+<span class="cstat-no" title="statement not covered" >        ? auta</span>
+<span class="cstat-no" title="statement not covered" >        : auta.filter(auto =&gt; auto.kategoria.toLowerCase() === activeCategory);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const categories = [</span>
+<span class="cstat-no" title="statement not covered" >        { key: "all", label: "Wszystkie" },</span>
+<span class="cstat-no" title="statement not covered" >        { key: "sedan", label: "Sedan" },</span>
+<span class="cstat-no" title="statement not covered" >        { key: "kombi", label: "Kombi" },</span>
+<span class="cstat-no" title="statement not covered" >        { key: "suv", label: "SUV" },</span>
+<span class="cstat-no" title="statement not covered" >        { key: "coupe", label: "Coupe" },</span>
+<span class="cstat-no" title="statement not covered" >        { key: "kabriolet", label: "Kabriolet" }</span>
+<span class="cstat-no" title="statement not covered" >    ];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const handleTabChange = (key: string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const path = key === "all" ? "/cars" : `/cars?type=${key}`;</span>
+<span class="cstat-no" title="statement not covered" >        navigate(path);</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return (</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div className="cars-container"&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;section className="section"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;Title level={2} className="section-title"&gt;Nasza Flota Samochodów&lt;/Title&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;Paragraph className="section-subtitle"&gt;</span>
+                    Wybierz spośród naszych nowoczesnych i komfortowych pojazdów
+<span class="cstat-no" title="statement not covered" >                &lt;/Paragraph&gt;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                &lt;div className="category-tabs"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;Tabs</span>
+<span class="cstat-no" title="statement not covered" >                        defaultActiveKey="all"</span>
+<span class="cstat-no" title="statement not covered" >                        activeKey={activeCategory}</span>
+<span class="cstat-no" title="statement not covered" >                        onChange={handleTabChange}</span>
+<span class="cstat-no" title="statement not covered" >                        centered</span>
+                    &gt;
+<span class="cstat-no" title="statement not covered" >                        {categories.map(category =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;TabPane key={category.key} tab={category.label} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                        ))}</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;/Tabs&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                &lt;Row gutter={[24, 24]}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    {filteredCars.map(auto =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;Col xs={24} md={12} lg={8} key={auto.id}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;Card</span>
+<span class="cstat-no" title="statement not covered" >                                hoverable</span>
+<span class="cstat-no" title="statement not covered" >                                cover={&lt;img alt={auto.nazwa} src={auto.image} /&gt;}</span>
+<span class="cstat-no" title="statement not covered" >                                className="car-card"</span>
+                            &gt;
+<span class="cstat-no" title="statement not covered" >                                &lt;div className="car-card-header"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;Title level={4}&gt;{auto.nazwa}&lt;/Title&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;Tag color={auto.dostepny ? "success" : "error"}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                        {auto.dostepny ? "Dostępny" : "Niedostępny"}</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;/Tag&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;Paragraph className="car-category"&gt;{auto.kategoria}&lt;/Paragraph&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;Rate disabled defaultValue={Math.floor(auto.ocena)} allowHalf={false} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;Paragraph className="car-description"&gt;{auto.opis}&lt;/Paragraph&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;Divider /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;div className="car-card-footer"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;div className="car-price"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                        &lt;span className="price"&gt;{auto.cena} zł&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                        &lt;span className="price-period"&gt;/dzień&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;Button type="primary" disabled={!auto.dostepny}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                        {auto.dostepny ? "Zarezerwuj" : "Niedostępny"}</span>
+<span class="cstat-no" title="statement not covered" >                                    &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >                                &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;/Card&gt;</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;/Col&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    ))}</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/Row&gt;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                {filteredCars.length === 0 &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;div className="no-cars"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;Title level={4} style={{ textAlign: 'center' }}&gt;</span>
+                            Brak dostępnych samochodów w wybranej kategorii
+<span class="cstat-no" title="statement not covered" >                        &lt;/Title&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
+                )}
+<span class="cstat-no" title="statement not covered" >            &lt;/section&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+    );
+<span class="cstat-no" title="statement not covered" >};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export default Cars;</span></pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-06-17T14:26:50.093Z
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    
