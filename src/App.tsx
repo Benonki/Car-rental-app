@@ -10,9 +10,10 @@ import Register from "./screens/Register";
 import AboutUs from "./screens/AboutUs";
 import FAQ from "./screens/FAQ";
 import './App.css'
+import Cookies from "js-cookie";
 
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-    const accessToken = "test"  // powinno byc: Cookies.get('accessToken') ale jesli nie chcemy wejsc do home to zmien "test" na null
+    const accessToken = Cookies.get('authToken')
     return accessToken ? children : <Navigate to="/login" replace />
 }
 

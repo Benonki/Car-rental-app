@@ -110,8 +110,9 @@ const LayoutApp: React.FC = () => {
         }
     };
 
-    const handleLogoutClick = () => {
-        logout().then(() => {
+    const handleLogoutClick = async () => {
+        logout().then(async () => {
+            await logout();
             contextLogout();
             window.location.href = '/login';
         });
