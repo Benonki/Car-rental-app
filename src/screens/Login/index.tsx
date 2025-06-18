@@ -1,17 +1,41 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import type { FormProps } from 'antd';
 import { Button, Flex, Form, Input, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { login } from '../../api/auth.ts';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import {decodeJwt, login} from '../../api/auth.ts';
 import './index.css';
 import Logo from '../../assets/Logo.png';
 import type { LoginData } from '../../types.ts';
 import { GoogleOutlined } from '@ant-design/icons';
 import { useUser } from '../../contexts/UserContext';
+import Cookies from "js-cookie";
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const { setUsername } = useUser();
+
+    useEffect(() => {
+        const token = searchParams.get('token');
+        const refreshToken = searchParams.get('refreshToken');
+
+        if (token && refreshToken) {
+            Cookies.set('authToken', token, { expires: 1 });
+            Cookies.set('refreshToken', refreshToken, { expires: 7 });
+
+            setTimeout(() => {
+                const decodedToken = decodeJwt(token);
+                if (decodedToken && decodedToken.sub) {
+                    setUsername(decodedToken.sub);
+                    message.success('Zalogowano przez Google pomyślnie!');
+                    navigate('/');
+                } else {
+                    message.error('Błąd podczas logowania przez Google');
+                    navigate('/login');
+                }
+            }, 200);
+        }
+    }, [searchParams, navigate, setUsername]);
 
     const onFinish: FormProps<LoginData>['onFinish'] = async (values) => {
         try {

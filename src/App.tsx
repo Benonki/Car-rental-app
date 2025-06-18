@@ -23,6 +23,7 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/oauth2/redirect" element={<Login />} />
                 <Route
                     element={
                         <PrivateRoute>
