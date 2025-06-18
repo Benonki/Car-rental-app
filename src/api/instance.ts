@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
                 console.error('Unable to refresh token:', refreshError);
                 Cookies.remove('authToken');
                 Cookies.remove('refreshToken');
-                window.location.href = '/login'; // Przekieruj do logowania
+                window.location.href = '/login';
                 return Promise.reject(refreshError);
             }
         }

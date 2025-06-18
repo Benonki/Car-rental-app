@@ -19,13 +19,11 @@ const Register: React.FC = () => {
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         try {
-            // Sprawdź, czy użytkownik zaakceptował warunki
             if (!values.terms) {
                 message.error('Musisz zaakceptować warunki użytkowania');
                 return;
             }
 
-            // Wyślij dane rejestracyjne
             const response = await register({
                 email: values.email,
                 password: values.password
