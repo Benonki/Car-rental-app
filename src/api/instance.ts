@@ -4,7 +4,7 @@ import { refreshAuthToken } from './auth';
 
 export const axiosInstance = axios.create({
     baseURL: '/api/',
-    timeout: 1000,
+    timeout: 5000,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -15,14 +15,26 @@ axiosInstance.interceptors.request.use((config) => {
     return config;
 });
 
+let isRefreshing = false;
+let refreshPromise: Promise<string> | null = null;
+
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
+
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
+
+            if (!isRefreshing) {
+                isRefreshing = true;
+                refreshPromise = refreshAuthToken().finally(() => {
+                    isRefreshing = false;
+                });
+            }
+
             try {
-                const newToken = await refreshAuthToken();
+                const newToken = await refreshPromise!;
                 originalRequest.headers.Authorization = `Bearer ${newToken}`;
                 return axiosInstance(originalRequest);
             } catch (refreshError) {
@@ -33,6 +45,7 @@ axiosInstance.interceptors.response.use(
                 return Promise.reject(refreshError);
             }
         }
+
         return Promise.reject(error);
     }
 );
