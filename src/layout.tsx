@@ -179,7 +179,7 @@ const LayoutApp: React.FC = () => {
                     </Content>
                     <Footer className="app-footer">
                     <div className="footer-copyright">
-                        <p>&copy; {new Date().getFullYear()} AutoWypożyczalnia. Wszelkie prawa zastrzeżone.</p>
+                        <p>&copy; {new Date().getFullYear()} CarRental App. Wszelkie prawa zastrzeżone.</p>
                     </div>
                     <div className="footer-content">
                         <div className="content-left">
@@ -213,7 +213,7 @@ const LayoutApp: React.FC = () => {
                         <ul>
                             <li>Pon – Pt: 08:00 – 18:00</li>
                             <li>Sobota: 09:00 – 14:00</li>
-                            <li>Niedziela: nieczynne</li>
+                            <li>Niedziela: 10:00 - 14:00</li>
                         </ul>
                         </div>
                         <div className="footer-social">

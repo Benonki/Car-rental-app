@@ -48,3 +48,40 @@ export type RawCar = {
     image_url: string;
     description: string;
 };
+
+export type Address = {
+    id: string;
+    country: string;
+    postal_code: string;
+    city: string;
+    street: string;
+    street_number: string;
+};
+
+export type PersonalData = {
+    id: string;
+    address: Address;
+    first_name: string;
+    last_name: string;
+    pesel: string;
+    id_number: string;
+    phone_number: string;
+    email: string;
+};
+
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    provider: string;
+    providerId: string;
+    enabled: boolean;
+};
+
+export type Customer = {
+    id: string;
+    user: User;
+    personalData: PersonalData;
+    date_of_joining: string;
+    loyalty_points: number;
+};

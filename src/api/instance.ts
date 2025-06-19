@@ -5,6 +5,7 @@ import { refreshAuthToken } from './auth';
 export const axiosInstance = axios.create({
     baseURL: '/api/',
     timeout: 5000,
+    withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use((config) => {
