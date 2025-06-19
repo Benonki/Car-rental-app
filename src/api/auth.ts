@@ -11,9 +11,6 @@ export const login = (data: LoginData) => {
                 Cookies.set('refreshToken', resp.data.refreshToken, { expires: 7 });
             }
             return resp.data;
-        })
-        .catch((err) => {
-            throw err;
         });
 };
 

@@ -13,16 +13,17 @@ import Cookies from "js-cookie";
 const Login: React.FC = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const { setUsername } = useUser();
+    const { setUsername, setCustomerId } = useUser();
 
     useEffect(() => {
         const token = searchParams.get('token');
         const refreshToken = searchParams.get('refreshToken');
+        const customerId = searchParams.get('customerId');
 
         if (token && refreshToken) {
             Cookies.set('authToken', token, { expires: 1 });
             Cookies.set('refreshToken', refreshToken, { expires: 7 });
-
+            setCustomerId(customerId);
             setTimeout(() => {
                 const decodedToken = decodeJwt(token);
                 if (decodedToken && decodedToken.sub) {
@@ -35,14 +36,15 @@ const Login: React.FC = () => {
                 }
             }, 200);
         }
-    }, [searchParams, navigate, setUsername]);
+    }, [searchParams, navigate, setUsername, setCustomerId]);
 
     const onFinish: FormProps<LoginData>['onFinish'] = async (values) => {
         try {
             const response = await login(values);
             if (response.message === 'Success') {
+                if (response.username) setUsername(response.username);
+                if (response.customerId) setCustomerId(response.customerId);
                 message.success('Zalogowano pomyślnie!');
-                setUsername(values.email);
                 navigate('/');
             } else {
                 message.error(response.message || 'Nieprawidłowe dane logowania.');
