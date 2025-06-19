@@ -1,12 +1,10 @@
 import { FC } from "react";
 import './index.css';
-import { useUser } from "../../contexts/UserContext";
 
 const FAQ: FC = () => {
-    const { customerId } = useUser();
   return (
     <div>
-      <h1>FAQ - {customerId}Często zadawane pytania</h1>
+      <h1>FAQ - Często zadawane pytania</h1>
       <ol>
         <li>
             Jak mogę zarezerwować samochód?

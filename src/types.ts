@@ -85,3 +85,12 @@ export type Customer = {
     date_of_joining: string;
     loyalty_points: number;
 };
+
+export type Rental = {
+  id: string;
+  car: RawCar;
+  date_of_rental: string;
+  date_of_return: string;
+  total_cost: number;
+  status: string;
+};
