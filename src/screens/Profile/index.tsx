@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import {Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space, Tabs, Table, Tag, Progress} from "antd";
-import {UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined} from "@ant-design/icons";
-import { axiosInstance } from "../../api/instance";
+import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space, Tabs, Table, Tag, Progress } from "antd";
+import { UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined } from "@ant-design/icons";
+import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddress } from '../../api/customer';
 import { useUser } from "../../contexts/UserContext";
 import type { Customer, Rental } from "../../types";
 import "./index.css";
@@ -15,23 +15,35 @@ const Profile: FC = () => {
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [rentals, setRentals] = useState<Rental[]>([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [activeTab, setActiveTab] = useState('1');
   const [form] = Form.useForm();
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const tabParam = queryParams.get('tab');
+    if (tabParam === '2') {
+      setActiveTab('2');
+    }
+
     if (customerId) {
-      axiosInstance.get(`/customers/${customerId}`).then((res) => {
-        setCustomer(res.data);
+      fetchCustomerData(customerId).then((data: Customer) => {
+        setCustomer(data);
         form.setFieldsValue({
-          ...res.data.personalData,
-          ...res.data.personalData.address,
+          ...data.personalData,
+          ...data.personalData.address,
         });
       });
 
-      axiosInstance.get(`/rentals/customers/${customerId}`).then((res) => {
-        setRentals(res.data);
+      fetchCustomerRentals(customerId).then((data: Rental[]) => {
+        setRentals(data);
       });
     }
   }, [customerId, form]);
+
+  const handleTabChange = (key: string) => {
+    setActiveTab(key);
+    window.history.pushState({}, '', `/profile?tab=${key}`);
+  };
 
   const handleSave = async () => {
     try {
@@ -44,18 +56,12 @@ const Profile: FC = () => {
         return;
       }
 
-      await axiosInstance.patch(`/personalData/${personalDataId}`, {
+      await updatePersonalData(personalDataId, {
         ...values,
         addressId: addressId
       });
 
-      await axiosInstance.patch(`/addresses/${addressId}`, {
-        country: values.country,
-        postal_code: values.postal_code,
-        city: values.city,
-        street: values.street,
-        street_number: values.street_number
-      });
+      await updateAddress(addressId, values);
 
       const updatedCustomer = {
         ...customer,
@@ -122,7 +128,10 @@ const Profile: FC = () => {
         </Card>
 
         <Card className="tabs-card">
-          <Tabs defaultActiveKey="1">
+          <Tabs
+              activeKey={activeTab}
+              onChange={handleTabChange}
+          >
             <TabPane tab="Dane osobowe" key="1">
               {!isEditing ? (
                 <Row gutter={16}>

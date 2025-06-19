@@ -25,9 +25,7 @@ const items2: MenuProps['items'] = [
         label: 'Profil',
         children: [
             { key: '1-1', label: 'Dane osobowe' },
-            { key: '1-2', label: 'Historia wypożyczeń' },
-            { key: '1-3', label: 'Ulubione' },
-            { key: '1-4', label: 'Ustawienia' },
+            { key: '1-2', label: 'Historia wypożyczeń' }
         ],
     },
     {
@@ -82,16 +80,10 @@ const LayoutApp: React.FC = () => {
     const handleSiderMenuClick: MenuProps['onClick'] = (e) => {
         switch (e.key) {
             case '1-1':
-                window.location.href = '/profile';
+                window.location.href = '/profile?tab=1';
                 break;
             case '1-2':
                 window.location.href = '/profile?tab=2';
-                break;
-            case '1-3':
-                window.location.href = '/profile?tab=3';
-                break;
-            case '1-4':
-                window.location.href = '/profile?tab=4';
                 break;
             case '2-1':
                 window.location.href = '/cars?type=Sedan';
