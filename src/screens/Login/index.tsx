@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import type { FormProps } from 'antd';
 import { Button, Flex, Form, Input, message } from 'antd';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {decodeJwt, login} from '../../api/auth.ts';
+import { decodeJwt, login } from '../../api/auth.ts';
 import './index.css';
 import Logo from '../../assets/Logo.png';
 import type { LoginData } from '../../types.ts';

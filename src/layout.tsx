@@ -35,11 +35,12 @@ const items2: MenuProps['items'] = [
         icon: <CarOutlined />,
         label: 'Rodzaje Aut',
         children: [
+            { key: '2-6', label: 'MPV' },
             { key: '2-1', label: 'Sedan' },
             { key: '2-2', label: 'Kombi' },
             { key: '2-3', label: 'SUV' },
             { key: '2-4', label: 'Coupe' },
-            { key: '2-5', label: 'Kabriolet' },
+            { key: '2-5', label: 'Kabriolet' }
         ],
     },
 ];
@@ -106,6 +107,9 @@ const LayoutApp: React.FC = () => {
                 break;
             case '2-5':
                 window.location.href = '/cars?type=Kabriolet';
+                break;
+            case '2-6':
+                window.location.href = '/cars?type=Mpv';
                 break;
         }
     };
