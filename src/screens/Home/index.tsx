@@ -110,32 +110,6 @@ const Home: FC = () => {
             Szeroki wybór pojazdów, konkurencyjne ceny i profesjonalna obsługa
           </Paragraph>
 
-          <Card className="search-card">
-            <Title level={4}>Znajdź dostępne samochody</Title>
-            <Row gutter={[16, 16]}>
-              <Col xs={24} md={8}>
-                <Input
-                  size="large"
-                  placeholder="Lokalizacja odbioru"
-                  prefix={<EnvironmentOutlined />}
-                  value={lokalizacja}
-                  onChange={(e) => setLokalizacja(e.target.value)}
-                />
-              </Col>
-              <Col xs={24} md={12}>
-                <RangePicker
-                  size="large"
-                  placeholder={["Data odbioru", "Data zwrotu"]}
-                  className="date-picker-full"
-                />
-              </Col>
-              <Col xs={24} md={4}>
-                <Button type="primary" icon={<SearchOutlined />} size="large" block>
-                  Szukaj
-                </Button>
-              </Col>
-            </Row>
-          </Card>
         </div>
       </section>
 

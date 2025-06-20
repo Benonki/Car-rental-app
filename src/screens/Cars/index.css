@@ -99,7 +99,6 @@
 .ant-rate-star-zero .ant-rate-star-first,
 .ant-rate-star-zero .ant-rate-star-second {
     color: transparent;
-    position: relative;
 }
 
 .ant-rate-star-zero .ant-rate-star-first::before,
