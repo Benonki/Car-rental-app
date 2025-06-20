@@ -194,10 +194,9 @@ const LayoutApp: React.FC = () => {
                         <div className="content-center">
                         <h4>Informacje</h4>
                             <ul>
-                                <li>Regulamin</li>
-                                <li>Polityka prywatności</li>
-                                <li>FAQ</li>
-                                <li>Kontakt</li>
+                                <li><a href="/about">O Nas</a></li>
+                                <li><a href="/cars">Nasze Auta</a></li>
+                                <li><a href="/FAQ">FAQ</a></li>
                             </ul>
                         </div>
                         <div className="content-right">

@@ -225,7 +225,7 @@ const Home: FC = () => {
             <section className="section cta-section">
                 <Title level={2}>Gotowy do drogi?</Title>
                 <Paragraph className="cta-text">Zarezerwuj samochód już teraz i wyrusz w podróż swoim wymarzonym autem!</Paragraph>
-                <Button type="primary" size="large">Zarezerwuj teraz</Button>
+                <Button type="primary" size="large" onClick={() => window.location.href = '/cars'}>Zarezerwuj teraz</Button>
             </section>
         </div>
     );
