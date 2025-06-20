@@ -94,3 +94,20 @@ export type Rental = {
   total_cost: number;
   status: string;
 };
+
+export type Opinion = {
+  id: string;
+  customer: Customer;
+  car: RawCar;
+  rating: number;
+  description: string;
+  date_of_publishing: string;
+};
+
+export type CreateOpinionDto = {
+  customerId: string;
+  carId: string;
+  rating: number;
+  description: string;
+  date_of_publishing: string;
+};

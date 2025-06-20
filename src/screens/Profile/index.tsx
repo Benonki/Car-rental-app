@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space, Tabs, Table, Tag, Progress } from "antd";
+import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space, Tabs, Table, Tag, Progress, Modal, Rate } from "antd";
 import { UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined } from "@ant-design/icons";
 import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddress } from '../../api/customer';
 import { useUser } from "../../contexts/UserContext";
 import type { Customer, Rental } from "../../types";
+import { postOpinion } from '../../api/opinions';
 import "./index.css";
 
 const { Title, Text } = Typography;
@@ -11,12 +12,40 @@ const { TabPane } = Tabs;
 const { Column } = Table;
 
 const Profile: FC = () => {
-  const { customerId } = useUser();
-  const [customer, setCustomer] = useState<Customer | null>(null);
-  const [rentals, setRentals] = useState<Rental[]>([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [activeTab, setActiveTab] = useState('1');
-  const [form] = Form.useForm();
+    const { customerId } = useUser();
+    const [customer, setCustomer] = useState<Customer | null>(null);
+    const [rentals, setRentals] = useState<Rental[]>([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [activeTab, setActiveTab] = useState('1');
+    const [form] = Form.useForm();
+
+    const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+    const [selectedRental, setSelectedRental] = useState<Rental | null>(null);
+    const [reviewForm] = Form.useForm();
+
+    const handleReviewSubmit = async () => {
+    try {
+        const values = await reviewForm.validateFields();
+
+        if (!customer || !selectedRental) return;
+
+        await postOpinion({
+        customerId: customer.id,
+        carId: selectedRental.car.id,
+        rating: values.rating,
+        description: values.description,
+        date_of_publishing: new Date().toISOString().split('T')[0]
+        });
+
+        message.success("Opinia została dodana!");
+        setIsReviewModalVisible(false);
+        reviewForm.resetFields();
+    } catch (err) {
+        console.error(err);
+        message.error("Nie udało się dodać opinii.");
+    }
+    };
+
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -121,10 +150,6 @@ const Profile: FC = () => {
             <p><Text type="secondary">📞</Text> {customer?.personalData.phone_number}</p>
             <p><Text type="secondary">📅</Text> Klient od: {customer?.date_of_joining}</p>
           </div>
-
-          <Button type="primary" icon={<EditOutlined />} onClick={() => setIsEditing(true)}>
-            Edytuj profil
-          </Button>
         </Card>
 
         <Card className="tabs-card">
@@ -144,6 +169,12 @@ const Profile: FC = () => {
                   <Col span={12}><Text type="secondary">Kod pocztowy</Text><p><Text strong>{customer?.personalData.address.postal_code}</Text></p></Col>
                   <Col span={12}><Text type="secondary">Miasto</Text><p><Text strong>{customer?.personalData.address.city}</Text></p></Col>
                   <Col span={12}><Text type="secondary">Kraj</Text><p><Text strong>{customer?.personalData.address.country}</Text></p></Col>
+                  <Col span={12}><Text type="secondary">Numer dowodu</Text><p><Text strong>{customer?.personalData.id_number}</Text></p></Col>
+                  <Col span={12}><Text type="secondary">Pesel</Text><p><Text strong>{customer?.personalData.pesel}</Text></p></Col>
+
+                  <Button type="primary" icon={<EditOutlined />} onClick={() => setIsEditing(true)}>
+                    Edytuj profil
+                </Button>
                 </Row>
               ) : (
                 <Form layout="vertical" form={form}>
@@ -175,18 +206,62 @@ const Profile: FC = () => {
             <TabPane tab={<span><HistoryOutlined /> Historia wypożyczeń</span>} key="2">
               <Title level={4}>Twoje wypożyczenia</Title>
               <Table dataSource={rentals} rowKey="id" pagination={{ pageSize: 3 }}>
-                <Column title="ID Rezerwacji" dataIndex="id" key="id" />
-                <Column title="Samochód" key="car" render={(_, record: Rental) => `${record.car.model.make.name} ${record.car.model.name}`} />
-                <Column title="Data odbioru" dataIndex="date_of_rental" key="date_of_rental" />
-                <Column title="Data zwrotu" dataIndex="date_of_return" key="date_of_return" />
-                <Column title="Status" key="status" render={(_, record: Rental) => <Tag color={record.status === 'Completed' ? 'green' : record.status === 'Upcoming' ? 'blue' : record.status === 'Cancelled' ? 'red' : 'gray'}>{record.status}</Tag>} />
-                <Column title="Cena (PLN)" dataIndex="total_cost" key="total_cost" render={(cost: number) => `${cost} zł`} />
-                <Column title="Ocena" key="rating" render={() => '-'} />
-                <Column title="Akcje" key="actions" render={(_, record: Rental) => <Space><Button type="link">Szczegóły</Button>{record.status === 'Upcoming' && <Button type="link" danger>Anuluj</Button>}</Space>} />
+                <Column title="Samochód" key="car" align="center" render={(_, record: Rental) => `${record.car.model.make.name} ${record.car.model.name}`} />
+                <Column title="Data odbioru" dataIndex="date_of_rental" key="date_of_rental" align="center" />
+                <Column title="Data zwrotu" dataIndex="date_of_return" key="date_of_return" align="center" />
+                <Column title="Status" key="status" align="center" render={(_, record: Rental) => <Tag color={record.status === 'Zakończone' ? 'green' : record.status === 'Nadchodzące' ? 'blue' : record.status === 'Anulowane' ? 'red' : 'gray'}>{record.status}</Tag>} />
+                <Column title="Cena (PLN)" dataIndex="total_cost" key="total_cost" align="center" render={(cost: number) => `${cost} zł`} />
+                <Column title="Ocena" key="rating" align="center" render={() => '-'} />
+                <Column
+                    title="Akcje"
+                    key="actions"
+                    align="center"
+                    render={(_, record: Rental) => (
+                        <Space>
+                        {record.status === 'Nadchodzące' && <Button type="link" danger>Anuluj</Button>}
+                        {record.status === 'Zakończone' && (
+                            <Button
+                            type="link"
+                            onClick={() => {
+                                setSelectedRental(record);
+                                setIsReviewModalVisible(true);
+                            }}
+                            >
+                            Wystaw opinię
+                            </Button>
+                        )}
+                        </Space>
+                    )}
+                />
               </Table>
             </TabPane>
           </Tabs>
         </Card>
+        <Modal
+            title="Wystaw opinię"
+            open={isReviewModalVisible}
+            onCancel={() => setIsReviewModalVisible(false)}
+            onOk={handleReviewSubmit}
+            okText="Wyślij"
+            cancelText="Anuluj"
+            >
+            <Form layout="vertical" form={reviewForm}>
+                <Form.Item
+                name="rating"
+                label="Ocena"
+                rules={[{ required: true, message: "Podaj ocenę!" }]}
+                >
+                <Rate />
+                </Form.Item>
+                <Form.Item
+                name="description"
+                label="Opis"
+                rules={[{ required: true, message: "Wpisz swoją opinię." }]}
+                >
+                <Input.TextArea rows={4} />
+                </Form.Item>
+            </Form>
+        </Modal>
       </div>
     </div>
   );
