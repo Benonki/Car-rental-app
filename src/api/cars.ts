@@ -24,7 +24,7 @@ export const getCars = async (): Promise<Car[]> => {
             rating = sum / opinions.length;
           }
         } catch (e) {
-          console.warn(`Nie udało się pobrać opinii dla auta ${item.id}`);
+          console.warn(`Nie udało się pobrać opinii dla auta ${item.id}, Error: ${e}`);
         }
 
         return {

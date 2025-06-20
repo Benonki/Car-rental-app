@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Modal, List, Rate } from "antd";
-import type { Opinion } from "../src/types";
+import type { Opinion } from "../types";
 
 interface CarOpinionModalProps {
   visible: boolean;

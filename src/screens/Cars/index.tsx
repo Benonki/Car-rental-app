@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Typography, Row, Col, Divider, Tag, Rate, Tabs, Modal, List } from "antd";
+import { Button, Card, Typography, Row, Col, Divider, Tag, Rate, Tabs } from "antd";
 import type { Car, Opinion } from '../../types.ts';
 import { getOpinionsByCarId } from "../../api/opinions.ts";
 import { getCars } from '../../api/cars';
