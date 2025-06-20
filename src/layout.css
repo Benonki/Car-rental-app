@@ -31,6 +31,7 @@
     overflow-y: auto;
     z-index: 500;
     width: 200px;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.25);
 }
 
 .layout-content {
