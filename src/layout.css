@@ -73,24 +73,16 @@
 
 .footer-content {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-evenly;
-    gap: 24px;
     flex-wrap: wrap;
-}
-
-.content-left,
-.content-center,
-.content-right {
-    flex: 1;
-    min-width: 200px;
 }
 
 .footer-social {
     display: flex;
     gap: 16px;
     font-size: 20px;
-    align-self: flex-start;
+    align-items: center;
 }
 
 .footer-social a {
@@ -114,7 +106,7 @@ ul li {
 }
 
 a {
-    color: #666;
+    color: #000000;
     text-decoration: none;
     transition: color 0.3s;
 }

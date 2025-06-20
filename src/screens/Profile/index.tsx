@@ -3,8 +3,9 @@ import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space
 import { UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined } from "@ant-design/icons";
 import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddress } from '../../api/customer';
 import { useUser } from "../../contexts/UserContext";
-import type { Customer, Rental } from "../../types";
-import { postOpinion } from '../../api/opinions';
+import type { Customer, Rental, Opinion } from "../../types";
+import { postOpinion, getAllOpinions } from '../../api/opinions';
+import { deleteRental } from "../../api/rental";
 import "./index.css";
 
 const { Title, Text } = Typography;
@@ -18,6 +19,7 @@ const Profile: FC = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [activeTab, setActiveTab] = useState('1');
     const [form] = Form.useForm();
+    const [customerOpinions, setCustomerOpinions] = useState<Opinion[]>([]);
 
     const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
     const [selectedRental, setSelectedRental] = useState<Rental | null>(null);
@@ -37,6 +39,11 @@ const Profile: FC = () => {
         date_of_publishing: new Date().toISOString().split('T')[0]
         });
 
+        getAllOpinions().then((opinions) => {
+          const userOpinions = opinions.filter(op => op.customer.id === customerId);
+          setCustomerOpinions(userOpinions);
+        });
+
         message.success("Opinia została dodana!");
         setIsReviewModalVisible(false);
         reviewForm.resetFields();
@@ -44,6 +51,17 @@ const Profile: FC = () => {
         console.error(err);
         message.error("Nie udało się dodać opinii.");
     }
+    };
+
+    const handleRentalCancel = async (rentalId: string) => {
+      try {
+        await deleteRental(rentalId);
+        setRentals(prev => prev.filter(r => r.id !== rentalId));
+        message.success("Wypożyczenie zostało anulowane.");
+      } catch (error) {
+        console.error(error);
+        message.error("Nie udało się anulować wypożyczenia.");
+      }
     };
 
 
@@ -66,8 +84,18 @@ const Profile: FC = () => {
       fetchCustomerRentals(customerId).then((data: Rental[]) => {
         setRentals(data);
       });
+
+      getAllOpinions().then((opinions) => {
+        const userOpinions = opinions.filter(op => op.customer.id === customerId);
+        setCustomerOpinions(userOpinions);
+      });
     }
   }, [customerId, form]);
+
+  const isRentalReviewed = (rental: Rental): boolean => {
+    return customerOpinions.some(op => op.car.id === rental.car.id);
+  };
+
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
@@ -224,20 +252,27 @@ const Profile: FC = () => {
                     align="center"
                     render={(_, record: Rental) => (
                         <Space>
-                        {record.status === 'Nadchodzące' && <Button type="link" danger>Anuluj</Button>}
-                        {record.status === 'Zakończone' && (
-                            <Button
-                            type="link"
-                            onClick={() => {
-                                setSelectedRental(record);
-                                setIsReviewModalVisible(true);
-                            }}
-                            >
-                            Wystaw opinię
-                            </Button>
+                        {record.status === 'Nadchodzące' && (
+                          <Button type="link" danger onClick={() => handleRentalCancel(record.id)}>
+                            Anuluj
+                          </Button>
                         )}
-                        </Space>
-                    )}
+                        {record.status === 'Zakończone' && !isRentalReviewed(record) && (
+                        <Button
+                          type="link"
+                          onClick={() => {
+                            setSelectedRental(record);
+                            setIsReviewModalVisible(true);
+                          }}
+                        >
+                          Wystaw opinię
+                        </Button>
+                        )}
+                        {record.status === 'Zakończone' && isRentalReviewed(record) && (
+                        <Tag color="gold">Oceniono</Tag>
+                        )}
+                  </Space>
+                  )}
                 />
               </Table>
             </TabPane>

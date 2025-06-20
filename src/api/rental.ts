@@ -10,3 +10,11 @@ export const createPayment = async (paymentData: PaymentRequest) => {
     const response = await axiosInstance.post('/payments', paymentData);
     return response.data;
 };
+
+export const cancelRental = (rentalId: string, payload: any) => {
+  return axiosInstance.patch(`/rentals/${rentalId}/status`, payload);
+};
+
+export const deleteRental = (id: string) => {
+  return axiosInstance.delete(`/rentals/${id}`);
+};
