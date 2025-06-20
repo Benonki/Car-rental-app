@@ -1,13 +1,30 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Button, Card, DatePicker, Input, Typography, Row, Col, Carousel, Divider, Tag, Rate } from "antd";
 import { SearchOutlined, CarOutlined, CalendarOutlined, EnvironmentOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import './index.css';
+import type { Opinion } from "../../types.ts";
+import { getAllOpinions } from "../../api/opinions.ts";
 
 const { Title, Paragraph } = Typography;
 const { RangePicker } = DatePicker;
 
 const Home: FC = () => {
     const [lokalizacja, setLokalizacja] = useState("");
+    const [opinie, setOpinie] = useState<Opinion[]>([]);
+
+    useEffect(() => {
+    const loadOpinie = async () => {
+        try {
+        const data = await getAllOpinions();
+        const filtered = data.filter(op => op.rating >= 4);
+        setOpinie(filtered);
+        } catch (err) {
+        console.error("Błąd przy ładowaniu opinii:", err);
+        }
+    };
+    loadOpinie();
+    }, []);
+
 
     const popularneAuta = [
         {
@@ -59,24 +76,6 @@ const Home: FC = () => {
             ikona: <CheckCircleOutlined />,
             tytul: "Pełne ubezpieczenie",
             opis: "Wszystkie nasze samochody posiadają pełne ubezpieczenie dla Twojego spokoju."
-        }
-    ];
-
-    const opinie = [
-        {
-            autor: "Jan Kowalski",
-            tresc: "Świetna obsługa i bardzo dobry stan samochodów. Polecam każdemu kto szuka niezawodnego auta!",
-            ocena: 5
-        },
-        {
-            autor: "Anna Nowak",
-            tresc: "Sprawna rezerwacja online i bezproblemowy odbiór samochodu. Na pewno skorzystam ponownie.",
-            ocena: 4.5
-        },
-        {
-            autor: "Piotr Wiśniewski",
-            tresc: "Konkurencyjne ceny i profesjonalna obsługa. Samochód był czysty i w idealnym stanie technicznym.",
-            ocena: 5
         }
     ];
 
@@ -207,17 +206,20 @@ const Home: FC = () => {
             <section className="section testimonials-section">
                 <Title level={2} className="section-title">Co mówią nasi klienci</Title>
                 <Carousel autoplay>
-                    {opinie.map((opinia, index) => (
-                        <div key={index}>
-                            <Card className="testimonial-card">
-                                <Rate disabled defaultValue={opinia.ocena} />
-                                <Paragraph className="testimonial-text">"{opinia.tresc}"</Paragraph>
-                                <div className="testimonial-author">- {opinia.autor}</div>
-                            </Card>
+                    {opinie.map((opinia, i) => (
+                    <div key={i}>
+                        <Card className="testimonial-card">
+                        <Rate disabled defaultValue={opinia.rating} />
+                        <Paragraph className="testimonial-text">"{opinia.description}"</Paragraph>
+                        <div className="testimonial-author">
+                            - {opinia.customer.personalData.first_name}
                         </div>
+                        </Card>
+                    </div>
                     ))}
                 </Carousel>
             </section>
+
 
 
             <section className="section cta-section">

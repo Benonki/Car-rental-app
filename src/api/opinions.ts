@@ -8,3 +8,7 @@ export const postOpinion = (data: CreateOpinionDto): Promise<Opinion> => {
 export const getOpinionsByCarId = (carId: string): Promise<Opinion[]> => {
   return axiosInstance.get(`/opinions/car/${carId}`).then(res => res.data);
 };
+
+export const getAllOpinions = (): Promise<Opinion[]> => {
+  return axiosInstance.get('/opinions').then(res => res.data);
+};
