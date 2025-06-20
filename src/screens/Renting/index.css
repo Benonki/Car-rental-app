@@ -1,0 +1,79 @@
+.renting-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.car-details-card, .rental-details-card {
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.car-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 4px;
+}
+
+.ant-descriptions-item-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.ant-card-head-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.ant-form-item-label label {
+    font-weight: 500;
+}
+
+.ant-select-selector, .ant-picker {
+    height: 40px !important;
+}
+
+.ant-btn-primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.ant-btn-primary:hover {
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+}
+
+.ant-divider {
+    margin: 16px 0;
+}
+
+.ant-space {
+    width: 100%;
+}
+
+.ant-drawer-content {
+    padding: 20px;
+}
+
+.ant-drawer-body {
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .renting-container {
+        padding: 10px;
+    }
+
+    .ant-col {
+        margin-bottom: 16px;
+    }
+}

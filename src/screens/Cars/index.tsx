@@ -115,7 +115,11 @@ const Cars: FC = () => {
                                         <span className="price">{auto.cena} zł</span>
                                         <span className="price-period">/dzień</span>
                                     </div>
-                                    <Button type="primary" disabled={!auto.dostepny}>
+                                    <Button
+                                        type="primary"
+                                        disabled={!auto.dostepny}
+                                        onClick={() => navigate(`/renting/${auto.id}`)}
+                                    >
                                         {auto.dostepny ? "Zarezerwuj" : "Niedostępny"}
                                     </Button>
                                 </div>

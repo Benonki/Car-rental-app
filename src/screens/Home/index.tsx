@@ -1,11 +1,12 @@
 import { FC, useState, useEffect } from "react";
-import {Button,Card,DatePicker,Input,Typography,Row,Col,Carousel,Divider,Tag,Rate,Spin, Modal, List,} from "antd";
-import {SearchOutlined,CarOutlined,CalendarOutlined,EnvironmentOutlined,CheckCircleOutlined,} from "@ant-design/icons";
+import { Button,Card,DatePicker,Input,Typography,Row,Col,Carousel,Divider,Tag,Rate,Spin } from "antd";
+import { SearchOutlined,CarOutlined,CalendarOutlined,EnvironmentOutlined,CheckCircleOutlined } from "@ant-design/icons";
 import "./index.css";
 import type { Opinion, Car } from "../../types.ts";
 import { getAllOpinions, getOpinionsByCarId } from "../../api/opinions.ts";
 import { getCars } from "../../api/cars.ts";
 import CarOpinionModal from "../../components/CarOpinionModal.tsx";
+import {useNavigate} from "react-router-dom";
 
 const { Title, Paragraph } = Typography;
 const { RangePicker } = DatePicker;
@@ -13,6 +14,7 @@ const { RangePicker } = DatePicker;
 type CarWithOpinionCount = Car & { opinionCount: number };
 
 const Home: FC = () => {
+  const navigate = useNavigate();
   const [lokalizacja, setLokalizacja] = useState("");
   const [opinie, setOpinie] = useState<Opinion[]>([]);
   const [popularneAuta, setPopularneAuta] = useState<CarWithOpinionCount[]>([]);
@@ -170,7 +172,11 @@ const Home: FC = () => {
                       <span className="price">{auto.cena} zł</span>
                       <span className="price-period">/dzień</span>
                     </div>
-                    <Button type="primary" disabled={!auto.dostepny}>
+                    <Button
+                        type="primary"
+                        disabled={!auto.dostepny}
+                        onClick={() => navigate(`/renting/${auto.id}`)}
+                    >
                       {auto.dostepny ? "Zarezerwuj" : "Niedostępny"}
                     </Button>
                   </div>

@@ -12,6 +12,19 @@ export type Car = {
     ocena: number;
     dostepny: boolean;
     opis: string;
+    specification?: {
+        yearOfProduction: number;
+        registration: string;
+        vin: string;
+        color: string;
+        numberOfSeats: number;
+        engineCapacity: number;
+        horsepower: number;
+        gearbox: string;
+        driveType: string;
+        fuelType: string;
+        mileage: number;
+    };
 };
 
 export type RawCar = {
@@ -47,6 +60,18 @@ export type RawCar = {
     availability: string;
     image_url: string;
     description: string;
+};
+
+export type PickUpPlace = {
+    id: string;
+    name: string;
+    address: Address;
+};
+
+export type ReturnPlace = {
+    id: string;
+    name: string;
+    address: Address;
 };
 
 export type Address = {
