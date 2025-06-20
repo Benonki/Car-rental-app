@@ -4,7 +4,6 @@
     margin: 0 auto;
 }
 
-/* Sekcja hero */
 .hero-section {
     margin-bottom: 48px;
     padding: 40px;
@@ -49,7 +48,6 @@
     object-fit: cover;
 }
 
-/* Sekcje ogólne */
 .section-title {
     text-align: center;
     margin-bottom: 32px !important;
@@ -80,7 +78,6 @@
     margin: 64px 0;
 }
 
-/* Sekcja misji */
 .mission-card {
     height: 100%;
     text-align: center;
@@ -107,7 +104,6 @@
     border-radius: 50%;
 }
 
-/* Sekcja zespołu */
 .team-card {
     text-align: center;
     height: 100%;
@@ -135,7 +131,6 @@
     color: rgba(0, 0, 0, 0.65);
 }
 
-/* Sekcja historii */
 .history-timeline-container {
     padding-left: 2px;
 }
@@ -150,7 +145,6 @@
     color: rgba(0, 0, 0, 0.65);
 }
 
-/* Sekcja kontaktu */
 .contact-card {
     height: 100%;
     border-radius: 8px;
@@ -188,7 +182,6 @@
     border-bottom: none;
 }
 
-/* Responsywność */
 @media (max-width: 768px) {
     .hero-carousel {
         height: 250px;

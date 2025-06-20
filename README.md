@@ -25,3 +25,9 @@ Spring Boot Backend: <a href="https://github.com/KacperMichalak2002/Car-Rental-B
    npm run dev
    ```
 2. You can open http://localhost:5173/ on your PC.
+
+## 🖼️ Showcase
+
+<div align="center">
+  <img src="https://github.com/Benonki/Portfolio/blob/main/StronaGlowna/sc/Cars.png" alt="Preview of My Project">
+</div>

@@ -8,7 +8,6 @@ const { Title, Text, Paragraph } = Typography;
 const AboutUs: React.FC = () => {
     return (
         <div className="about-container">
-            {/* Sekcja główna */}
             <div className="hero-section">
                 <Row gutter={[24, 24]} align="middle">
                     <Col xs={24} md={14}>
@@ -23,7 +22,7 @@ const AboutUs: React.FC = () => {
                                 <Col xs={8}>
                                     <Statistic
                                         title={<span style={{ color: '#fff' }}>Aut w ofercie</span>}
-                                        value={100}
+                                        value={12}
                                         prefix={<CarOutlined style={{ color: '#fff' }} />}
                                         valueStyle={{ color: '#fff' }}
                                         className="about-statistic"
@@ -69,7 +68,6 @@ const AboutUs: React.FC = () => {
             </div>
             <Divider className="section-divider" />
 
-            {/* Sekcja misji i wartości */}
             <div className="mission-section">
                 <Title level={2} className="section-title">Nasza misja i wartości</Title>
                 <Row gutter={[24, 24]}>
@@ -114,7 +112,6 @@ const AboutUs: React.FC = () => {
 
             <Divider className="section-divider" />
 
-            {/* Sekcja zespołu */}
             <div className="team-section">
                 <Title level={2} className="section-title">Nasz zespół</Title>
                 <Paragraph className="section-intro">
@@ -160,7 +157,6 @@ const AboutUs: React.FC = () => {
 
             <Divider className="section-divider" />
 
-            {/* Sekcja historii firmy */}
             <div className="history-section">
                 <Title level={2} className="section-title">Historia naszej firmy</Title>
                 <Row gutter={[24, 24]}>
@@ -243,7 +239,6 @@ const AboutUs: React.FC = () => {
 
             <Divider className="section-divider" />
 
-            {/* Sekcja kontaktu */}
             <div className="contact-section">
                 <Title level={2} className="section-title">Skontaktuj się z nami</Title>
                 <Row gutter={[24, 24]}>
