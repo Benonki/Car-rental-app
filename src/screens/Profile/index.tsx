@@ -5,7 +5,7 @@ import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddr
 import { useUser } from "../../contexts/UserContext";
 import type { Customer, Rental, Opinion } from "../../types";
 import { postOpinion, getAllOpinions } from '../../api/opinions';
-import { deleteRental } from "../../api/rental";
+import { cancelRental } from "../../api/rental";
 import "./index.css";
 
 const { Title, Text } = Typography;
@@ -55,15 +55,18 @@ const Profile: FC = () => {
 
     const handleRentalCancel = async (rentalId: string) => {
       try {
-        await deleteRental(rentalId);
-        setRentals(prev => prev.filter(r => r.id !== rentalId));
+        await cancelRental(rentalId, { status: "Anulowane" });
+        setRentals(prev =>
+          prev.map(r =>
+            r.id === rentalId ? { ...r, status: "Anulowane" } : r
+          )
+        );
         message.success("Wypożyczenie zostało anulowane.");
       } catch (error) {
         console.error(error);
         message.error("Nie udało się anulować wypożyczenia.");
       }
     };
-
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -205,22 +208,65 @@ const Profile: FC = () => {
                 </Button>
                 </Row>
               ) : (
-                <Form layout="vertical" form={form}>
+                <Form layout="vertical" form={form} validateMessages={{
+                    required: "Pole wymagane",
+                    types: {
+                      email: "Podaj poprawny adres e-mail",
+                    },
+                    string: {
+                      min: "Minimalna liczba znaków: ${min}",
+                      max: "Maksymalna liczba znaków: ${max}"
+                    },
+                    pattern: {
+                      mismatch: "${label} ma niepoprawny format"
+                    }
+                  }}>
                   <Row gutter={[8, 8]}>
                     <Col xs={24} sm={12}>
-                      <Form.Item name="first_name" label="Imię"><Input /></Form.Item>
-                      <Form.Item name="last_name" label="Nazwisko"><Input /></Form.Item>
-                      <Form.Item name="pesel" label="PESEL"><Input /></Form.Item>
-                      <Form.Item name="id_number" label="Numer dowodu"><Input /></Form.Item>
-                      <Form.Item name="phone_number" label="Telefon"><Input /></Form.Item>
-                      <Form.Item name="email" label="Email"><Input /></Form.Item>
+                      <Form.Item name="first_name" label="Imię" rules={[{ required: true }, { pattern: /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]{2,}$/, message: "Podaj poprawne imię" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="last_name" label="Nazwisko" rules={[{ required: true }, { pattern: /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]{2,}$/, message: "Podaj poprawne nazwisko" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="pesel" label="PESEL" rules={[{ required: true }, { pattern: /^\d{11}$/, message: "PESEL musi mieć dokładnie 11 cyfr" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="id_number" label="Numer dowodu" rules={[{ required: true }, { pattern: /^[A-Z]{3}\d{6}$/, message: "Wprowadź numer w formacie ABC123456" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="phone_number" label="Telefon" rules={[{ required: true }, { pattern: /^[0-9]{9,15}$/, message: "Podaj poprawny numer telefonu" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="email" label="Email" rules={[{ required: true }, { type: 'email', message: "Niepoprawny adres e-mail" }]}>
+                        <Input />
+                      </Form.Item>
                     </Col>
                     <Col xs={24} sm={12}>
-                      <Form.Item name="country" label="Kraj"><Input /></Form.Item>
-                      <Form.Item name="postal_code" label="Kod pocztowy"><Input /></Form.Item>
-                      <Form.Item name="city" label="Miasto"><Input /></Form.Item>
-                      <Form.Item name="street" label="Ulica"><Input /></Form.Item>
-                      <Form.Item name="street_number" label="Numer budynku"><Input /></Form.Item>
+                      <Form.Item name="country" label="Kraj" rules={[{ required: true }, { pattern: /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]{2,}$/, message: "Podaj poprawny kraj" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="postal_code" label="Kod pocztowy" rules={[{ required: true }, { pattern: /^\d{2}-\d{3}$/, message: "Format: 00-000" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="city" label="Miasto" rules={[{ required: true }, { pattern: /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]{2,}$/, message: "Podaj poprawne miasto" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="street" label="Ulica" rules={[{ required: true }, { min: 2, message: "Podaj poprawną nazwę ulicy" }]}>
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item name="street_number" label="Numer budynku" rules={[{ required: true }, { pattern: /^[0-9]+[A-Za-z]?$/, message: "Np. 12 lub 12A" }]}>
+                        <Input />
+                      </Form.Item>
                     </Col>
                   </Row>
                   <Space className="mt-large">
@@ -265,7 +311,7 @@ const Profile: FC = () => {
                             setIsReviewModalVisible(true);
                           }}
                         >
-                          Wystaw opinię
+                          Opinia
                         </Button>
                         )}
                         {record.status === 'Zakończone' && isRentalReviewed(record) && (
