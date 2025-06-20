@@ -5,6 +5,7 @@ import type { Car, Opinion } from '../../types.ts';
 import { getOpinionsByCarId } from "../../api/opinions.ts";
 import { getCars } from '../../api/cars';
 import './index.css';
+import CarOpinionModal from "../../components/CarOpinionModal.tsx";
 
 const { Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
@@ -131,30 +132,12 @@ const Cars: FC = () => {
                     </div>
                 )}
             </section>
-            <Modal
-                title={`Opinie o samochodzie: ${selectedCarName}`}
-                open={opinionModalVisible}
-                onCancel={() => setOpinionModalVisible(false)}
-                footer={null}
-                >
-                {selectedCarOpinions.length === 0 ? (
-                    <p>Brak opinii dla tego samochodu.</p>
-                ) : (
-                    <List
-                    itemLayout="vertical"
-                    dataSource={selectedCarOpinions}
-                    renderItem={(item) => (
-                        <List.Item>
-                        <Rate disabled defaultValue={item.rating} />
-                        <p>{item.description}</p>
-                        <p style={{ fontSize: 12, color: '#999' }}>
-                            {item.customer.personalData.first_name} {item.customer.personalData.last_name}, {item.date_of_publishing}
-                        </p>
-                        </List.Item>
-                    )}
-                    />
-                )}
-            </Modal>
+            <CarOpinionModal
+                visible={opinionModalVisible}
+                carName={selectedCarName}
+                opinions={selectedCarOpinions}
+                onClose={() => setOpinionModalVisible(false)}
+            />
         </div>
     );
 };
