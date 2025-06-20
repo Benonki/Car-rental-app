@@ -130,3 +130,53 @@
     color: #666;
     text-align: center;
 }
+
+.totalSum {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.totalSum-text {
+    margin-bottom: 8px;
+}
+
+.payment-buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.payment-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.stripe-button {
+    background-color: #635bff;
+}
+
+@media (max-width: 768px) {
+    .payment-buttons {
+        flex-direction: column;
+    }
+
+    .payment-button {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+    .payment-buttons {
+        flex-direction: row;
+    }
+
+    .payment-button {
+        width: auto;
+    }
+}

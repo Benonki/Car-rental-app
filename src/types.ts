@@ -146,4 +146,14 @@ export type RentalFormValues = {
     pickUpPlaceId: string;
     returnPlaceId: string;
     insuranceType: InsuranceType;
+    paymentMethod?: 'STRIPE' | 'ON_SITE';
 };
+
+export interface AddressFormValues {
+    name: string;
+    country: string;
+    postalCode: string;
+    city: string;
+    street: string;
+    streetNumber: string;
+}

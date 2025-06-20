@@ -3,31 +3,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card, Typography, Row, Col, Divider, Descriptions, DatePicker, Select, Form, Input, Space, message, Drawer, Radio } from "antd";
 import dayjs from 'dayjs';
 import { SiStripe } from "react-icons/si";
+import { FaCashRegister } from "react-icons/fa";
 import { getCarById } from "../../api/cars";
 import { getPickUpPlaces, getReturnPlaces, createFullPickUpPlace, createFullReturnPlace } from "../../api/locations";
-import { Car, PickUpPlace, ReturnPlace } from "../../types";
+import { Car, PickUpPlace, ReturnPlace, RentalFormValues, AddressFormValues, InsuranceType } from "../../types";
 import { useUser } from "../../contexts/UserContext";
 import './index.css';
 
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-
-interface RentalFormValues {
-    dates: [dayjs.Dayjs, dayjs.Dayjs];
-    pickUpPlaceId: string;
-    returnPlaceId: string;
-    insuranceType: 'NONE' | 'BASIC' | 'PREMIUM';
-}
-
-interface AddressFormValues {
-    name: string;
-    country: string;
-    postalCode: string;
-    city: string;
-    street: string;
-    streetNumber: string;
-}
 
 const Renting: FC = () => {
     const { customerId } = useUser();
@@ -67,7 +52,7 @@ const Renting: FC = () => {
         fetchData();
     }, [id, navigate]);
 
-    const calculateTotalCost = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null, insuranceType: 'NONE' | 'BASIC' | 'PREMIUM' = 'NONE') => {
+    const calculateTotalCost = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null, insuranceType: InsuranceType = 'NONE') => {
         if (!dates || !car) return 0;
         const days = dates[1].diff(dates[0], 'days') + 1;
         const baseCost = days * car.cena;
@@ -87,7 +72,7 @@ const Renting: FC = () => {
         setTotalCost(calculateTotalCost(dates, insuranceType));
     };
 
-    const handleInsuranceChange = (value: 'NONE' | 'BASIC' | 'PREMIUM') => {
+    const handleInsuranceChange = (value: InsuranceType) => {
         const dates = form.getFieldValue('dates');
         setTotalCost(calculateTotalCost(dates, value));
     };
@@ -117,14 +102,20 @@ const Renting: FC = () => {
                 customerId: customerId,
                 pick_up_place_id: values.pickUpPlaceId,
                 return_place_id: values.returnPlaceId,
+                paymentMethod: values.paymentMethod || 'STRIPE',
                 insurance: {
                     type: values.insuranceType,
                     coverage: insuranceCoverage,
                     cost: insuranceCost
                 }
             });
-            // TODO: MAKE PAYMENT WORK AND CREATE A NEW RENTAL
-            message.success('Wypożyczenie zostało złożone!');
+
+            if (values.paymentMethod === 'ON_SITE') {
+                message.success('Wypożyczenie zostało złożone! Płatność zostanie dokonana na miejscu.');
+            } else {
+                message.success('Wypożyczenie zostało złożone! Przekierowujemy do płatności...');
+                // TODO: Stripe payment integration
+            }
         } catch (error) {
             console.error('Error submitting rental:', error);
             message.error('Nie udało się złożyć wypożyczenia');
@@ -397,8 +388,8 @@ const Renting: FC = () => {
 
                         <Divider />
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div>
+                        <div className="totalSum">
+                            <div className="totalSum-text">
                                 <Text strong style={{ fontSize: '1.2rem' }}>
                                     Suma: {totalCost} zł
                                 </Text>
@@ -408,21 +399,35 @@ const Renting: FC = () => {
                                     </Text>
                                 )}
                             </div>
-                            <Button
-                                type="primary"
-                                size="large"
-                                onClick={() => form.submit()}
-                                disabled={!car.dostepny || totalCost <= 0}
-                                icon={<SiStripe size={24} />}
-                                style={{
-                                    backgroundColor: '#635bff',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '8px'
-                                }}
+                            <Space
+                                size={16}
+                                className="payment-buttons"
+                                direction="horizontal" // Default horizontal direction
                             >
-                                Zapłać
-                            </Button>
+                                <Button
+                                    type="default"
+                                    size="large"
+                                    onClick={() => handleSubmit({ ...form.getFieldsValue(), paymentMethod: 'ON_SITE' })}
+                                    disabled={!car.dostepny || totalCost <= 0}
+                                    icon={<FaCashRegister size={20} />}
+                                    className="payment-button"
+                                >
+                                    Zapłać przy odbiorze
+                                </Button>
+                                <Button
+                                    type="primary"
+                                    size="large"
+                                    onClick={() => {
+                                        form.setFieldsValue({ paymentMethod: 'STRIPE' });
+                                        form.submit();
+                                    }}
+                                    disabled={!car.dostepny || totalCost <= 0}
+                                    icon={<SiStripe size={24} />}
+                                    className="payment-button stripe-button"
+                                >
+                                    Zapłać przez Stripe
+                                </Button>
+                            </Space>
                         </div>
                     </Form>
                 </Card>
@@ -566,6 +571,5 @@ const Renting: FC = () => {
         </div>
     );
 };
-
 
 export default Renting;

@@ -9,6 +9,8 @@ import Cars from './screens/Cars';
 import Register from "./screens/Register";
 import AboutUs from "./screens/AboutUs";
 import FAQ from "./screens/FAQ";
+import ResultPage from "./screens/ResultPage";
+
 import './App.css'
 import Cookies from "js-cookie";
 
@@ -34,6 +36,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/renting/:id" element={<Renting />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/result" element={<ResultPage />} />
                     <Route path="/cars" element={<Cars />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/FAQ" element={<FAQ />} />
