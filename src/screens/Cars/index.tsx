@@ -1,7 +1,8 @@
 import {FC, useEffect, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Typography, Row, Col, Divider, Tag, Rate, Tabs } from "antd";
-import type { Car } from '../../types.ts';
+import { Button, Card, Typography, Row, Col, Divider, Tag, Rate, Tabs, Modal, List } from "antd";
+import type { Car, Opinion } from '../../types.ts';
+import { getOpinionsByCarId } from "../../api/opinions.ts";
 import { getCars } from '../../api/cars';
 import './index.css';
 
@@ -15,6 +16,22 @@ const Cars: FC = () => {
 
     const queryParams = new URLSearchParams(location.search);
     const activeCategory = queryParams.get("type")?.toLowerCase() || "all";
+
+    const [opinionModalVisible, setOpinionModalVisible] = useState(false);
+    const [selectedCarOpinions, setSelectedCarOpinions] = useState<Opinion[]>([]);
+    const [selectedCarName, setSelectedCarName] = useState('');
+
+    const handleShowOpinions = async (carId: string, carName: string) => {
+    try {
+        const opinions = await getOpinionsByCarId(carId);
+        setSelectedCarOpinions(opinions);
+        setSelectedCarName(carName);
+        setOpinionModalVisible(true);
+    } catch (error) {
+        console.error('Błąd podczas pobierania opinii:', error);
+    }
+    };
+
 
     useEffect(() => {
         const fetchCars = async () => {
@@ -84,6 +101,12 @@ const Cars: FC = () => {
                                 </div>
                                 <Paragraph className="car-category">{auto.kategoria}</Paragraph>
                                 <Rate disabled defaultValue={Math.floor(auto.ocena)} allowHalf={false} />
+                                <Button
+                                    type="link"
+                                    onClick={() => handleShowOpinions(auto.id, auto.nazwa)}
+                                    >
+                                    Zobacz opinie
+                                </Button>
                                 <Paragraph className="car-description">{auto.opis}</Paragraph>
                                 <Divider />
                                 <div className="car-card-footer">
@@ -108,6 +131,30 @@ const Cars: FC = () => {
                     </div>
                 )}
             </section>
+            <Modal
+                title={`Opinie o samochodzie: ${selectedCarName}`}
+                open={opinionModalVisible}
+                onCancel={() => setOpinionModalVisible(false)}
+                footer={null}
+                >
+                {selectedCarOpinions.length === 0 ? (
+                    <p>Brak opinii dla tego samochodu.</p>
+                ) : (
+                    <List
+                    itemLayout="vertical"
+                    dataSource={selectedCarOpinions}
+                    renderItem={(item) => (
+                        <List.Item>
+                        <Rate disabled defaultValue={item.rating} />
+                        <p>{item.description}</p>
+                        <p style={{ fontSize: 12, color: '#999' }}>
+                            {item.customer.personalData.first_name} {item.customer.personalData.last_name}, {item.date_of_publishing}
+                        </p>
+                        </List.Item>
+                    )}
+                    />
+                )}
+            </Modal>
         </div>
     );
 };
