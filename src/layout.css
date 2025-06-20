@@ -2,6 +2,13 @@
     display: flex;
     align-items: center;
     height: 64px;
+    padding: 0 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
 }
 
 .header-menu-container {
@@ -17,47 +24,22 @@
 
 .layout-sider {
     background: var(--bg-container);
-    height: 100vh;
+    height: calc(100vh - 64px);
     position: fixed;
     left: 0;
     top: 64px;
     overflow-y: auto;
+    z-index: 500;
+    width: 200px;
 }
 
 .layout-content {
-    padding: 24px;
+    padding: 16px;
     margin: 0;
-    min-height: 280px;
+    min-height: calc(100vh - 64px - 100px);
     background: var(--bg-container);
     border-radius: var(--border-radius);
     flex: 1;
-}
-
-.layout-breadcrumb {
-    margin: 16px 0;
-}
-
-.layout {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.layout > .ant-layout {
-    display: flex;
-    flex: 1;
-    margin-left: 200px;
-    margin-top: 64px;
-}
-
-.layout > .ant-layout > .ant-layout-sider {
-    height: 100vh;
-}
-
-.layout > .ant-layout > .ant-layout-content {
-    flex: 1;
-    padding: 24px;
-    margin-top: 0;
 }
 
 .header-logo {
@@ -68,48 +50,92 @@
 }
 
 .miniLogo {
-    width: 200px;
+    width: 160px;
+    height: auto;
+    max-height: 48px;
     padding-right: 15px;
     object-fit: contain;
+}
+
+.app-footer {
+    margin-top: auto;
+    padding: 24px 16px;
+    background: #f5f5f5;
 }
 
 .footer-copyright {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 16px;
 }
 
 .footer-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.content-left,
+.content-center,
+.content-right {
+    flex: 1;
+    min-width: 200px;
 }
 
 .footer-social {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     font-size: 20px;
+    align-self: flex-start;
+}
+
+.footer-social a {
+    color: #666;
+    transition: color 0.3s;
+}
+
+.footer-social a:hover {
+    color: #1890ff;
 }
 
 ul {
     list-style: none;
     padding-left: 0;
+    margin: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 a {
-    color: black;
+    color: #666;
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #1890ff;
+}
+
+.footer-icon {
+    margin-right: 8px;
 }
 
 .user-info-section {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    width: 200px;
+    width: 100%;
     padding: 12px 16px;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--bg-container);
+    border-top: 1px solid #f0f0f0;
 }
 
 .username-display {
@@ -139,19 +165,311 @@ a {
     max-width: 130px;
 }
 
-.logout-button {
-    width: 100%;
-    margin-top: 8px;
-    color: rgba(0, 0, 0, 0.65);
-}
-
-.logout-button:hover {
-    color: #1890ff;
-    background: rgba(24, 144, 255, 0.1);
-}
-
 .custom-divider {
     margin: 0 !important;
     border-width: 2px 0 0 0 !important;
     border-color: #d9d9d9 !important;
+}
+
+.mobile-menu-button {
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 16px;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sider-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.mobile-sider-overlay.show {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .miniLogo {
+        width: 120px;
+        padding-right: 10px;
+    }
+
+    .header-menu-container .ant-menu-item {
+        padding: 0 12px;
+    }
+
+    .footer-content {
+        gap: 16px;
+    }
+
+    .content-left,
+    .content-center,
+    .content-right {
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .layout-header {
+        height: 56px;
+        padding: 0 8px;
+    }
+
+    .header-logo {
+        margin-right: 8px;
+    }
+
+    .miniLogo {
+        width: 100px;
+        max-height: 40px;
+        padding-right: 8px;
+    }
+
+    .header-menu-container {
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .header-menu-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .header-menu-container .ant-menu {
+        min-width: 300px;
+        border-bottom: none;
+    }
+
+    .header-menu-container .ant-menu-item {
+        padding: 0 8px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .header-menu-container .ant-btn {
+        margin-left: 8px;
+        min-width: 80px;
+        font-size: 12px;
+        padding: 4px 8px;
+        height: 32px;
+    }
+
+    .mobile-menu-button {
+        display: block;
+    }
+
+    .layout-sider {
+        position: fixed;
+        left: -200px;
+        top: 56px;
+        height: calc(100vh - 56px);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+        width: 200px;
+    }
+
+    .layout-sider.mobile-open {
+        left: 0;
+    }
+
+    .layout-content {
+        padding: 12px;
+        min-height: calc(100vh - 56px - 120px);
+    }
+
+    .user-info-section {
+        padding: 8px 12px;
+    }
+
+    .username-text {
+        font-size: 12px;
+        max-width: 100px;
+    }
+
+    .app-footer {
+        padding: 16px 8px;
+        margin-top: 24px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .content-left,
+    .content-center,
+    .content-right {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .footer-social {
+        justify-content: center;
+        gap: 24px;
+        font-size: 24px;
+        margin-top: 16px;
+    }
+
+    .footer-copyright {
+        margin-bottom: 20px;
+    }
+
+    .footer-copyright p {
+        font-size: 12px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .layout-header {
+        height: 48px;
+        padding: 0 4px;
+    }
+
+    .miniLogo {
+        width: 80px;
+        max-height: 32px;
+        padding-right: 4px;
+    }
+
+    .header-menu-container .ant-menu-item {
+        padding: 0 6px;
+        font-size: 12px;
+    }
+
+    .header-menu-container .ant-btn {
+        font-size: 11px;
+        padding: 2px 6px;
+        height: 28px;
+        min-width: 70px;
+    }
+
+    .mobile-menu-button {
+        display: block;
+        top: 50px;
+        left: 8px;
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    .layout-sider {
+        left: -200px;
+        top: 48px;
+        height: calc(100vh - 48px);
+    }
+
+    .layout-sider.mobile-open {
+        left: 0;
+    }
+
+    .layout-content {
+        padding: 8px;
+        min-height: calc(100vh - 48px - 100px);
+    }
+
+    .user-info-section {
+        padding: 6px 8px;
+    }
+
+    .username-content {
+        gap: 4px;
+        margin-top: 6px;
+    }
+
+    .username-text {
+        font-size: 11px;
+        max-width: 80px;
+    }
+
+    .user-icon {
+        font-size: 12px;
+    }
+
+    .app-footer {
+        padding: 12px 4px;
+    }
+
+    .footer-content h4 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .footer-content ul li {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .footer-social {
+        font-size: 20px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .layout-header {
+        height: 48px;
+    }
+
+    .miniLogo {
+        width: 80px;
+        max-height: 32px;
+    }
+
+    .layout-sider {
+        top: 48px;
+        height: calc(100vh - 48px);
+    }
+
+    .layout-content {
+        padding: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .layout-sider {
+        transition: none;
+    }
+
+    .footer-social a,
+    a {
+        transition: none;
+    }
+}
+
+.mobile-menu-button:focus {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+}
+
+.header-logo:focus {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+    .miniLogo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+
+    .header-menu-container .ant-menu-item,
+    .username-text,
+    .footer-content {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 }

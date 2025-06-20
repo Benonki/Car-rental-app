@@ -1,5 +1,5 @@
-import React from 'react';
-import { CarOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { CarOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from '@ant-design/icons';
 import {Divider, MenuProps} from 'antd';
 import { Layout, Menu, theme, Button } from 'antd';
 import { Outlet, useLocation } from "react-router-dom";
@@ -43,7 +43,6 @@ const items2: MenuProps['items'] = [
     },
 ];
 
-
 const getSelectedKey = (pathname: string) => {
     if (pathname === "/") return "1";
     if (pathname.startsWith("/cars")) return "2";
@@ -53,6 +52,7 @@ const getSelectedKey = (pathname: string) => {
 
 const LayoutApp: React.FC = () => {
     const { username, logout: contextLogout } = useUser();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -78,6 +78,8 @@ const LayoutApp: React.FC = () => {
     };
 
     const handleSiderMenuClick: MenuProps['onClick'] = (e) => {
+        setMobileMenuOpen(false);
+
         switch (e.key) {
             case '1-1':
                 window.location.href = '/profile?tab=1';
@@ -114,8 +116,28 @@ const LayoutApp: React.FC = () => {
         });
     };
 
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!mobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false);
+    };
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
+            <Button
+                className="mobile-menu-button"
+                icon={<MenuOutlined />}
+                onClick={toggleMobileMenu}
+                aria-label="Otwórz menu"
+            />
+
+            <div
+                className={`mobile-sider-overlay ${mobileMenuOpen ? 'show' : ''}`}
+                onClick={closeMobileMenu}
+            />
+
             <Header className="layout-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
                 <div className="header-logo" onClick={() => window.location.href = '/'}>
                     <img src={Logo} alt="Logo" className="miniLogo" />
@@ -138,8 +160,13 @@ const LayoutApp: React.FC = () => {
                     </Button>
                 </div>
             </Header>
-            <Layout style={{ marginTop: 64, marginLeft: 200, flex: 1 }}>
-                <Sider width={200} className="layout-sider" style={{ background: colorBgContainer }}>
+
+            <Layout className="main-layout">
+                <Sider
+                    width={200}
+                    className={`layout-sider ${mobileMenuOpen ? 'mobile-open' : ''}`}
+                    style={{ background: colorBgContainer }}
+                >
                     <Menu
                         mode="inline"
                         defaultSelectedKeys={['1']}
@@ -158,7 +185,8 @@ const LayoutApp: React.FC = () => {
                         </div>
                     </div>
                 </Sider>
-                <Layout style={{ padding: '10px 24px 24px', flex: 1 }}>
+
+                <Layout style={{ flex: 1 }}>
                     <Content
                         className="layout-content"
                         style={{
@@ -170,55 +198,55 @@ const LayoutApp: React.FC = () => {
                         <Outlet />
                     </Content>
                     <Footer className="app-footer">
-                    <div className="footer-copyright">
-                        <p>&copy; {new Date().getFullYear()} CarRental App. Wszelkie prawa zastrzeżone.</p>
-                    </div>
-                    <div className="footer-content">
-                        <div className="content-left">
-                        <h4>Kontakt</h4>
-                            <ul>
-                                <li>
-                                <span className="footer-icon">📍</span>
-                                ul. Przykładowa 15, 00-001 Warszawa
-                                </li>
-                                <li>
-                                <span className="footer-icon">📞</span>
-                                +48 123 456 789
-                                </li>
-                                <li>
-                                <span className="footer-icon">✉️</span>
-                                    kontakt@przykladowa-wypozyczalnia.pl
-                                </li>
-                            </ul>
+                        <div className="footer-copyright">
+                            <p>&copy; {new Date().getFullYear()} CarRental App. Wszelkie prawa zastrzeżone.</p>
                         </div>
-                        <div className="content-center">
-                        <h4>Informacje</h4>
-                            <ul>
-                                <li><a href="/about">O Nas</a></li>
-                                <li><a href="/cars">Nasze Auta</a></li>
-                                <li><a href="/FAQ">FAQ</a></li>
-                            </ul>
+                        <div className="footer-content">
+                            <div className="content-left">
+                                <h4>Kontakt</h4>
+                                <ul>
+                                    <li>
+                                        <span className="footer-icon">📍</span>
+                                        ul. Przykładowa 15, 00-001 Warszawa
+                                    </li>
+                                    <li>
+                                        <span className="footer-icon">📞</span>
+                                        +48 123 456 789
+                                    </li>
+                                    <li>
+                                        <span className="footer-icon">✉️</span>
+                                        kontakt@przykladowa-wypozyczalnia.pl
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="content-center">
+                                <h4>Informacje</h4>
+                                <ul>
+                                    <li><a href="/about">O Nas</a></li>
+                                    <li><a href="/cars">Nasze Auta</a></li>
+                                    <li><a href="/FAQ">FAQ</a></li>
+                                </ul>
+                            </div>
+                            <div className="content-right">
+                                <h4>Godziny otwarcia</h4>
+                                <ul>
+                                    <li>Pon – Pt: 08:00 – 18:00</li>
+                                    <li>Sobota: 09:00 – 14:00</li>
+                                    <li>Niedziela: 10:00 - 14:00</li>
+                                </ul>
+                            </div>
+                            <div className="footer-social">
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                                    <FaFacebookF />
+                                </a>
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                                    <FaInstagram />
+                                </a>
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                                    <FaLinkedinIn />
+                                </a>
+                            </div>
                         </div>
-                        <div className="content-right">
-                        <h4>Godziny otwarcia</h4>
-                        <ul>
-                            <li>Pon – Pt: 08:00 – 18:00</li>
-                            <li>Sobota: 09:00 – 14:00</li>
-                            <li>Niedziela: 10:00 - 14:00</li>
-                        </ul>
-                        </div>
-                        <div className="footer-social">
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <FaFacebookF />
-                            </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                            <FaInstagram />
-                            </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                            <FaLinkedinIn />
-                            </a>
-                        </div>
-                    </div>
                     </Footer>
                 </Layout>
             </Layout>

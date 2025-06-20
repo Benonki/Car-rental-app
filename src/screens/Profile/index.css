@@ -1,5 +1,10 @@
+.profile-container {
+  padding: 16px;
+}
+
 .profile-grid {
   display: flex;
+  flex-direction: column;
   gap: 24px;
   margin: 24px auto;
   max-width: 1200px;
@@ -71,4 +76,61 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .profile-grid {
+    flex-direction: row;
+  }
+}
+
+.profile-card {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .profile-card {
+    width: 300px;
+    padding: 24px;
+  }
+}
+
+.tabs-card {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .tabs-card {
+    padding: 24px;
+  }
+}
+
+.ant-form-item {
+  margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+}
+
+.ant-table {
+  overflow-x: auto;
+}
+
+.mt-large {
+  margin-top: 16px;
+}
+
+@media (min-width: 768px) {
+  .mt-large {
+    margin-top: 24px;
+  }
 }

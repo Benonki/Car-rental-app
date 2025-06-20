@@ -178,8 +178,8 @@ const Profile: FC = () => {
                 </Row>
               ) : (
                 <Form layout="vertical" form={form}>
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
+                  <Row gutter={[8, 8]}>
+                    <Col xs={24} sm={12}>
                       <Form.Item name="first_name" label="Imię"><Input /></Form.Item>
                       <Form.Item name="last_name" label="Nazwisko"><Input /></Form.Item>
                       <Form.Item name="pesel" label="PESEL"><Input /></Form.Item>
@@ -187,7 +187,7 @@ const Profile: FC = () => {
                       <Form.Item name="phone_number" label="Telefon"><Input /></Form.Item>
                       <Form.Item name="email" label="Email"><Input /></Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                       <Form.Item name="country" label="Kraj"><Input /></Form.Item>
                       <Form.Item name="postal_code" label="Kod pocztowy"><Input /></Form.Item>
                       <Form.Item name="city" label="Miasto"><Input /></Form.Item>
@@ -196,8 +196,14 @@ const Profile: FC = () => {
                     </Col>
                   </Row>
                   <Space className="mt-large">
-                    <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>Zapisz</Button>
-                    <Button danger icon={<CloseOutlined />} onClick={handleCancel}>Anuluj</Button>
+                      <Space className="mt-large" direction={window.innerWidth < 768 ? "vertical" : "horizontal"}>
+                          <Button type="primary" icon={<SaveOutlined />} onClick={handleSave} block={window.innerWidth < 768}>
+                              Zapisz
+                          </Button>
+                          <Button danger icon={<CloseOutlined />} onClick={handleCancel} block={window.innerWidth < 768}>
+                              Anuluj
+                          </Button>
+                      </Space>
                   </Space>
                 </Form>
               )}
@@ -205,7 +211,7 @@ const Profile: FC = () => {
 
             <TabPane tab={<span><HistoryOutlined /> Historia wypożyczeń</span>} key="2">
               <Title level={4}>Twoje wypożyczenia</Title>
-              <Table dataSource={rentals} rowKey="id" pagination={{ pageSize: 3 }}>
+              <Table dataSource={rentals} rowKey="id" pagination={{ pageSize: 3 }}  scroll={{ x: true }}>
                 <Column title="Samochód" key="car" align="center" render={(_, record: Rental) => `${record.car.model.make.name} ${record.car.model.name}`} />
                 <Column title="Data odbioru" dataIndex="date_of_rental" key="date_of_rental" align="center" />
                 <Column title="Data zwrotu" dataIndex="date_of_return" key="date_of_return" align="center" />
@@ -244,6 +250,7 @@ const Profile: FC = () => {
             onOk={handleReviewSubmit}
             okText="Wyślij"
             cancelText="Anuluj"
+            width={window.innerWidth < 768 ? '90%' : '50%'}
             >
             <Form layout="vertical" form={reviewForm}>
                 <Form.Item

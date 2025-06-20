@@ -1,17 +1,105 @@
-h1 {
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-ol {
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-    font-size: 20px;
-    font-weight: bold;
+.faq-title {
+    text-align: center;
+    font-size: clamp(28px, 5vw, 50px);
+    margin-bottom: 30px;
+    color: #333;
+    line-height: 1.2;
 }
-  
-  ol li p {
+
+.faq-list {
+    list-style: none;
+    counter-reset: faq-counter;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    counter-increment: faq-counter;
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+    position: relative;
+}
+
+.faq-item::before {
+    content: counter(faq-counter);
+    position: absolute;
+    left: -15px;
+    top: 20px;
+    background-color: #007bff;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.faq-question {
+    display: block;
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.faq-answer {
     font-weight: normal;
-  }
+    font-size: clamp(14px, 2vw, 16px);
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .faq-container {
+        padding: 15px;
+    }
+
+    .faq-title {
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        margin-left: 20px;
+    }
+
+    .faq-item::before {
+        left: -25px;
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-container {
+        padding: 10px;
+    }
+
+    .faq-item {
+        padding: 12px;
+        margin-left: 15px;
+    }
+
+    .faq-item::before {
+        left: -20px;
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+    }
+}

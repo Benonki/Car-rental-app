@@ -1,33 +1,33 @@
 .about-container {
-    padding: 24px;
+    padding: 16px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .hero-section {
-    margin-bottom: 48px;
-    padding: 40px;
+    margin-bottom: 32px;
+    padding: 24px;
     border-radius: 8px;
 }
 
 .hero-description {
     font-size: 16px;
     line-height: 1.8;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     color: rgba(255, 255, 255, 0.85);
 }
 
 .hero-stats {
-    margin-top: 32px;
+    margin-top: 24px;
 }
 
 .about-statistic .ant-statistic-title {
-    font-size: 14px;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.65);
 }
 
 .about-statistic .ant-statistic-content {
-    font-size: 24px;
+    font-size: 20px;
     color: #fff;
 }
 
@@ -35,24 +35,26 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     overflow: hidden;
+    margin-top: 24px;
 }
 
 .hero-carousel {
-    height: 400px;
+    height: 300px;
     border-radius: 8px;
 }
 
 .carousel-image {
     width: 100%;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 32px !important;
+    margin-bottom: 24px !important;
     position: relative;
     padding-bottom: 16px;
+    font-size: 24px;
 }
 
 .section-title::after {
@@ -69,13 +71,14 @@
 .section-intro {
     text-align: center;
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto 32px;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.65);
+    padding: 0 16px;
 }
 
 .section-divider {
-    margin: 64px 0;
+    margin: 48px 0;
 }
 
 .mission-card {
@@ -84,6 +87,7 @@
     border-radius: 8px;
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
+    margin-bottom: 16px;
 }
 
 .mission-card:hover {
@@ -97,7 +101,7 @@
 }
 
 .card-icon {
-    font-size: 36px;
+    font-size: 32px;
     color: #1890ff;
     background: rgba(24, 144, 255, 0.1);
     padding: 16px;
@@ -109,6 +113,7 @@
     height: 100%;
     border-radius: 8px;
     transition: all 0.3s ease;
+    margin-bottom: 16px;
 }
 
 .team-card:hover {
@@ -148,6 +153,7 @@
 .contact-card {
     height: 100%;
     border-radius: 8px;
+    margin-bottom: 16px;
 }
 
 .contact-info {
@@ -158,12 +164,14 @@
     display: flex;
     align-items: center;
     margin-bottom: 12px;
+    flex-wrap: wrap;
 }
 
 .contact-icon {
     font-size: 18px;
     color: #1890ff;
     margin-right: 12px;
+    flex-shrink: 0;
 }
 
 .opening-hours {
@@ -183,19 +191,174 @@
 }
 
 @media (max-width: 768px) {
-    .hero-carousel {
-        height: 250px;
+    .about-container {
+        padding: 12px;
     }
 
-    .carousel-image {
-        height: 250px;
+    .hero-section {
+        padding: 16px;
+        margin-bottom: 24px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin-bottom: 16px !important;
+    }
+
+    .section-intro {
+        font-size: 14px;
+        margin-bottom: 24px;
+        padding: 0 8px;
     }
 
     .section-divider {
-        margin: 40px 0;
+        margin: 32px 0;
     }
 
-    .history-image {
-        height: 300px;
+    .hero-carousel {
+        height: 220px;
+    }
+
+    .carousel-image {
+        height: 220px;
+    }
+
+    .about-statistic .ant-statistic-title {
+        font-size: 10px;
+    }
+
+    .about-statistic .ant-statistic-content {
+        font-size: 16px;
+    }
+
+    .card-icon {
+        font-size: 28px;
+        padding: 12px;
+    }
+
+    .team-avatar {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .history-timeline-container {
+        padding-left: 0;
+    }
+
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .contact-icon {
+        margin-right: 8px;
+        margin-bottom: 4px;
+    }
+
+    .hours-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        padding: 8px;
+    }
+
+    .hero-section {
+        padding: 12px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .section-intro {
+        font-size: 13px;
+    }
+
+    .hero-carousel {
+        height: 180px;
+    }
+
+    .carousel-image {
+        height: 180px;
+    }
+
+    .about-statistic .ant-statistic-content {
+        font-size: 14px;
+    }
+
+    .card-icon {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .team-avatar {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .mission-card .ant-card-body,
+    .team-card .ant-card-body,
+    .contact-card .ant-card-body {
+        padding: 16px;
+    }
+
+    .timeline-content h5 {
+        font-size: 14px;
+    }
+
+    .timeline-content p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-carousel {
+        height: 160px;
+    }
+
+    .carousel-image {
+        height: 160px;
+    }
+
+    .hero-section {
+        padding: 12px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .mission-card:hover,
+    .team-card:hover {
+        transform: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .mission-card:active,
+    .team-card:active {
+        transform: scale(0.98);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+    .section-title,
+    .hero-description,
+    .section-intro,
+    .timeline-content p {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
