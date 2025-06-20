@@ -402,7 +402,7 @@ const Renting: FC = () => {
                             <Space
                                 size={16}
                                 className="payment-buttons"
-                                direction="horizontal" // Default horizontal direction
+                                direction="horizontal"
                             >
                                 <Button
                                     type="default"
