@@ -157,3 +157,22 @@ export interface AddressFormValues {
     street: string;
     streetNumber: string;
 }
+
+export type RentalRequest = {
+    customerId: string;
+    carId: string;
+    date_of_rental: string;
+    date_of_return: string;
+    pick_up_placeId: string;
+    return_placeId: string;
+    total_cost: number;
+    status: string;
+    paymentMethod?: 'ONLINE' | 'OFFLINE';
+};
+
+export type PaymentRequest = {
+    rentalId: string;
+    title: string;
+    cost: number;
+    paymentType: 'ONLINE' | 'OFFLINE';
+};

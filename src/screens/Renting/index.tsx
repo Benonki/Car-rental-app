@@ -5,8 +5,9 @@ import dayjs from 'dayjs';
 import { SiStripe } from "react-icons/si";
 import { FaCashRegister } from "react-icons/fa";
 import { getCarById } from "../../api/cars";
+import { createPayment, createRental } from "../../api/rental";
 import { getPickUpPlaces, getReturnPlaces, createFullPickUpPlace, createFullReturnPlace } from "../../api/locations";
-import { Car, PickUpPlace, ReturnPlace, RentalFormValues, AddressFormValues, InsuranceType } from "../../types";
+import { Car, PickUpPlace, ReturnPlace, RentalFormValues, AddressFormValues, InsuranceType, RentalRequest, PaymentRequest } from "../../types";
 import { useUser } from "../../contexts/UserContext";
 import './index.css';
 
@@ -79,46 +80,58 @@ const Renting: FC = () => {
 
     const handleSubmit = async (values: RentalFormValues) => {
         try {
-            const [date_of_rental, date_of_return] = values.dates;
-            const days = date_of_return.diff(date_of_rental, 'days') + 1;
+            if (!car || !customerId) return;
 
-            let insuranceCost = 0;
-            let insuranceCoverage = 'None';
+            const isOnlinePayment = values.paymentMethod !== 'ON_SITE';
+            const rentalStatus = isOnlinePayment ? 'Zakończone' : 'Nadchodzące';
 
-            if (values.insuranceType === 'BASIC') {
-                insuranceCost = days * 20;
-                insuranceCoverage = 'Scratches';
-            } else if (values.insuranceType === 'PREMIUM') {
-                insuranceCost = days * 50;
-                insuranceCoverage = 'Everything';
-            }
 
-            console.log('Rental details:', {
-                date_of_rental: date_of_rental.format('YYYY-MM-DD'),
-                date_of_return: date_of_return.format('YYYY-MM-DD'),
-                status: "Nadchodzące",
-                totalCost: calculateTotalCost(values.dates, values.insuranceType),
-                carId: id,
+            const rentalRequest: RentalRequest = {
                 customerId: customerId,
-                pick_up_place_id: values.pickUpPlaceId,
-                return_place_id: values.returnPlaceId,
-                paymentMethod: values.paymentMethod || 'STRIPE',
-                insurance: {
-                    type: values.insuranceType,
-                    coverage: insuranceCoverage,
-                    cost: insuranceCost
-                }
-            });
+                carId: id!,
+                date_of_rental: values.dates[0].format('YYYY-MM-DD'),
+                date_of_return: values.dates[1].format('YYYY-MM-DD'),
+                pick_up_placeId: values.pickUpPlaceId,
+                return_placeId: values.returnPlaceId,
+                total_cost: totalCost,
+                status: rentalStatus
+            };
+
+            const rentalResponse = await createRental(rentalRequest);
+
+            const paymentRequest: PaymentRequest = {
+                rentalId: rentalResponse.id,
+                title: `Wypożyczenie ${car.nazwa}`,
+                cost: totalCost,
+                paymentType: values.paymentMethod === 'ON_SITE' ? 'OFFLINE' : 'ONLINE' as const
+            };
+
+            const paymentResponse = await createPayment(paymentRequest);
 
             if (values.paymentMethod === 'ON_SITE') {
-                message.success('Wypożyczenie zostało złożone! Płatność zostanie dokonana na miejscu.');
+                navigate('/result', {
+                    state: {
+                        success: true,
+                        message: 'Wypożyczenie zostało złożone! Płatność zostanie dokonana na miejscu.',
+                        rentalStatus: 'Nadchodzące'
+                    }
+                });
             } else {
-                message.success('Wypożyczenie zostało złożone! Przekierowujemy do płatności...');
-                // TODO: Stripe payment integration
+                if (paymentResponse.sessionUrl) {
+                    window.location.href = paymentResponse.sessionUrl;
+                } else {
+                    throw new Error('Błąd podczas przekierowania do płatności');
+                }
             }
         } catch (error) {
             console.error('Error submitting rental:', error);
-            message.error('Nie udało się złożyć wypożyczenia');
+            navigate('/result', {
+                state: {
+                    success: false,
+                    message: 'Nie udało się złożyć wypożyczenia',
+                    rentalStatus: 'Anulowane'
+                }
+            });
         }
     };
 

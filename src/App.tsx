@@ -36,11 +36,32 @@ const App: React.FC = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/renting/:id" element={<Renting />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/result" element={<ResultPage />} />
                     <Route path="/cars" element={<Cars />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/FAQ" element={<FAQ />} />
-
+                    <Route path="/result" element={<ResultPage />} />
+                    <Route path="/success" element={
+                        <Navigate
+                            to="/result"
+                            replace
+                            state={{
+                                success: true,
+                                message: 'Płatność zakończona sukcesem! Wypożyczenie zostało potwierdzone.',
+                                rentalStatus: 'Zakończone'
+                            }}
+                        />
+                    } />
+                    <Route path="/cancel" element={
+                        <Navigate
+                            to="/result"
+                            replace
+                            state={{
+                                success: false,
+                                message: 'Płatność nie powiodła się. Wypożyczenie zostało anulowane.',
+                                rentalStatus: 'Anulowane'
+                            }}
+                        />
+                    } />
                 </Route>
             </Routes>
 
