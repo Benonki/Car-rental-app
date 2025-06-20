@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
-import { Button,Card, Typography,Row,Col,Carousel,Divider,Tag,Rate,Spin } from "antd";
-import { CarOutlined,CalendarOutlined,EnvironmentOutlined,CheckCircleOutlined } from "@ant-design/icons";
+import { Button,Card,DatePicker,Input,Typography,Row,Col,Carousel,Divider,Tag,Rate,Spin } from "antd";
+import { SearchOutlined,CarOutlined,CalendarOutlined,EnvironmentOutlined,CheckCircleOutlined } from "@ant-design/icons";
 import "./index.css";
 import type { Opinion, Car } from "../../types.ts";
 import { getAllOpinions, getOpinionsByCarId } from "../../api/opinions.ts";
@@ -9,11 +9,13 @@ import CarOpinionModal from "../../components/CarOpinionModal.tsx";
 import {useNavigate} from "react-router-dom";
 
 const { Title, Paragraph } = Typography;
+const { RangePicker } = DatePicker;
 
 type CarWithOpinionCount = Car & { opinionCount: number };
 
 const Home: FC = () => {
   const navigate = useNavigate();
+  const [lokalizacja, setLokalizacja] = useState("");
   const [opinie, setOpinie] = useState<Opinion[]>([]);
   const [popularneAuta, setPopularneAuta] = useState<CarWithOpinionCount[]>([]);
   const [loading, setLoading] = useState(true);
@@ -107,6 +109,33 @@ const Home: FC = () => {
           <Paragraph className="hero-subtitle">
             Szeroki wybór pojazdów, konkurencyjne ceny i profesjonalna obsługa
           </Paragraph>
+
+          <Card className="search-card">
+            <Title level={4}>Znajdź dostępne samochody</Title>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={8}>
+                <Input
+                  size="large"
+                  placeholder="Lokalizacja odbioru"
+                  prefix={<EnvironmentOutlined />}
+                  value={lokalizacja}
+                  onChange={(e) => setLokalizacja(e.target.value)}
+                />
+              </Col>
+              <Col xs={24} md={12}>
+                <RangePicker
+                  size="large"
+                  placeholder={["Data odbioru", "Data zwrotu"]}
+                  className="date-picker-full"
+                />
+              </Col>
+              <Col xs={24} md={4}>
+                <Button type="primary" icon={<SearchOutlined />} size="large" block>
+                  Szukaj
+                </Button>
+              </Col>
+            </Row>
+          </Card>
         </div>
       </section>
 
