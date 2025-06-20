@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Typography, Row, Col, Divider, Descriptions, DatePicker, Select, Form, Input, Space, message, Drawer } from "antd";
+import { Button, Card, Typography, Row, Col, Divider, Descriptions, DatePicker, Select, Form, Input, Space, message, Drawer, Radio } from "antd";
 import dayjs from 'dayjs';
 import { SiStripe } from "react-icons/si";
 import { getCarById } from "../../api/cars";
@@ -17,6 +17,7 @@ interface RentalFormValues {
     dates: [dayjs.Dayjs, dayjs.Dayjs];
     pickUpPlaceId: string;
     returnPlaceId: string;
+    insuranceType: 'NONE' | 'BASIC' | 'PREMIUM';
 }
 
 interface AddressFormValues {
@@ -66,29 +67,61 @@ const Renting: FC = () => {
         fetchData();
     }, [id, navigate]);
 
-    const calculateTotalCost = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null) => {
+    const calculateTotalCost = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null, insuranceType: 'NONE' | 'BASIC' | 'PREMIUM' = 'NONE') => {
         if (!dates || !car) return 0;
         const days = dates[1].diff(dates[0], 'days') + 1;
-        return days * car.cena;
+        const baseCost = days * car.cena;
+
+        let insuranceCost = 0;
+        if (insuranceType === 'BASIC') {
+            insuranceCost = days * 20;
+        } else if (insuranceType === 'PREMIUM') {
+            insuranceCost = days * 50;
+        }
+
+        return baseCost + insuranceCost;
     };
 
     const handleDatesChange = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null) => {
-        setTotalCost(calculateTotalCost(dates));
+        const insuranceType = form.getFieldValue('insuranceType') || 'NONE';
+        setTotalCost(calculateTotalCost(dates, insuranceType));
+    };
+
+    const handleInsuranceChange = (value: 'NONE' | 'BASIC' | 'PREMIUM') => {
+        const dates = form.getFieldValue('dates');
+        setTotalCost(calculateTotalCost(dates, value));
     };
 
     const handleSubmit = async (values: RentalFormValues) => {
         try {
             const [date_of_rental, date_of_return] = values.dates;
+            const days = date_of_return.diff(date_of_rental, 'days') + 1;
+
+            let insuranceCost = 0;
+            let insuranceCoverage = 'None';
+
+            if (values.insuranceType === 'BASIC') {
+                insuranceCost = days * 20;
+                insuranceCoverage = 'Scratches';
+            } else if (values.insuranceType === 'PREMIUM') {
+                insuranceCost = days * 50;
+                insuranceCoverage = 'Everything';
+            }
 
             console.log('Rental details:', {
                 date_of_rental: date_of_rental.format('YYYY-MM-DD'),
                 date_of_return: date_of_return.format('YYYY-MM-DD'),
                 status: "Nadchodzące",
-                totalCost: calculateTotalCost(values.dates),
+                totalCost: calculateTotalCost(values.dates, values.insuranceType),
                 carId: id,
                 customerId: customerId,
                 pick_up_place_id: values.pickUpPlaceId,
-                return_place_id: values.returnPlaceId
+                return_place_id: values.returnPlaceId,
+                insurance: {
+                    type: values.insuranceType,
+                    coverage: insuranceCoverage,
+                    cost: insuranceCost
+                }
             });
             // TODO: MAKE PAYMENT WORK AND CREATE A NEW RENTAL
             message.success('Wypożyczenie zostało złożone!');
@@ -305,6 +338,61 @@ const Renting: FC = () => {
                                     </Option>
                                 ))}
                             </Select>
+                        </Form.Item>
+
+                        <Form.Item
+                            name="insuranceType"
+                            label="Ubezpieczenie"
+                            initialValue="NONE"
+                        >
+                            <Radio.Group
+                                optionType="button"
+                                buttonStyle="solid"
+                                onChange={(e) => handleInsuranceChange(e.target.value)}
+                                className="insurance-radio-group"
+                            >
+                                <Row gutter={[8, 16]} style={{ width: '100%' }}>
+                                    <Col span={8}>
+                                        <div className="insurance-option">
+                                            <Radio.Button
+                                                value="NONE"
+                                                style={{ width: '100%', borderRadius: '4px' }}
+                                            >
+                                                Brak
+                                            </Radio.Button>
+                                            <div className="insurance-description">
+                                                Brak ubezpieczenia
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col span={8}>
+                                        <div className="insurance-option">
+                                            <Radio.Button
+                                                value="BASIC"
+                                                style={{ width: '100%', borderRadius: '4px' }}
+                                            >
+                                                Basic (+20zł/dzień)
+                                            </Radio.Button>
+                                            <div className="insurance-description">
+                                                Pokrywa drobne rysy
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col span={8}>
+                                        <div className="insurance-option">
+                                            <Radio.Button
+                                                value="PREMIUM"
+                                                style={{ width: '100%', borderRadius: '4px' }}
+                                            >
+                                                Premium (+50zł/dzień)
+                                            </Radio.Button>
+                                            <div className="insurance-description">
+                                                Pełne pokrycie szkód
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Radio.Group>
                         </Form.Item>
 
                         <Divider />

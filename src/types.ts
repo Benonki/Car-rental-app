@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export type LoginData = {
     email: string
     password: string
@@ -135,4 +137,13 @@ export type CreateOpinionDto = {
   rating: number;
   description: string;
   date_of_publishing: string;
+};
+
+export type InsuranceType = 'NONE' | 'BASIC' | 'PREMIUM';
+
+export type RentalFormValues = {
+    dates: [dayjs.Dayjs, dayjs.Dayjs];
+    pickUpPlaceId: string;
+    returnPlaceId: string;
+    insuranceType: InsuranceType;
 };
