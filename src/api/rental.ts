@@ -18,3 +18,7 @@ export const patchRental = (rentalId: string, payload: any) => {
 export const deleteRental = (id: string) => {
   return axiosInstance.delete(`/rentals/${id}`);
 };
+
+export const updateRentalStatus = async (rentalId: string, status: 'Nadchodzące' | 'Zakończone' | 'Anulowane') => {
+    return axiosInstance.patch(`/rentals/${rentalId}/status`, { status });
+};

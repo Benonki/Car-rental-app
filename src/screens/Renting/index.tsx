@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { SiStripe } from "react-icons/si";
 import { FaCashRegister } from "react-icons/fa";
 import { getCarById } from "../../api/cars";
-import { createPayment, createRental } from "../../api/rental";
+import { createPayment, createRental, updateRentalStatus } from "../../api/rental";
 import { createInsurance } from "../../api/insurance";
 import { getPickUpPlaces, getReturnPlaces, createFullPickUpPlace, createFullReturnPlace } from "../../api/locations";
 import { Car, PickUpPlace, ReturnPlace, RentalFormValues, AddressFormValues, InsuranceType, RentalRequest, PaymentRequest, InsuranceRequest } from "../../types";
@@ -91,7 +91,6 @@ const Renting: FC = () => {
             const isOnlinePayment = values.paymentMethod !== 'ON_SITE';
             const rentalStatus = isOnlinePayment ? 'Zakończone' : 'Nadchodzące';
 
-
             const rentalRequest: RentalRequest = {
                 customerId: customerId,
                 carId: id!,
@@ -128,6 +127,10 @@ const Renting: FC = () => {
 
             const paymentResponse = await createPayment(paymentRequest);
 
+            localStorage.setItem('pendingRental', JSON.stringify({
+                rentalId: rentalResponse.id
+            }));
+
             if (values.paymentMethod === 'ON_SITE') {
                 navigate('/result', {
                     state: {
@@ -140,6 +143,8 @@ const Renting: FC = () => {
                 if (paymentResponse.sessionUrl) {
                     window.location.href = paymentResponse.sessionUrl;
                 } else {
+                    await updateRentalStatus(rentalResponse.id, 'Anulowane');
+                    localStorage.removeItem('pendingRental');
                     throw new Error('Błąd podczas przekierowania do płatności');
                 }
             }
