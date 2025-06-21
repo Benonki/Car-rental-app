@@ -1,11 +1,12 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import {render, screen, waitFor, fireEvent, act} from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
 import { message } from 'antd';
 import Renting from '../../../src/screens/Renting';
 import { getCarById } from '../../../src/api/cars';
 import { createPayment, createRental } from '../../../src/api/rental';
-import { createFullPickUpPlace, getPickUpPlaces, getReturnPlaces } from '../../../src/api/locations';
+import { createInsurance } from '../../../src/api/insurance';
+import { createFullPickUpPlace, createFullReturnPlace, getPickUpPlaces, getReturnPlaces } from '../../../src/api/locations';
 import { useUser } from '../../../src/contexts/UserContext';
 import { Car, PickUpPlace, ReturnPlace } from "../../../src/types";
 
@@ -136,9 +137,22 @@ describe('Renting Screen', () => {
         vi.mocked(getReturnPlaces).mockResolvedValue(mockReturnPlaces);
         vi.mocked(createRental).mockResolvedValue(mockRentalResponse);
         vi.mocked(createPayment).mockResolvedValue({ sessionUrl: 'https://stripe.com' });
+        vi.mocked(createInsurance).mockResolvedValue({ id: 'ins1' });
         vi.mocked(createFullPickUpPlace).mockResolvedValue({
             id: '2',
             name: 'New Place',
+            address: {
+                id: 'addr2',
+                country: 'Poland',
+                postal_code: '00-001',
+                city: 'Warsaw',
+                street: 'New Street',
+                street_number: '2'
+            }
+        });
+        vi.mocked(createFullReturnPlace).mockResolvedValue({
+            id: '2',
+            name: 'New Return Place',
             address: {
                 id: 'addr2',
                 country: 'Poland',
@@ -241,4 +255,179 @@ describe('Renting Screen', () => {
             expect(message.success).toHaveBeenCalledWith('Miejsce odbioru dodane pomyślnie!');
         });
     });
+
+
+    it('should add new return place when form is submitted', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const returnSelect = screen.getAllByText('Wybierz miejsce zwrotu')[0];
+        fireEvent.mouseDown(returnSelect);
+        fireEvent.click(screen.getByText('+ Dodaj nowe miejsce'));
+
+        const nameInput = screen.getByLabelText('Nazwa punktu');
+        fireEvent.change(nameInput, { target: { value: 'New Return Place' } });
+
+        const streetInput = screen.getByLabelText('Ulica');
+        fireEvent.change(streetInput, { target: { value: 'New Street' } });
+
+        const streetNumberInput = screen.getByLabelText('Numer budynku');
+        fireEvent.change(streetNumberInput, { target: { value: '2' } });
+
+        const cityInput = screen.getByLabelText('Miasto');
+        fireEvent.change(cityInput, { target: { value: 'Warsaw' } });
+
+        const postalCodeInput = screen.getByLabelText('Kod pocztowy');
+        fireEvent.change(postalCodeInput, { target: { value: '00-001' } });
+
+        const countryInput = screen.getByLabelText('Kraj');
+        fireEvent.change(countryInput, { target: { value: 'Poland' } });
+
+        const submitButton = screen.getByText('Zapisz');
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(createFullReturnPlace).toHaveBeenCalled();
+            expect(message.success).toHaveBeenCalledWith('Miejsce zwrotu dodane pomyślnie!');
+        });
+    });
+
+    it('should disable payment buttons when car is not available', async () => {
+        vi.mocked(getCarById).mockResolvedValueOnce({
+            ...mockCar,
+            dostepny: false
+        });
+
+        renderComponent();
+        await waitFor(() => screen.getByText('Niedostępny'));
+
+        const onSiteButton = screen.getByRole('button', { name: /Zapłać przy odbiorze/i });
+        const stripeButton = screen.getByRole('button', { name: /Zapłać przez Stripe/i });
+
+        expect(onSiteButton).toBeDisabled();
+        expect(stripeButton).toBeDisabled();
+    });
+
+    it('should disable payment buttons when no dates are selected', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const onSiteButton = screen.getByRole('button', { name: /Zapłać przy odbiorze/i });
+        const stripeButton = screen.getByRole('button', { name: /Zapłać przez Stripe/i });
+
+        expect(onSiteButton).toBeDisabled();
+        expect(stripeButton).toBeDisabled();
+    });
+
+    it('should calculate total cost correctly without insurance', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const datePickers = screen.getAllByLabelText('Okres Wypożyczenia');
+        await act(async () => {
+            fireEvent.mouseDown(datePickers[0]);
+            fireEvent.change(datePickers[0], { target: { value: '2023-01-01,2023-01-03' } });
+        });
+
+        await waitFor(() => {
+            expect(screen.getByText(/Suma:/)).toBeInTheDocument();
+        });
+    });
+
+    it('should close pickup place drawer on cancel', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const pickupSelect = screen.getAllByText('Wybierz miejsce odbioru')[0];
+        fireEvent.mouseDown(pickupSelect);
+        fireEvent.click(screen.getByText('+ Dodaj nowe miejsce'));
+
+        expect(screen.getByText('Dodaj nowe miejsce odbioru')).toBeInTheDocument();
+
+        const cancelButton = screen.getByText('Anuluj');
+        fireEvent.click(cancelButton);
+
+        await waitFor(() => {
+            expect(screen.queryByText('Dodaj nowe miejsce odbioru')).not.toBeInTheDocument();
+        });
+    });
+
+    it('should close return place drawer on cancel', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const returnSelect = screen.getAllByText('Wybierz miejsce zwrotu')[0];
+        fireEvent.mouseDown(returnSelect);
+        fireEvent.click(screen.getByText('+ Dodaj nowe miejsce'));
+
+        expect(screen.getByText('Dodaj nowe miejsce zwrotu')).toBeInTheDocument();
+
+        const cancelButton = screen.getByText('Anuluj');
+        fireEvent.click(cancelButton);
+
+        await waitFor(() => {
+            expect(screen.queryByText('Dodaj nowe miejsce zwrotu')).not.toBeInTheDocument();
+        });
+    });
+
+    it('should filter return places by search input', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const returnSelect = screen.getAllByText('Wybierz miejsce zwrotu')[0];
+        fireEvent.mouseDown(returnSelect);
+
+        const input = screen.getAllByRole('combobox')[1];
+        fireEvent.change(input, {target: {value: 'Return'}});
+
+        await waitFor(() => {
+            expect(screen.getByText('Return Place 1 - Warsaw')).toBeInTheDocument();
+        });
+    });
+
+    it('should not show cost breakdown when no dates are selected', async () => {
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        expect(screen.getByText('Suma: 0 zł')).toBeInTheDocument();
+        expect(screen.queryByText('dni × 200 zł/dzień')).not.toBeInTheDocument();
+    });
+
+    it('should handle missing customerId', async () => {
+        vi.mocked(useUser).mockReturnValue({
+            ...mockUserContext,
+            customerId: null
+        });
+
+        renderComponent();
+        await waitFor(() => screen.getByText('Test Car'));
+
+        const datePickers = screen.getAllByLabelText('Okres Wypożyczenia');
+        await act(async () => {
+            fireEvent.change(datePickers[0], {target: {value: '2023-01-01,2023-01-07'}});
+        });
+
+        const onSiteButton = screen.getByRole('button', {name: /Zapłać przy odbiorze/i});
+        fireEvent.click(onSiteButton);
+
+        expect(createRental).not.toHaveBeenCalled();
+    });
+
+    it('should display technical specifications correctly', async () => {
+        renderComponent();
+        await waitFor(() => {
+            expect(screen.getByText('2022')).toBeInTheDocument();
+            expect(screen.getByText('ABC123')).toBeInTheDocument();
+            expect(screen.getByText('VIN123456789')).toBeInTheDocument();
+            expect(screen.getByText('Red')).toBeInTheDocument();
+            expect(screen.getByText('5')).toBeInTheDocument();
+            expect(screen.getByText('2000 cm³')).toBeInTheDocument();
+            expect(screen.getByText('150 KM')).toBeInTheDocument();
+            expect(screen.getByText('Automatic')).toBeInTheDocument();
+            expect(screen.getByText('FWD')).toBeInTheDocument();
+            expect(screen.getByText('Gasoline')).toBeInTheDocument();
+            expect(screen.getByText('10000 km')).toBeInTheDocument();
+        });
+    });
+
 });

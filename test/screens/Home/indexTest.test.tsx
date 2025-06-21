@@ -1,10 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
 import Home from '../../../src/screens/Home';
 import { MemoryRouter } from 'react-router-dom';
 import * as opinionsApi from '../../../src/api/opinions';
 import * as carsApi from '../../../src/api/cars';
 import type { Opinion, Car } from '../../../src/types';
+
+vi.mock('react-router-dom', async () => {
+    const actual = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
+    return {
+        ...actual,
+        useNavigate: () => vi.fn(),
+    };
+});
 
 vi.mock('../../../src/api/opinions', () => ({
     getAllOpinions: vi.fn(),
@@ -88,6 +96,70 @@ const mockOpinions: Opinion[] = [
         description: 'Great car!',
         date_of_publishing: '2023-01-01',
     },
+    {
+        id: '2',
+        customer: {
+            id: '2',
+            user: {
+                id: '2',
+                name: 'Jane Smith',
+                email: 'jane@example.com',
+                provider: 'local',
+                providerId: '2',
+                enabled: true,
+            },
+            personalData: {
+                id: '2',
+                address: {
+                    id: '2',
+                    country: 'Poland',
+                    postal_code: '00-002',
+                    city: 'Krakow',
+                    street: 'Second',
+                    street_number: '2',
+                },
+                first_name: 'Jane',
+                last_name: 'Smith',
+                pesel: '98765432109',
+                id_number: 'XYZ987654',
+                phone_number: '987654321',
+                email: 'jane@example.com',
+            },
+            date_of_joining: '2023-01-02',
+            loyalty_points: 50,
+        },
+        car: {
+            id: '2',
+            model: {
+                id: '2',
+                name: 'Corolla',
+                make: { id: '2', name: 'Toyota' },
+                bodyType: { id: '2', name: 'Sedan' },
+            },
+            specification: {
+                id: '2',
+                yearOfProduction: 2021,
+                registration: 'KR54321',
+                vin: '98765432109876543',
+                color: 'Blue',
+                numberOfSeats: 5,
+                engineCapacity: 1800,
+                horsepower: 140,
+                gearbox: 'Automatic',
+                driveType: 'FWD',
+                fuelType: 'Gasoline',
+                mileage: 20000,
+            },
+            cost: 200,
+            deposit: 3000,
+            availability: 'AVAILABLE',
+            image_url: '/toyota.jpg',
+            description: 'Reliable car',
+        },
+        rating: 3,
+        description: 'Average experience',
+        date_of_publishing: '2023-01-02',
+    },
 ];
 
 const mockCars: Car[] = [
@@ -111,12 +183,22 @@ const mockCars: Car[] = [
         dostepny: true,
         opis: 'Reliable car',
     },
+    {
+        id: '3',
+        nazwa: 'Ford Focus',
+        kategoria: 'Compact',
+        cena: 150,
+        image: '/ford.jpg',
+        ocena: 3,
+        dostepny: false,
+        opis: 'Compact car',
+    },
 ];
 
 describe('Home Screen', () => {
     beforeEach(() => {
         (opinionsApi.getAllOpinions as jest.Mock).mockResolvedValue(mockOpinions);
-        (opinionsApi.getOpinionsByCarId as jest.Mock).mockResolvedValue(mockOpinions);
+        (opinionsApi.getOpinionsByCarId as jest.Mock).mockResolvedValue([mockOpinions[0]]);
         (carsApi.getCars as jest.Mock).mockResolvedValue(mockCars);
     });
 
@@ -170,6 +252,93 @@ describe('Home Screen', () => {
             expect(screen.getByText('Co mówią nasi klienci')).toBeInTheDocument();
             expect(screen.getByText('"Great car!"')).toBeInTheDocument();
             expect(screen.getByText('- John')).toBeInTheDocument();
+            expect(screen.queryByText('"Average experience"')).not.toBeInTheDocument();
+        });
+    });
+
+    it('shows loading spinner while fetching data', async () => {
+        (carsApi.getCars as jest.Mock).mockImplementation(() => new Promise(() => {}));
+
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
+    });
+
+    it('displays popular cars section correctly', async () => {
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        await waitFor(() => {
+            expect(screen.getByText('Popularne Samochody')).toBeInTheDocument();
+            expect(screen.getByText('Tesla Model S')).toBeInTheDocument();
+            expect(screen.getByText('Toyota Corolla')).toBeInTheDocument();
+            expect(screen.getByText('Premium')).toBeInTheDocument();
+            expect(screen.getByText('Standard')).toBeInTheDocument();
+            expect(screen.getByText('500 zł')).toBeInTheDocument();
+            expect(screen.getByText('200 zł')).toBeInTheDocument();
+            expect(screen.getAllByText('Dostępny').length).toBe(2);
+        });
+    });
+
+    it('opens opinion modal when "Zobacz opinie" button is clicked', async () => {
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        await waitFor(() => {
+            const buttons = screen.getAllByText('Zobacz opinie');
+            fireEvent.click(buttons[0]);
+        });
+
+        await waitFor(() => {
+            expect(opinionsApi.getOpinionsByCarId).toHaveBeenCalledWith('1');
+        });
+    });
+
+    it('handles API errors gracefully', async () => {
+        console.error = vi.fn();
+        (carsApi.getCars as jest.Mock).mockRejectedValue(new Error('API Error'));
+
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        await waitFor(() => {
+            expect(console.error).toHaveBeenCalledWith('Błąd przy ładowaniu popularnych aut:', expect.any(Error));
+        });
+    });
+
+    it('filters opinions correctly (only ratings >= 4)', async () => {
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        await waitFor(() => {
+            expect(screen.getByText('"Great car!"')).toBeInTheDocument();
+            expect(screen.queryByText('"Average experience"')).not.toBeInTheDocument();
         });
     });
 });
