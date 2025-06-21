@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Result, Button } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
+import { updateRentalStatus } from "../../api/rental";
 
 interface ResultPageState {
     success: boolean;
@@ -17,6 +18,26 @@ const ResultPage: FC = () => {
     const isSuccess = state?.success ?? false;
     const message = state?.message ?? (isSuccess ? 'Operacja zakończona sukcesem!' : 'Operacja nie powiodła się');
     const rentalStatus = state?.rentalStatus ?? '';
+
+    useEffect(() => {
+        const handlePaymentStatus = async () => {
+            const pendingRental = localStorage.getItem('pendingRental');
+            if (!pendingRental) return;
+
+            const { rentalId } = JSON.parse(pendingRental);
+            try {
+                if (!isSuccess) {
+                    await updateRentalStatus(rentalId, 'Anulowane');
+                }
+            } catch (error) {
+                console.error('Error updating statuses:', error);
+            } finally {
+                localStorage.removeItem('pendingRental');
+            }
+        };
+
+        handlePaymentStatus();
+    }, [isSuccess]);
 
     return (
         <div style={{
