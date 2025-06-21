@@ -176,3 +176,12 @@ export type PaymentRequest = {
     cost: number;
     paymentType: 'ONLINE' | 'OFFLINE';
 };
+
+export type InsuranceRange = 'NONE' | 'MINOR_DAMAGE' | 'FULL_COVERAGE';
+
+export type InsuranceRequest = {
+    rentalId: string;
+    insurance_type: InsuranceType;
+    cost: number;
+    range_of_insurance: InsuranceRange;
+};

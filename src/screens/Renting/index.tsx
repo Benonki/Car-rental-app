@@ -6,8 +6,9 @@ import { SiStripe } from "react-icons/si";
 import { FaCashRegister } from "react-icons/fa";
 import { getCarById } from "../../api/cars";
 import { createPayment, createRental } from "../../api/rental";
+import { createInsurance } from "../../api/insurance";
 import { getPickUpPlaces, getReturnPlaces, createFullPickUpPlace, createFullReturnPlace } from "../../api/locations";
-import { Car, PickUpPlace, ReturnPlace, RentalFormValues, AddressFormValues, InsuranceType, RentalRequest, PaymentRequest } from "../../types";
+import { Car, PickUpPlace, ReturnPlace, RentalFormValues, AddressFormValues, InsuranceType, RentalRequest, PaymentRequest, InsuranceRequest } from "../../types";
 import { useUser } from "../../contexts/UserContext";
 import './index.css';
 
@@ -98,6 +99,21 @@ const Renting: FC = () => {
             };
 
             const rentalResponse = await createRental(rentalRequest);
+
+            if (values.insuranceType !== 'NONE') {
+                const insuranceCost = values.insuranceType === 'BASIC' ?
+                    20 * Math.floor(totalCost / car.cena) :
+                    50 * Math.floor(totalCost / car.cena);
+
+                const insuranceRequest: InsuranceRequest = {
+                    rentalId: rentalResponse.id,
+                    insurance_type: values.insuranceType,
+                    cost: insuranceCost,
+                    range_of_insurance: values.insuranceType === 'BASIC' ? 'MINOR_DAMAGE' : 'FULL_COVERAGE'
+                };
+
+                await createInsurance(insuranceRequest);
+            }
 
             const paymentRequest: PaymentRequest = {
                 rentalId: rentalResponse.id,
