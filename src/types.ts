@@ -195,3 +195,9 @@ export type Insurance = {
   cost: number;
   range_of_insurance: InsuranceRange;
 };
+
+export interface ResultPageState {
+    success: boolean;
+    message: string;
+    rentalStatus: 'Nadchodzące' | 'Zakończone' | 'Anulowane';
+}

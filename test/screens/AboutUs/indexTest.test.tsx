@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import AboutUs from '../../../src/screens/AboutUs';
 
-describe('AboutUs Component', () => {
+describe('AboutUs Screen', () => {
     beforeEach(async () => {
         await act(async () => {
             render(<AboutUs />);

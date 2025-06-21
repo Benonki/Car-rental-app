@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import FAQ from '../../../src/screens/FAQ'
 
-describe('FAQ Component', () => {
+describe('FAQ Screen', () => {
     test('renders FAQ component', () => {
         render(<FAQ />);
         expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();

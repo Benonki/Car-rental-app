@@ -19,11 +19,6 @@ beforeAll(() => {
         display: '',
         appearance: '',
     }));
-
-    Object.defineProperty(window, 'scrollTo', {
-        value: vi.fn(),
-        writable: true,
-    });
 });
 
 afterEach(() => {

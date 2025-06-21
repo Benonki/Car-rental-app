@@ -308,7 +308,7 @@ const Renting: FC = () => {
                                     const label = option?.label?.toString() ?? '';
                                     return label.toLowerCase().includes(input.toLowerCase());
                                 }}
-                                dropdownRender={(menu) => (
+                                popupRender={(menu) => (
                                     <>
                                         {menu}
                                         <Divider style={{ margin: '8px 0' }} />
@@ -345,7 +345,7 @@ const Renting: FC = () => {
                                     const label = option?.label?.toString() ?? '';
                                     return label.toLowerCase().includes(input.toLowerCase());
                                 }}
-                                dropdownRender={(menu) => (
+                                popupRender={(menu) => (
                                     <>
                                         {menu}
                                         <Divider style={{ margin: '8px 0' }} />

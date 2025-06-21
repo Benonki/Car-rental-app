@@ -3,12 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Result, Button } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { updateRentalStatus } from "../../api/rental";
-
-interface ResultPageState {
-    success: boolean;
-    message: string;
-    rentalStatus: 'Nadchodzące' | 'Zakończone' | 'Anulowane';
-}
+import { ResultPageState } from "../../types";
 
 const ResultPage: FC = () => {
     const location = useLocation();
