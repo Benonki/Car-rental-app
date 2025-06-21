@@ -8,7 +8,14 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/setupTests.ts',
-    include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}']
+    include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    deps: {
+      optimizer: {
+        web: {
+          include: ['antd'],
+        },
+      },
+    },
   },
   server: {
     proxy: {
