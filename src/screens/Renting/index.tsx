@@ -30,6 +30,7 @@ const Renting: FC = () => {
     const [showNewPickUpForm, setShowNewPickUpForm] = useState(false);
     const [showNewReturnForm, setShowNewReturnForm] = useState(false);
     const [totalCost, setTotalCost] = useState<number>(0);
+    const [dates, setDates] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -69,20 +70,24 @@ const Renting: FC = () => {
         return baseCost + insuranceCost;
     };
 
-    const handleDatesChange = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null) => {
-        const insuranceType = form.getFieldValue('insuranceType') || 'NONE';
-        setTotalCost(calculateTotalCost(dates, insuranceType));
-    };
-
     const handleInsuranceChange = (value: InsuranceType) => {
         const dates = form.getFieldValue('dates');
-        setTotalCost(calculateTotalCost(dates, value));
+        if (dates) {
+            setTotalCost(calculateTotalCost(dates, value));
+        }
+    };
+
+    const handleDatesChange = (dates: [dayjs.Dayjs, dayjs.Dayjs] | null) => {
+        setDates(dates);
+        const insuranceType = form.getFieldValue('insuranceType') || 'NONE';
+        setTotalCost(calculateTotalCost(dates, insuranceType));
     };
 
     const handleSubmit = async (values: RentalFormValues) => {
         try {
             if (!car || !customerId) return;
 
+            const days = values.dates[1].diff(values.dates[0], 'days') + 1;
             const isOnlinePayment = values.paymentMethod !== 'ON_SITE';
             const rentalStatus = isOnlinePayment ? 'Zakończone' : 'Nadchodzące';
 
@@ -101,9 +106,8 @@ const Renting: FC = () => {
             const rentalResponse = await createRental(rentalRequest);
 
             if (values.insuranceType !== 'NONE') {
-                const insuranceCost = values.insuranceType === 'BASIC' ?
-                    20 * Math.floor(totalCost / car.cena) :
-                    50 * Math.floor(totalCost / car.cena);
+                const insuranceDailyCost = values.insuranceType === 'BASIC' ? 20 : 50;
+                const insuranceCost = insuranceDailyCost * days;
 
                 const insuranceRequest: InsuranceRequest = {
                     rentalId: rentalResponse.id,
@@ -423,9 +427,21 @@ const Renting: FC = () => {
                                     Suma: {totalCost} zł
                                 </Text>
                                 {totalCost > 0 && (
-                                    <Text type="secondary" style={{ display: 'block' }}>
-                                        {Math.floor(totalCost / car.cena)} dni × {car.cena} zł/dzień
-                                    </Text>
+                                    <>
+                                        <Text type="secondary" style={{ display: 'block' }}>
+                                            {dates ? dates[1].diff(dates[0], 'days') + 1 : 0} dni × {car.cena} zł/dzień (samochód)
+                                        </Text>
+                                        {form.getFieldValue('insuranceType') === 'BASIC' && (
+                                            <Text type="secondary" style={{ display: 'block' }}>
+                                                + {dates ? dates[1].diff(dates[0], 'days') + 1 : 0} dni × 20 zł/dzień (ubezpieczenie Basic)
+                                            </Text>
+                                        )}
+                                        {form.getFieldValue('insuranceType') === 'PREMIUM' && (
+                                            <Text type="secondary" style={{ display: 'block' }}>
+                                                + {dates ? dates[1].diff(dates[0], 'days') + 1 : 0} dni × 50 zł/dzień (ubezpieczenie Premium)
+                                            </Text>
+                                        )}
+                                    </>
                                 )}
                             </div>
                             <Space
