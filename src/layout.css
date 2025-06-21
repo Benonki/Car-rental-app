@@ -9,17 +9,31 @@
     right: 0;
     z-index: 1000;
     width: 100%;
+    min-width: 320px;
 }
 
 .header-menu-container {
     display: flex;
     align-items: center;
     width: 100%;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    height: 100%;
 }
 
 .header-menu-container .ant-menu {
     flex: 1;
     min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 100%;
+}
+
+.header-menu-container .ant-menu .ant-menu-item {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 .layout-sider {
@@ -48,6 +62,7 @@
     align-items: center;
     margin-right: 20px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .miniLogo {
@@ -167,7 +182,7 @@ a:hover {
 .mobile-menu-button {
     display: none;
     position: fixed;
-    top: 50px;
+    top: 12px;
     left: 16px;
     z-index: 1001;
     background: #fff;
@@ -200,6 +215,7 @@ a:hover {
 
     .header-menu-container .ant-menu-item {
         padding: 0 12px;
+        font-size: 14px;
     }
 
     .footer-content {
@@ -215,58 +231,76 @@ a:hover {
 
 @media (max-width: 768px) {
     .layout-header {
-        height: 56px;
-        padding: 0 8px;
+        height: 60px;
+        padding: 0 12px;
+        justify-content: space-between;
     }
 
     .header-logo {
-        margin-right: 8px;
+        margin-right: 12px;
+        flex-shrink: 0;
     }
 
     .miniLogo {
         width: 100px;
-        max-height: 40px;
+        max-height: 36px;
         padding-right: 8px;
     }
 
     .header-menu-container {
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .header-menu-container::-webkit-scrollbar {
-        display: none;
+        flex: 1;
+        min-width: 0;
+        justify-content: space-between;
     }
 
     .header-menu-container .ant-menu {
-        min-width: 300px;
+        flex: 1;
+        min-width: 200px;
+        max-width: calc(100vw - 300px);
         border-bottom: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .header-menu-container .ant-menu::-webkit-scrollbar {
+        display: none;
     }
 
     .header-menu-container .ant-menu-item {
-        padding: 0 8px;
+        padding: 0 10px;
         font-size: 13px;
         white-space: nowrap;
+        min-width: 80px;
+        height: 60px !important;
+        line-height: 60px !important;
+        display: inline-flex !important;
+        align-items: center !important;
     }
 
     .header-menu-container .ant-btn {
-        margin-left: 8px;
-        min-width: 80px;
+        margin-left: 12px;
+        min-width: 85px;
         font-size: 12px;
         padding: 4px 8px;
         height: 32px;
+        flex-shrink: 0;
     }
 
     .mobile-menu-button {
         display: block;
+        top: 14px;
+        left: 12px;
     }
 
     .layout-sider {
         position: fixed;
         left: -200px;
-        top: 56px;
-        height: calc(100vh - 56px);
+        top: 60px;
+        height: calc(100vh - 60px);
         transition: left 0.3s ease;
         z-index: 1000;
         box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
@@ -279,7 +313,7 @@ a:hover {
 
     .layout-content {
         padding: 12px;
-        min-height: calc(100vh - 56px - 120px);
+        min-height: calc(100vh - 60px - 120px);
     }
 
     .user-info-section {
@@ -328,40 +362,61 @@ a:hover {
 
 @media (max-width: 480px) {
     .layout-header {
-        height: 48px;
-        padding: 0 4px;
+        height: 56px;
+        padding: 0 8px;
+        min-height: 56px;
+    }
+
+    .header-logo {
+        margin-right: 8px;
     }
 
     .miniLogo {
         width: 80px;
         max-height: 32px;
-        padding-right: 4px;
+        padding-right: 6px;
+    }
+
+    .header-menu-container {
+        overflow: hidden;
+    }
+
+    .header-menu-container .ant-menu {
+        min-width: 150px;
+        max-width: calc(100vw - 200px);
+        height: 56px;
+        line-height: 56px;
     }
 
     .header-menu-container .ant-menu-item {
-        padding: 0 6px;
+        padding: 0 8px;
         font-size: 12px;
+        min-width: 60px;
+        height: 56px !important;
+        line-height: 56px !important;
+        display: inline-flex !important;
+        align-items: center !important;
     }
 
     .header-menu-container .ant-btn {
         font-size: 11px;
         padding: 2px 6px;
         height: 28px;
-        min-width: 70px;
+        min-width: 65px;
+        margin-left: 8px;
     }
 
     .mobile-menu-button {
-        display: block;
-        top: 50px;
+        top: 12px;
         left: 8px;
-        padding: 4px;
+        padding: 6px;
         font-size: 12px;
     }
 
     .layout-sider {
         left: -200px;
-        top: 48px;
-        height: calc(100vh - 48px);
+        top: 56px;
+        height: calc(100vh - 56px);
     }
 
     .layout-sider.mobile-open {
@@ -370,7 +425,7 @@ a:hover {
 
     .layout-content {
         padding: 8px;
-        min-height: calc(100vh - 48px - 100px);
+        min-height: calc(100vh - 56px - 100px);
     }
 
     .user-info-section {
@@ -383,12 +438,12 @@ a:hover {
     }
 
     .username-text {
-        font-size: 11px;
-        max-width: 80px;
+        font-size: 10px;
+        max-width: 70px;
     }
 
     .user-icon {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .app-footer {
@@ -411,14 +466,92 @@ a:hover {
     }
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 360px) {
     .layout-header {
-        height: 48px;
+        height: 52px;
+        padding: 0 6px;
+    }
+
+    .header-logo {
+        margin-right: 6px;
     }
 
     .miniLogo {
-        width: 80px;
-        max-height: 32px;
+        width: 70px;
+        max-height: 28px;
+        padding-right: 4px;
+    }
+
+    .header-menu-container .ant-menu {
+        min-width: 120px;
+        max-width: calc(100vw - 180px);
+        height: 52px;
+        line-height: 52px;
+    }
+
+    .header-menu-container .ant-menu-item {
+        padding: 0 6px;
+        font-size: 11px;
+        min-width: 50px;
+        height: 52px !important;
+        line-height: 52px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    .header-menu-container .ant-btn {
+        font-size: 10px;
+        padding: 2px 4px;
+        height: 26px;
+        min-width: 55px;
+        margin-left: 6px;
+    }
+
+    .mobile-menu-button {
+        top: 10px;
+        left: 6px;
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    .layout-sider {
+        top: 52px;
+        height: calc(100vh - 52px);
+    }
+
+    .layout-content {
+        padding: 6px;
+        min-height: calc(100vh - 52px - 90px);
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .layout-header {
+        height: 48px;
+        padding: 0 8px;
+    }
+
+    .miniLogo {
+        width: 70px;
+        max-height: 28px;
+    }
+
+    .header-menu-container .ant-menu-item {
+        padding: 0 8px;
+        font-size: 11px;
+        height: 48px !important;
+        line-height: 48px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    .header-menu-container .ant-btn {
+        height: 26px;
+        font-size: 10px;
+    }
+
+    .mobile-menu-button {
+        top: 8px;
     }
 
     .layout-sider {
@@ -428,6 +561,7 @@ a:hover {
 
     .layout-content {
         padding: 8px;
+        min-height: calc(100vh - 48px - 80px);
     }
 }
 
@@ -464,5 +598,20 @@ a:hover {
     .footer-content {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+@media (min-width: 1200px) {
+    .layout-header {
+        padding: 0 24px;
+    }
+
+    .header-logo {
+        margin-right: 32px;
+    }
+
+    .miniLogo {
+        width: 180px;
+        padding-right: 20px;
     }
 }
