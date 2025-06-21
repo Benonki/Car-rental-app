@@ -24,3 +24,9 @@ export const updateAddress = async (addressId: string, data: any) => {
         street_number: data.street_number
     });
 };
+
+export const updateLoyaltyPoints = (customerId: string, points: number) => {
+  return axiosInstance.patch(`/customers/${customerId}`, {
+    loyalty_points: points,
+  });
+};

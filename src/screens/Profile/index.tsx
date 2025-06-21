@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space, Tabs, Table, Tag, Progress, Modal, Rate } from "antd";
-import { UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined } from "@ant-design/icons";
-import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddress } from '../../api/customer';
+import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space, Tabs, Table, Tag, Progress, Modal, Rate, Badge } from "antd";
+import { UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined, CrownOutlined } from "@ant-design/icons";
+import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddress, updateLoyaltyPoints } from '../../api/customer';
 import { useUser } from "../../contexts/UserContext";
 import type { Customer, Rental, Opinion, Insurance } from "../../types";
 import { postOpinion, getAllOpinions } from '../../api/opinions';
@@ -104,9 +104,14 @@ const Profile: FC = () => {
         setRentals(data);
 
         const completedRentals = data.filter(rental => rental.status === 'Zakończone');
-        const points = completedRentals.length * 50;
+        let points = completedRentals.length * 50;
+        if (points > 1000) points = 1000;
 
         setCustomer(prev => prev ? { ...prev, loyalty_points: points } : null);
+
+        updateLoyaltyPoints(customerId, points).catch(() => {
+          message.error("Nie udało się zaktualizować punktów lojalnościowych.");
+        });
       });
 
       getAllOpinions().then((opinions) => {
@@ -178,11 +183,16 @@ const Profile: FC = () => {
       <div className="profile-grid">
         <Card className="profile-card">
           <div className="avatar-wrapper">
+          <Badge
+            count={<CrownOutlined style={{ color: '#faad14', fontSize: 18 }} />}
+            offset={[-10, 80]}
+          >
             <Avatar
               size={90}
               icon={<UserOutlined />}
               src={`https://ui-avatars.com/api/?name=${customer?.personalData.first_name}+${customer?.personalData.last_name}&background=0D8ABC&color=fff`}
             />
+          </Badge>
           </div>
           <Title level={4} className="centered-name">
             {customer?.personalData.first_name} {customer?.personalData.last_name}
@@ -191,10 +201,16 @@ const Profile: FC = () => {
           <div className="loyalty-box">
             <Text strong>Program lojalnościowy</Text>
             <div className="loyalty-points">{customer?.loyalty_points ?? 0} punktów</div>
-            <Progress percent={((customer?.loyalty_points ?? 0) % 1000) / 10} showInfo={false} />
-            <Text type="secondary" style={{ fontSize: 12 }}>
-              Zdobądź jeszcze {1000 - (customer?.loyalty_points ?? 0) % 1000} punktów, aby odebrać bonus.
-            </Text>
+            <Progress percent={(customer?.loyalty_points ?? 0) / 10} showInfo={false} />
+              {(customer?.loyalty_points ?? 0) < 1000 ? (
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  Zdobądź jeszcze {1000 - (customer?.loyalty_points ?? 0)} punktów, aby odebrać bonus.
+                </Text>
+              ) : (
+                <Text strong type="success" style={{ fontSize: 13 }}>
+                  🎉 Maksymalna liczba punktów zdobyta! Odbierz nagrodę w biurze obsługi.
+                </Text>
+              )}
           </div>
 
           <div className="sidebar-info">
