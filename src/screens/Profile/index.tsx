@@ -3,9 +3,10 @@ import { Avatar, Button, Card, Typography, Row, Col, Form, Input, message, Space
 import { UserOutlined, EditOutlined, SaveOutlined, CloseOutlined, HistoryOutlined } from "@ant-design/icons";
 import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddress } from '../../api/customer';
 import { useUser } from "../../contexts/UserContext";
-import type { Customer, Rental, Opinion } from "../../types";
+import type { Customer, Rental, Opinion, Insurance } from "../../types";
 import { postOpinion, getAllOpinions } from '../../api/opinions';
 import { patchRental } from "../../api/rental";
+import { fetchInsuranceByRentalId } from "../../api/insurance";
 import "./index.css";
 
 const { Title, Text } = Typography;
@@ -20,6 +21,10 @@ const Profile: FC = () => {
     const [activeTab, setActiveTab] = useState('1');
     const [form] = Form.useForm();
     const [customerOpinions, setCustomerOpinions] = useState<Opinion[]>([]);
+
+    const [isInsuranceModalVisible, setIsInsuranceModalVisible] = useState(false);
+    const [insuranceDetails, setInsuranceDetails] = useState<Insurance | null>(null);
+
 
     const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
     const [selectedRental, setSelectedRental] = useState<Rental | null>(null);
@@ -67,6 +72,17 @@ const Profile: FC = () => {
         message.error("Nie udało się anulować wypożyczenia.");
       }
     };
+
+    const handleInsuranceClick = async (rentalId: string) => {
+      try {
+        const response = await fetchInsuranceByRentalId(rentalId);
+        setInsuranceDetails(response.data);
+        setIsInsuranceModalVisible(true);
+      } catch (err) {
+        message.error("Nie udało się pobrać danych o ubezpieczeniu.");
+      }
+    };
+
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -336,6 +352,14 @@ const Profile: FC = () => {
                         {record.status === 'Zakończone' && isRentalReviewed(record) && (
                         <Tag color="gold">Oceniono</Tag>
                         )}
+                        {record.status === 'Zakończone' && (
+                        <Button
+                          type="link"
+                          onClick={() => handleInsuranceClick(record.id)}
+                        >
+                          Ubezpieczenie
+                        </Button>
+                      )}
                   </Space>
                   )}
                 />
@@ -369,6 +393,24 @@ const Profile: FC = () => {
                 </Form.Item>
             </Form>
         </Modal>
+
+
+        <Modal
+          title="Szczegóły ubezpieczenia"
+          open={isInsuranceModalVisible}
+          onCancel={() => setIsInsuranceModalVisible(false)}
+          footer={null}
+        >
+          {insuranceDetails ? (
+            <div>
+              <p><strong>Typ:</strong> {insuranceDetails.insurance_type}</p>
+              <p><strong>Koszt:</strong> {insuranceDetails.cost} zł</p>
+            </div>
+          ) : (
+            <p>Brak danych.</p>
+          )}
+        </Modal>
+
       </div>
     </div>
   );

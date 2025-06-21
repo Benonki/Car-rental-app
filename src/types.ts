@@ -185,3 +185,13 @@ export type InsuranceRequest = {
     cost: number;
     range_of_insurance: InsuranceRange;
 };
+
+export type Insurance = {
+  id: string;
+  rental: {
+    id: string;
+  };
+  insurance_type: string;
+  cost: number;
+  range_of_insurance: InsuranceRange;
+};
