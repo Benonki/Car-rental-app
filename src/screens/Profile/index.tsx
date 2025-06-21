@@ -291,7 +291,21 @@ const Profile: FC = () => {
                 <Column title="Data zwrotu" dataIndex="date_of_return" key="date_of_return" align="center" />
                 <Column title="Status" key="status" align="center" render={(_, record: Rental) => <Tag color={record.status === 'Zakończone' ? 'green' : record.status === 'Nadchodzące' ? 'blue' : record.status === 'Anulowane' ? 'red' : 'gray'}>{record.status}</Tag>} />
                 <Column title="Cena (PLN)" dataIndex="total_cost" key="total_cost" align="center" render={(cost: number) => `${cost} zł`} />
-                <Column title="Ocena" key="rating" align="center" render={() => '-'} />
+                <Column
+                  title="Ocena"
+                  key="rating"
+                  align="center"
+                  render={(_, record: Rental) => {
+                    const opinion = customerOpinions.find(op => op.car.id === record.car.id);
+                    return opinion ? (
+                      <Space>
+                        <span>{opinion.rating}/5</span>
+                        <Rate disabled defaultValue={1} count={1} />
+                      </Space>
+                    ) : '-';
+                  }}
+                />
+
                 <Column
                     title="Akcje"
                     key="actions"
