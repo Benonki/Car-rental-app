@@ -46,7 +46,7 @@ const App: React.FC = () => {
                             replace
                             state={{
                                 success: true,
-                                message: 'Płatność zakończona sukcesem! Wypożyczenie zostało potwierdzone.',
+                                message: 'Płatność zakończona sukcesem! Wypożyczenie zostało potwierdzone.\nDo twojego konta zostało doliczone 50 punktów lojalnościowych.',
                                 rentalStatus: 'Zakończone'
                             }}
                         />

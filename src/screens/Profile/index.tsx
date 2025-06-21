@@ -5,7 +5,7 @@ import { fetchCustomerData, fetchCustomerRentals, updatePersonalData, updateAddr
 import { useUser } from "../../contexts/UserContext";
 import type { Customer, Rental, Opinion } from "../../types";
 import { postOpinion, getAllOpinions } from '../../api/opinions';
-import { cancelRental } from "../../api/rental";
+import { patchRental } from "../../api/rental";
 import "./index.css";
 
 const { Title, Text } = Typography;
@@ -55,7 +55,7 @@ const Profile: FC = () => {
 
     const handleRentalCancel = async (rentalId: string) => {
       try {
-        await cancelRental(rentalId, { status: "Anulowane" });
+        await patchRental(rentalId, { status: "Anulowane" });
         setRentals(prev =>
           prev.map(r =>
             r.id === rentalId ? { ...r, status: "Anulowane" } : r
@@ -86,6 +86,11 @@ const Profile: FC = () => {
 
       fetchCustomerRentals(customerId).then((data: Rental[]) => {
         setRentals(data);
+
+        const completedRentals = data.filter(rental => rental.status === 'Zakończone');
+        const points = completedRentals.length * 50;
+
+        setCustomer(prev => prev ? { ...prev, loyalty_points: points } : null);
       });
 
       getAllOpinions().then((opinions) => {

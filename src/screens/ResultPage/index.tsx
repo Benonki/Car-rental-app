@@ -28,7 +28,16 @@ const ResultPage: FC = () => {
         }}>
             <Result
                 icon={isSuccess ? <SmileOutlined /> : <FrownOutlined />}
-                title={message}
+                title={
+                    <>
+                        {message.split('\n').map((line, index) => (
+                            <span key={index}>
+                                {line}
+                                <br />
+                            </span>
+                        ))}
+                    </>
+                }
                 subTitle={`Status wypożyczenia: ${rentalStatus}`}
                 extra={[
                     <Button

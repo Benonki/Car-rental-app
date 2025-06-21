@@ -11,7 +11,7 @@ export const createPayment = async (paymentData: PaymentRequest) => {
     return response.data;
 };
 
-export const cancelRental = (rentalId: string, payload: any) => {
+export const patchRental = (rentalId: string, payload: any) => {
   return axiosInstance.patch(`/rentals/${rentalId}/status`, payload);
 };
 
