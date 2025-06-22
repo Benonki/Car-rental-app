@@ -42,7 +42,7 @@ const Login: React.FC = () => {
         try {
             const response = await login(values);
             if (response.message === 'Success') {
-                if (response.username) setUsername(response.username);
+                setUsername(values.email);
                 if (response.customerId) setCustomerId(response.customerId);
                 message.success('Zalogowano pomyślnie!');
                 navigate('/');
