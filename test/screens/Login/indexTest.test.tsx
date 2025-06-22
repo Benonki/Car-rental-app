@@ -88,19 +88,21 @@ describe('Login Screen', () => {
     it('successfully logs in with valid credentials', async () => {
         mockLogin.mockResolvedValueOnce({
             message: 'Success',
-            username: 'testuser',
             customerId: '123'
         });
         renderLogin();
 
-        await fillAndSubmitForm('test@example.com', 'password123');
+        const testEmail = 'test@example.com';
+        const testPassword = 'password123';
+
+        await fillAndSubmitForm(testEmail, testPassword);
 
         await waitFor(() => {
             expect(mockLogin).toHaveBeenCalledWith({
-                email: 'test@example.com',
-                password: 'password123'
+                email: testEmail,
+                password: testPassword
             });
-            expect(mockSetUsername).toHaveBeenCalledWith('testuser');
+            expect(mockSetUsername).toHaveBeenCalledWith(testEmail);
             expect(mockSetCustomerId).toHaveBeenCalledWith('123');
             expect(mockMessageSuccess).toHaveBeenCalledWith('Zalogowano pomyślnie!');
             expect(mockNavigate).toHaveBeenCalledWith('/');
