@@ -1,7 +1,7 @@
 # Car Rental App
 
 A car rental app built with TypeScript and React, allowing users to easily browse, book, and manage car rentals.
-The backend is developed using Spring Boot, with data persisted in a MongoDB database.
+The backend is developed using Spring Boot, with data persisted in a PostgreSQL database.
 
 
 Spring Boot Backend: <a href="https://github.com/KacperMichalak2002/Car-Rental-Backend"> Car-Rental-Backend </a>
